@@ -19,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'import'],
   rules: {
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
     'import/extensions': [
@@ -41,8 +41,17 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
   },
   settings: {
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        directory: './tsconfig.json',
+      },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
   },
 };
