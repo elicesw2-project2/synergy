@@ -1,7 +1,11 @@
 import React from 'react';
 
 function TopBar() {
-  return <h1>TopBar</h1>;
+  return (
+    <div>
+      <div className="TopBar">TopBar</div>
+    </div>
+  );
 }
 
 export default TopBar;
