@@ -4,14 +4,18 @@ import SideBar from 'components/Bars/SideBar';
 import TopBar from 'components/Bars/TopBar';
 import WorkSpaceBar from 'components/Bars/WorkSpaceBar';
 
+import 'styles/base/Grid.scss';
+
 function Bars() {
   return (
-    <>
-      <SideBar />
-      <TopBar />
+    <div className="Grid__container">
       <WorkSpaceBar />
-      <Outlet />
-    </>
+      <SideBar />
+      <div>
+        <TopBar />
+        <Outlet />
+      </div>
+    </div>
   );
 }
 

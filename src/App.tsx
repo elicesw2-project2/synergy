@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Components
-import Bars from 'common/Grid';
+import Bars from 'common/Bars';
 
 // Pages
 import Home from 'pages/Home';

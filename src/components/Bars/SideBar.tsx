@@ -1,7 +1,8 @@
 import React from 'react';
+import 'styles/Bars/SideBar.scss';
 
 function SideBar() {
-  return <h1>SideBar</h1>;
+  return <div className="SideBar">SideBar</div>;
 }
 
 export default SideBar;
