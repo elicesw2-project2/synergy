@@ -1,5 +1,10 @@
 .TopBar {
-    width: 100vw;
+    display: flex;
     border: 1px solid red;
-    padding: 1.5rem;
+    padding: 2rem;
+    background-color: #89AA54;
+
+    h1 {
+        font-size: 1.3rem;
+    }
 }

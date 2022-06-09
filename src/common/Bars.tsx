@@ -11,7 +11,7 @@ function Bars() {
     <div className="Grid__container">
       <WorkSpaceBar />
       <SideBar />
-      <div>
+      <div className="Main__container">
         <TopBar />
         <Outlet />
       </div>

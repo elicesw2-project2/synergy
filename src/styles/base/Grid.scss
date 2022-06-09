@@ -1,7 +1,11 @@
 .Grid__container {
     display: flex;
-    height: 100vh;
+    overflow: hidden;
     border: 1px solid black; 
+}
+
+.Main__container {
+    width: 100vw;
 }
 
 .right {
