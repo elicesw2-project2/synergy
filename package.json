@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.ts",
-    "dev": "nodemon --exec ts-node src/bin/www.ts",
+    "dev": "ts-node-dev --inspect --watch -- ./app.ts",
     "copy-files": "cp -r src/public/ dist/public/ && cp -r src/views/ dist/views/",
-    "build": "tsc && npm run copy-files"
+    "build": "tsc && npm run copy-files",
+    "lint": "eslint **/*.ts"
   },
   "author": "",
   "license": "ISC",
@@ -18,8 +19,15 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.41",
-    "nodemon": "^2.0.16",
-    "ts-node": "^10.8.1",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.3"
   }
 }
