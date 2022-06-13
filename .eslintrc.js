@@ -26,7 +26,6 @@ module.exports = {
     'import/extensions': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/'],
-
   settings: {
     'import/resolver': {
       node: {
