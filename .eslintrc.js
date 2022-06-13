@@ -23,6 +23,14 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'import/extensions': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
 };
