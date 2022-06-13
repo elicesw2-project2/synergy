@@ -5,7 +5,7 @@ function SideBar() {
   return (
     <div className="SideBar">
       <div className="SideBar__category">
-        <h1>Menu1</h1>
+        <h1>워크스페이스</h1>
         <div className="SideBar__channels">
           <ul>
             <li className="channel"># 채널1</li>
@@ -17,10 +17,10 @@ function SideBar() {
         </div>
       </div>
       <div className="SideBar__category">
-        <h1>Menu2</h1>
+        <h1>채널 카테고리 1</h1>
       </div>
       <div className="SideBar__category">
-        <h1>Menu3</h1>
+        <h1>채널 카테고리 2</h1>
       </div>
     </div>
   );

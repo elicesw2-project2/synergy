@@ -39,6 +39,7 @@ module.exports = {
     'max-len': ['warn', { code: 80 }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': ['warn'], // react-hook-form
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
