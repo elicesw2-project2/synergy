@@ -2,19 +2,19 @@
     background-color: #8787A1;
     padding: 10px;
 
-    .createBtn {
+    .WorkSpaceBar__createBtn {
         &:hover {
             border-radius: 20px;
         }
 
-        .createIcon {
+        .WorkSpaceBar__createIcon {
             font-size: 2rem;
             color: green;   
         }
     }
 }
 
-.box {
+.WorkSpaceBar__box {
     display: flex;
     align-items: center;
     justify-content: center;

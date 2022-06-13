@@ -1,0 +1,44 @@
+.Modal__Background {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+  
+    .Modal__Container {
+      position: relative; 
+      width: 80%;
+      height: 30rem;
+      max-width: 30rem;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      border-radius: 15px;
+      background-color: rgb(255, 253, 233);
+      /* 팝업이 열릴때 스르륵 열리는 효과 */
+      animation: modal-show 0.3s;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .Modal__Form {
+      height: 80%;
+    }
+
+    .Modal__Form__CloseBtn {
+      position: absolute;
+      cursor: pointer;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .Modal__Form__SubmitBtn {
+      position: absolute;
+      right: 1.5rem;
+      bottom: 2rem;
+    }
+    
+}

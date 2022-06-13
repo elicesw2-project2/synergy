@@ -40,16 +40,16 @@ function WorkSpaceBar() {
     <div className="WorkSpaceBar">
       {/* 워크 스페이스 리스트 */}
       {workSpaceList.map((workSpace) => (
-        <div className="box">{workSpace.title}</div>
+        <div className="WorkSpaceBar__box">{workSpace.title}</div>
       ))}
 
       {/* 워크스페이스 추가 버튼 */}
       <button
         type="button"
-        className="box createBtn"
+        className="WorkSpaceBar__box WorkSpaceBar__createBtn"
         onClick={onClickToggleModal}
       >
-        <FontAwesomeIcon icon={faPlus} className="createIcon" />
+        <FontAwesomeIcon icon={faPlus} className="WorkSpaceBar__createIcon" />
       </button>
 
       {/* 모달창 */}

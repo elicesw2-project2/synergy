@@ -31,25 +31,25 @@ function WorkSpaceModal({
   };
 
   return (
-    <div className="modalBg">
-      <div className="modal">
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <div className="Modal__Background">
+      <div className="Modal__Container">
+        <form onSubmit={handleSubmit(onSubmit)} className="Modal__Form">
           {/* 나가기 버튼 */}
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="closeBtn"
+            className="Modal__Form__CloseBtn"
           >
             X
           </button>
-          <div className="description">
+          <div className="Modal__Form__Description">
             <h1>서버 만들기</h1>
             <h2>서버는 나와 친구들이 함께 어울리는 공간입니다.</h2>
           </div>
 
           {/* title, content 입력 */}
-          <div className="input">
-            <label htmlFor="title" className="title">
+          <div className="Modal__Form__Input">
+            <label htmlFor="title" className="Modal__Form__Title">
               <span>서버 이름</span>
               <input
                 placeholder="Title..."
@@ -57,7 +57,7 @@ function WorkSpaceModal({
               />
             </label>
             {errors.title && 'Title is Required!'}
-            <label htmlFor="content" className="content">
+            <label htmlFor="content" className="Modal__Form__Content">
               <span>서버 설명</span>
               <textarea
                 placeholder="Content..."
@@ -67,7 +67,11 @@ function WorkSpaceModal({
             {errors.content && 'Content is Required!'}
 
             {/* 서버 추가 버튼 */}
-            <input type="submit" value="제출" className="submitBtn" />
+            <input
+              type="submit"
+              value="제출"
+              className="Modal__Form__SubmitBtn"
+            />
           </div>
         </form>
       </div>
