@@ -1,7 +1,17 @@
 .WorkSpaceBar {
     background-color: #8787A1;
-    border: 1px solid red;
     padding: 10px;
+
+    .createBtn {
+        &:hover {
+            border-radius: 20px;
+        }
+
+        .createIcon {
+            font-size: 2rem;
+            color: green;   
+        }
+    }
 }
 
 .box {
@@ -11,7 +21,8 @@
     width: 5rem;
     height: 5rem;
     margin-bottom: 10px;
-    border: 1px solid blue;
+    border: none;
     border-radius: 50%;
     background-color: whitesmoke;
 }
+

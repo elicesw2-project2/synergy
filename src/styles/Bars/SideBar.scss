@@ -1,17 +1,15 @@
 .SideBar {
     background-color: #F8F5EC;
-    border: 1px solid blue;
     width: 20rem;
 
     // 채널 카테고리
     .SideBar__category {
         background-color: #E8EAAA;
-        border: 1px solid red;
         text-align: center;
 
         h1 {
             padding: 0.7rem 0;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 
