@@ -10,20 +10,28 @@ import WorkSpaceModal from 'components/Modals/WorkSpaceModal';
 interface iWorkSpace {
   title: string;
   content?: string;
+  image?: string;
 }
 
+// dummy
 const lists = [
   {
     title: '1번',
     content: '1번입니다',
+    image:
+      'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1776&q=80',
   },
   {
     title: '2번',
     content: '2번입니다',
+    image:
+      'https://images.unsplash.com/photo-1561948955-570b270e7c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=602&q=80',
   },
   {
     title: '3번',
     content: '3번입니다',
+    image:
+      'https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
   },
 ];
 
@@ -40,7 +48,7 @@ function WorkSpaceBar() {
     <div className="WorkSpaceBar">
       {/* 워크 스페이스 리스트 */}
       {workSpaceList.map((workSpace) => (
-        <div className="WorkSpaceBar__box">{workSpace.title}</div>
+        <img src={workSpace.image} alt="img" className="WorkSpaceBar__box" />
       ))}
 
       {/* 워크스페이스 추가 버튼 */}
