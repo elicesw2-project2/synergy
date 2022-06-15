@@ -17,3 +17,19 @@ connection.connect((error) => {
   // eslint-disable-next-line no-console
   console.log('MySQL Connected!!!', 'db.js');
 });
+
+// connection.query('select * from channelcategory', (error, results) => {
+//   if (error) throw error;
+//   console.log(results);
+// });
+// connection.query(
+//   'SELECT * FROM channelcategory;',
+//   (err: Error, res: Response) => {
+//     if (err) {
+//       console.log('error: ', err);
+//     }
+//     console.log('post: ', res, 'Post.model.js');
+//   }
+// );
+
+export default connection;
