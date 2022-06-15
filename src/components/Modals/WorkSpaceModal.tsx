@@ -54,7 +54,11 @@ function WorkSpaceModal({
   // 사진 미리보기
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    setPreview(URL.createObjectURL(e.target.files[0]));
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append('img', img);
+    // axios FormData type?
+    setPreview(URL.createObjectURL(img));
   };
 
   return (
