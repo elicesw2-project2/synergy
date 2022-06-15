@@ -4,22 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import 'styles/Bars/SideBar.scss';
-
-interface iChannels {
-  title: string;
-}
+import { iChannel } from 'types/channel';
 
 const dummyChannels = [
   {
+    idx: 0,
     title: '[문서공유] 채널1',
   },
   {
+    idx: 1,
+
     title: '[일정관리] 채널1',
   },
   {
+    idx: 2,
+
     title: '[문서공유] 채널2',
   },
   {
+    idx: 3,
     title: '[일정관리] 채널2',
   },
 ];
@@ -30,7 +33,7 @@ function SideBar() {
     setIsOpenModal(!isOpenModal);
   }, [isOpenModal]);
 
-  const [channels, setChannels] = useState<iChannels[]>(dummyChannels);
+  const [channels, setChannels] = useState<iChannel[]>(dummyChannels);
 
   return (
     <div className="SideBar">
@@ -51,7 +54,7 @@ function SideBar() {
         <div className="SideBar__category__channels">
           <ul>
             {channels.map((channel) => (
-              <li># {channel.title}</li>
+              <li key={channel.idx}># {channel.title}</li>
             ))}
           </ul>
         </div>

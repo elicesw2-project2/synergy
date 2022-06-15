@@ -1,16 +1,13 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { iChannel } from 'types/channel';
 
 import 'styles/Modals/SideBarModal.scss';
 
-interface iChannels {
-  title: string;
-}
-
 interface iProps {
   onClickToggleModal: () => void;
-  channels: iChannels[];
-  setChannels: Dispatch<SetStateAction<iChannels[]>>;
+  channels: iChannel[];
+  setChannels: Dispatch<SetStateAction<iChannel[]>>;
 }
 
 function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {
@@ -20,7 +17,9 @@ function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {
   };
   const handleSubmit = () => {
     onClickToggleModal();
-    setChannels(channels.concat({ title: `[문서공유] ${newChannelName}` }));
+    setChannels(
+      channels.concat({ title: `[문서공유] ${newChannelName}`, idx: 0 })
+    );
   };
   return (
     <div className="Modal__Background">

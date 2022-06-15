@@ -5,29 +5,27 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // components
 import WorkSpaceModal from 'components/Modals/WorkSpaceModal';
-
-// interface
-interface iWorkSpace {
-  title: string;
-  content?: string;
-  image?: string;
-}
+import { iWorkSpace } from 'types/workspace';
+import SingleWorkSpace from './SingleWorkSpace';
 
 // dummy
 const lists = [
   {
+    idx: 0,
     title: '1번',
     content: '1번입니다',
     image:
       'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1776&q=80',
   },
   {
+    idx: 1,
     title: '2번',
     content: '2번입니다',
     image:
       'https://images.unsplash.com/photo-1561948955-570b270e7c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=602&q=80',
   },
   {
+    idx: 2,
     title: '3번',
     content: '3번입니다',
     image:
@@ -48,7 +46,12 @@ function WorkSpaceBar() {
     <div className="WorkSpaceBar">
       {/* 워크 스페이스 리스트 */}
       {workSpaceList.map((workSpace) => (
-        <img src={workSpace.image} alt="img" className="WorkSpaceBar__box" />
+        <SingleWorkSpace
+          workSpace={workSpace}
+          workSpaceList={workSpaceList}
+          setWorkSpaceList={setWorkSpaceList}
+          key={workSpace.idx}
+        />
       ))}
 
       {/* 워크스페이스 추가 버튼 */}

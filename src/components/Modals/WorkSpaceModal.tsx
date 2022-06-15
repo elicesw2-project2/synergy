@@ -5,18 +5,15 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 import 'styles/Modals/WorkSpaceModal.scss';
 
-import defaultImg from 'assets/default-img.jpeg';
+// types
+import { iWorkSpace } from 'types/workspace';
 
-interface iForm {
-  title: string;
-  content?: string;
-  image?: string;
-}
+import defaultImg from 'assets/default-img.jpeg';
 
 interface iProps {
   onClickToggleModal: () => void;
-  workSpaceList: iForm[];
-  setWorkSpaceList: Dispatch<SetStateAction<iForm[]>>;
+  workSpaceList: iWorkSpace[];
+  setWorkSpaceList: Dispatch<SetStateAction<iWorkSpace[]>>;
 }
 
 function WorkSpaceModal({
@@ -28,18 +25,18 @@ function WorkSpaceModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iForm>();
+  } = useForm<iWorkSpace>();
 
   const [preview, setPreview] = useState<string>('');
 
   // 폼 제출
-  const onSubmit: SubmitHandler<iForm> = (data) => {
-    const { title } = data;
+  const onSubmit: SubmitHandler<iWorkSpace> = (data) => {
+    const { idx, title } = data;
     let image = preview;
     if (!preview) {
       image = defaultImg;
     }
-    const newWorkSpace = { title, image };
+    const newWorkSpace = { idx, title, image };
     setWorkSpaceList(workSpaceList.concat(newWorkSpace));
     onClickToggleModal();
   };
