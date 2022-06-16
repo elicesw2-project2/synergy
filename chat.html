@@ -8,7 +8,9 @@
   <body>
     <input placeholder="chat" />
     <button onClick="sendMsg()">send</button>
-
+    <ul id="messages" type="none">
+      <li id="usercount"></li>
+    </ul>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -16,6 +18,22 @@
       socket.on('message', function (data) {
         console.log(data);
       });
+
+      // socket.on 함수로 서버에서 전달하는 신호를 수신
+      // socket.on('usercount', (count) => {
+      //   var userCounter = document.getElementById('usercount');
+      //   userCounter.innerText = '현재 ' + count + '명이 서버에 접속해있습니다.';
+      // });
+
+      // 메시지 수신시 HTML에 메시지 내용 작성
+      socket.on('message', (msg) => {
+        var messageList = document.getElementById('messages');
+        var messageTag = document.createElement('li');
+        messageTag.innerText = msg;
+        messageList.appendChild(messageTag);
+      });
+      socket.emit('nickname', 'anon');
+      socket.emit('enter_room', '1번방');
       function sendMsg() {
         const input = document.querySelector('input');
         var message = input.value;
