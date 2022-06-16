@@ -22,16 +22,13 @@ class ChatService {
     // console.log('service', rooms);
     // return rooms;
 
-    await this.chatroomModel.getAllChatRooms(
-      workspace_Idx,
-      (err: Error | null, data: ChatRoomData[] | null) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
+    await this.chatroomModel.getAllChatRooms(workspace_Idx, (err, data) => {
+      if (err) {
+        result(err, null);
+        return;
       }
-    );
+      result(null, data);
+    });
   }
 
   async addChatRoom(
@@ -39,16 +36,13 @@ class ChatService {
     result: (err: Error | null, data: ChatRoomData | null) => void
   ) {
     // db저장
-    return this.chatroomModel.create(
-      chatroomInfo,
-      (err: Error | null, data: ChatRoomData | null) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
+    return this.chatroomModel.create(chatroomInfo, (err, data) => {
+      if (err) {
+        result(err, null);
+        return;
       }
-    );
+      result(null, data);
+    });
   }
 }
 

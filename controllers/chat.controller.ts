@@ -43,20 +43,17 @@ class ChatController {
       throw new Error('요청 바디 없음');
     }
     // console.log('controller1', req.body);
-    const workspace_idx = req.body.workspace_idx;
-    await chatService.addChatRoom(
-      workspace_idx,
-      (err: Error | null, data: any) => {
-        if (err) {
-          next(err);
-        }
-        res.status(201).send({
-          status: 201,
-          message: 'ChatRoom created successfully',
-          data,
-        });
+    // const workspace_idx = req.body.workspace_idx;
+    await chatService.addChatRoom(req.body, (err: Error | null, data: any) => {
+      if (err) {
+        next(err);
       }
-    );
+      res.status(201).send({
+        status: 201,
+        message: 'ChatRoom created successfully',
+        data,
+      });
+    });
   }
 }
 const chatController = new ChatController();

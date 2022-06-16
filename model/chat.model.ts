@@ -36,20 +36,17 @@ export class ChatRoomModel {
   }
 
   async create(
-    chtroomInfo: ChatRoomInfo,
+    newchatroomInfo: ChatRoomInfo,
     result: (err: Error | null, data: ChatRoomData | null) => void
   ) {
-    sql.query(
-      'INSERT INTO chatroom (workspace_idx) VALUES (?)',
-      chtroomInfo,
-      (err, res) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, { room_idx: res.insertId, ...chtroomInfo });
+    console.log(newchatroomInfo);
+    sql.query('INSERT INTO chatroom SET ?', newchatroomInfo, (err, res) => {
+      if (err) {
+        result(err, null);
+        return;
       }
-    );
+      result(null, { room_idx: res.insertId, ...newchatroomInfo });
+    });
   }
 }
 const chatroomModel = new ChatRoomModel();
