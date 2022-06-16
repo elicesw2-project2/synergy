@@ -17,3 +17,5 @@ connection.connect((error) => {
   // eslint-disable-next-line no-console
   console.log('MySQL Connected!!!', 'db.js');
 });
+
+export default connection;

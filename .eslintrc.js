@@ -24,6 +24,7 @@ module.exports = {
       },
     ],
     'import/extensions': 'off',
+    'import/no-import-module-exports': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/'],
   settings: {
