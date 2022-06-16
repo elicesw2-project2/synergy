@@ -24,6 +24,15 @@ module.exports = {
       },
     ],
     'import/extensions': 'off',
+    camelcase: 'off',
+    rules: {
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': ['error'],
+    },
+    overrides: {
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': ['error'],
+    },
   },
   ignorePatterns: ['dist/', 'node_modules/'],
   settings: {
