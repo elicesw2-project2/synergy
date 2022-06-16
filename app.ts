@@ -2,10 +2,7 @@ import bodyParser from 'body-parser';
 import * as http from 'http';
 import * as path from 'path';
 import webSocket from './socket';
-
-import { chatRouter } from './routes';
 import express, { Request, Response } from 'express';
-
 import routes from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 
@@ -26,8 +23,6 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/chat', (req: any, res: any) => {
   res.sendFile(path.resolve('./chat.html'));
 });
-
-app.use('/chatrooms', chatRouter);
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
