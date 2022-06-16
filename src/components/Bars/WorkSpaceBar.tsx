@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // components
 import WorkSpaceModal from 'components/Modals/WorkSpaceModal';
-import { iWorkSpace } from 'types/workspace';
+import { iWorkSpace } from 'types';
 import SingleWorkSpace from './SingleWorkSpace';
 
 // dummy

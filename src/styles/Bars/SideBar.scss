@@ -11,11 +11,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .SideBar__category__add-btn{
+                position: absolute;
+                right: 1rem;
+            }
         }
+
         h1 {
             padding: 0.7rem 0;
             font-size: 1.5rem;
         }
+        
     }
 
     // 채널

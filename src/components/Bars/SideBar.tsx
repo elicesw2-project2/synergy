@@ -1,8 +1,15 @@
 import SideBarModal from 'components/Modals/SideBarModal';
 import React, { useCallback, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
+// css
 import 'styles/Bars/SideBar.scss';
-import { iChannel } from 'types/channel';
+
+// types
+import { iChannel } from 'types';
+
+// components
 import Channel from './Channel';
 
 const dummyChannels = [
@@ -36,20 +43,23 @@ function SideBar() {
 
   return (
     <div className="SideBar">
+      {/* 워크 스페이스 이름 */}
       <div className="SideBar__category">
         <h1>워크스페이스</h1>
       </div>
+
+      {/* 채널 카테고리 */}
       <div className="SideBar__category">
         <div className="SideBar__category__title">
           <h1>채널 카테고리 1</h1>
-          <button
-            type="button"
-            className="SideBar__category__addBtn"
+          <FontAwesomeIcon
+            icon={faPlusCircle}
+            className="SideBar__category__add-btn"
             onClick={onClickToggleModal}
-          >
-            +
-          </button>
+          />
         </div>
+
+        {/* 채널 */}
         <div className="SideBar__category__channels">
           <ul>
             {channels.map((channel) => (
@@ -66,6 +76,8 @@ function SideBar() {
       <div className="SideBar__category">
         <h1>채널 카테고리 2</h1>
       </div>
+
+      {/* 채널 카테고리 생성 모달창 */}
       {isOpenModal && (
         <SideBarModal
           onClickToggleModal={onClickToggleModal}

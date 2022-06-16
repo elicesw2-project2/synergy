@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { iWorkSpace } from 'types/workspace';
+
+import { iWorkSpace } from 'types';
 
 interface iProps {
   workSpace: iWorkSpace;

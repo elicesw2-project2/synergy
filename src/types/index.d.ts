@@ -4,3 +4,8 @@ export interface iWorkSpace {
   content?: string;
   image?: string;
 }
+
+export interface iChannel {
+  idx: number;
+  title: string;
+}
