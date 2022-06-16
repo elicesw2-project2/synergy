@@ -26,20 +26,12 @@ export class ChatRoomModel {
         result(null, res);
       }
     );
-    // const data = await sql.query(
-    //   'SELECT * FROM chatroom where workspace_idx = ?',
-    //   workspace_idx
-    // );
-
-    // console.log(data);
-    // return data;
   }
 
   async create(
     newchatroomInfo: ChatRoomInfo,
     result: (err: Error | null, data: ChatRoomData | null) => void
   ) {
-    console.log(newchatroomInfo);
     sql.query('INSERT INTO chatroom SET ?', newchatroomInfo, (err, res) => {
       if (err) {
         result(err, null);

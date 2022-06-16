@@ -18,10 +18,6 @@ class ChatService {
       throw new Error('required value is not allowed to be null');
     }
 
-    // const rooms: any = await this.chatroomModel.getAllChatRooms(workspaceIdx);
-    // console.log('service', rooms);
-    // return rooms;
-
     await this.chatroomModel.getAllChatRooms(workspace_Idx, (err, data) => {
       if (err) {
         result(err, null);
