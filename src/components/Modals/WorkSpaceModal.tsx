@@ -84,6 +84,7 @@ function WorkSpaceModal({
                 type="file"
                 accept="image/*"
                 placeholder="Image Upload..."
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...register('image')}
                 style={{ display: 'none' }}
                 ref={photoInput}

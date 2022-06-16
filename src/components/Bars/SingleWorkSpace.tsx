@@ -19,8 +19,8 @@ function SingleWorkSpace({
   };
 
   const handleClick = () => {
-    const newArr = workSpaceList.filter((a) => a !== workSpace);
-    setWorkSpaceList(newArr);
+    const filtered = workSpaceList.filter((selcted) => selcted !== workSpace);
+    setWorkSpaceList(filtered);
   };
 
   return (

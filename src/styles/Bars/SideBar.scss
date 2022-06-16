@@ -31,5 +31,17 @@
 
 }
 
+// channel component
+.channel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    .channel__delete-icon {
+        position: absolute;
+        right: 1rem;
+        opacity: 0.7;
+    }
+   
+}
 

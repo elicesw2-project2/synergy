@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "src", // 루트 폴더 url
     "downlevelIteration": true, // https://tried.tistory.com/96
+    "typeRoots": ["./node_modules/@types", "@types"] // https://velog.io/@nsunny0908/TIL-46-Typescript-image-import
   },
   "include": ["src"]
 }

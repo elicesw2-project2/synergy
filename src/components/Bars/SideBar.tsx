@@ -1,10 +1,9 @@
 import SideBarModal from 'components/Modals/SideBarModal';
 import React, { useCallback, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import 'styles/Bars/SideBar.scss';
 import { iChannel } from 'types/channel';
+import Channel from './Channel';
 
 const dummyChannels = [
   {
@@ -54,7 +53,12 @@ function SideBar() {
         <div className="SideBar__category__channels">
           <ul>
             {channels.map((channel) => (
-              <li key={channel.idx}># {channel.title}</li>
+              <Channel
+                key={channel.idx}
+                channel={channel}
+                channels={channels}
+                setChannels={setChannels}
+              />
             ))}
           </ul>
         </div>
