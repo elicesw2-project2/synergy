@@ -1,6 +1,7 @@
 import {
   chatroomModel,
   ChatRoomModel,
+  ChatRoomData,
   ChatRoomInfo,
 } from '../model/chat.model';
 
@@ -9,11 +10,11 @@ class ChatService {
   constructor(private chatroomModel: ChatRoomModel) {}
 
   async getRooms(
-    workspace_idx: number,
-    result: (err: Error | null, data: ChatRoomInfo[] | null) => void
+    ChatRoomInfo: number,
+    result: (err: Error | null, data: ChatRoomData[] | null) => void
   ) {
-    const workspaceIdx = workspace_idx;
-    if (workspaceIdx == null) {
+    const workspace_Idx = ChatRoomInfo;
+    if (workspace_Idx == null) {
       throw new Error('required value is not allowed to be null');
     }
 
@@ -22,8 +23,8 @@ class ChatService {
     // return rooms;
 
     await this.chatroomModel.getAllChatRooms(
-      workspaceIdx,
-      (err: Error | null, data: ChatRoomInfo[] | null) => {
+      workspace_Idx,
+      (err: Error | null, data: ChatRoomData[] | null) => {
         if (err) {
           result(err, null);
           return;
@@ -34,13 +35,13 @@ class ChatService {
   }
 
   async addChatRoom(
-    workspace_idx: number,
-    result: (err: Error | null, data: ChatRoomInfo | null) => void
+    chatroomInfo: ChatRoomInfo,
+    result: (err: Error | null, data: ChatRoomData | null) => void
   ) {
     // db저장
     return this.chatroomModel.create(
-      workspace_idx,
-      (err: Error | null, data: ChatRoomInfo | null) => {
+      chatroomInfo,
+      (err: Error | null, data: ChatRoomData | null) => {
         if (err) {
           result(err, null);
           return;

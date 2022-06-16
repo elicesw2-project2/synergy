@@ -40,7 +40,7 @@ class ChatController {
 
   async createChatRooms(req: Request, res: Response, next: NextFunction) {
     if (!req.body) {
-      throw new Error('응답바디없음');
+      throw new Error('요청 바디 없음');
     }
     // console.log('controller1', req.body);
     const workspace_idx = req.body.workspace_idx;
@@ -53,6 +53,7 @@ class ChatController {
         res.status(201).send({
           status: 201,
           message: 'ChatRoom created successfully',
+          data,
         });
       }
     );

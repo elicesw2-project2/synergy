@@ -19,6 +19,26 @@ class ChatMessageController {
       }
     );
   }
+
+  async createChatMessage(req: Request, res: Response, next: NextFunction) {
+    if (!req.body) {
+      throw new Error('요청 바디 없음');
+    }
+
+    await chatmessageService.createMessage(
+      req.body,
+      (err: Error | null, data: any) => {
+        if (err) {
+          next(err);
+        }
+        res.status(200).send({
+          status: 200,
+          message: 'ChatMessages created successfully',
+          data,
+        });
+      }
+    );
+  }
 }
 const chatmessageController = new ChatMessageController();
 

@@ -1,5 +1,10 @@
 import sql from './db';
 
+export interface ChatRoomData {
+  room_idx: number;
+  workspace_idx: number;
+}
+
 export interface ChatRoomInfo {
   workspace_idx: number;
 }
@@ -8,7 +13,7 @@ export class ChatRoomModel {
   // eslint-disable-next-line class-methods-use-this
   async getAllChatRooms(
     workspace_idx: number,
-    result: (err: Error | null, data: ChatRoomInfo[] | null) => void
+    result: (err: Error | null, data: ChatRoomData[] | null) => void
   ) {
     await sql.query(
       'SELECT * FROM chatroom where workspace_idx = ?',
@@ -31,19 +36,18 @@ export class ChatRoomModel {
   }
 
   async create(
-    workspace_idx: number,
-    result: (err: Error | null, data: ChatRoomInfo | null) => void
+    chtroomInfo: ChatRoomInfo,
+    result: (err: Error | null, data: ChatRoomData | null) => void
   ) {
     sql.query(
       'INSERT INTO chatroom (workspace_idx) VALUES (?)',
-      workspace_idx,
+      chtroomInfo,
       (err, res) => {
         if (err) {
           result(err, null);
           return;
         }
-        console.log(res);
-        result(null, res);
+        result(null, { room_idx: res.insertId, ...chtroomInfo });
       }
     );
   }

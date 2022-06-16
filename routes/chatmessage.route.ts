@@ -7,7 +7,7 @@ const chatmessageRouter: Router = express.Router();
 chatmessageRouter.get('/:room_idx', chatmessageController.getChatMessages);
 
 // 채팅 메시지 등록
-// chatmessageRouter.post('/', chatmessageController.createChatMessage);
+chatmessageRouter.post('/', chatmessageController.createChatMessage);
 
 // 채팅 메시지 수정
 // chatmessageRouter.patch('/', chatmessageController.updateChatMessage);
