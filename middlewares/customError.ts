@@ -1,4 +1,4 @@
-class customError extends Error {
+class CustomError extends Error {
   status: number;
 
   constructor(status: number, message: string | undefined) {
@@ -8,4 +8,4 @@ class customError extends Error {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { customError };
+export { CustomError };
