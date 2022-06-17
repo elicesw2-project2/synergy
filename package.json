@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.ts",
     "dev": "ts-node-dev --inspect --watch -- ./app.ts",
-    "copy-files": "cp -r src/public/ dist/public/ && cp -r src/views/ dist/views/",
-    "build": "tsc && npm run copy-files",
+    "build": "tsc",
     "lint": "eslint **/*.ts"
   },
   "author": "",
