@@ -14,7 +14,7 @@ export interface ChannelCategoryData {
 export class ChannelCategoryModel {
   // workspace_idx로 채널 카테고리 목록 조회
   // eslint-disable-next-line class-methods-use-this
-  async getAllByWorkSpace(workspaceIdx: number) {
+  async findByWorkspace(workspaceIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
         'SELECT * FROM channelcategory WHERE workspace_idx = ?',
@@ -44,10 +44,7 @@ export class ChannelCategoryModel {
 
   // channel_idx로 채널 이름 수정
   // eslint-disable-next-line class-methods-use-this
-  async updateById(
-    categoryIdx: number,
-    newChannelCategory: ChannelCategoryInfo
-  ) {
+  async update(categoryIdx: number, newChannelCategory: ChannelCategoryInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
         'UPDATE channelcategory SET name = ? WHERE category_idx = ?',
