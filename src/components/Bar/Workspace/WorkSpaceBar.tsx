@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // components
-import WorkSpaceModal from 'components/Modals/WorkSpaceModal';
+import WorkSpaceModal from 'components/Bar/Workspace/AddWorkSpaceModal';
 import SingleWorkSpace from './SingleWorkSpace';
 
 // dummy

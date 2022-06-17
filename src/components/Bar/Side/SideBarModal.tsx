@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import 'styles/Modals/SideBarModal.scss';
 import RadioButton from 'components/Button/RadioButton';
 
-import { IChannel } from 'components/Bars/SideBar';
+import { IChannel } from 'components/Bar/Side/SideBar';
 
 interface iProps {
   onClickToggleModal: () => void;

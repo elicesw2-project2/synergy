@@ -6,7 +6,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
-import { IWorkSpace } from 'components/Bars/WorkSpaceBar';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
 
 import defaultImg from 'assets/default-img.jpeg';
 

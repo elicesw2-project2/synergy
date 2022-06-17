@@ -14,7 +14,7 @@ function RadioButton({ type, setChannelType, checked }: iProps) {
 
   return (
     <div className="SideBarModal__Form__Type">
-      <span>이건 {type} 채널</span>
+      <span>{type} 채널</span>
       <input
         type="radio"
         name="type"

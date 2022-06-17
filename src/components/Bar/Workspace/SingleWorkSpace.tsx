@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
-import { IWorkSpace } from 'components/Bars/WorkSpaceBar';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import WorkSpaceModal from 'components/Bar/Workspace/AddWorkSpaceModal';
 
 interface iProps {
   workSpace: IWorkSpace;
@@ -13,16 +14,18 @@ function SingleWorkSpace({
   workSpaceList,
   setWorkSpaceList,
 }: iProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
-    setIsOpen((prev) => !prev);
+    setIsEdit((prev) => !prev);
   };
 
   const handleClick = () => {
     const filtered = workSpaceList.filter((selcted) => selcted !== workSpace);
     setWorkSpaceList(filtered);
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
@@ -32,11 +35,17 @@ function SingleWorkSpace({
         className="WorkSpaceBar__box"
         onContextMenu={handleContextMenu}
       />
-      {isOpen && (
-        <button type="button" onClick={handleClick}>
-          삭제
-        </button>
+      {isEdit && (
+        <>
+          <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
+            수정
+          </button>
+          <button type="button" onClick={handleClick}>
+            삭제
+          </button>
+        </>
       )}
+      {/* {isModalOpen && <WorkSpaceModal />} */}
     </div>
   );
 }
