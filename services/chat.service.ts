@@ -4,41 +4,26 @@ import {
   ChatRoomData,
   ChatRoomInfo,
 } from '../model/chat.model';
+import { CustomError } from '../middlewares/customError';
 
 class ChatService {
   // eslint-disable-next-line no-useless-constructor
   constructor(private chatroomModel: ChatRoomModel) {}
 
-  async getRooms(
-    ChatRoomInfo: number,
-    result: (err: Error | null, data: ChatRoomData[] | null) => void
-  ) {
+  async findAllRooms(ChatRoomInfo: number) {
     const workspace_Idx = ChatRoomInfo;
-    if (workspace_Idx == null) {
-      throw new Error('required value is not allowed to be null');
+    if (!workspace_Idx) {
+      throw new CustomError(400, 'workspace_Idx 값이 없습니다');
     }
-
-    await this.chatroomModel.getAllChatRooms(workspace_Idx, (err, data) => {
-      if (err) {
-        result(err, null);
-        return;
-      }
-      result(null, data);
-    });
+    return await this.chatroomModel.findAll(workspace_Idx);
   }
 
-  async addChatRoom(
-    chatroomInfo: ChatRoomInfo,
-    result: (err: Error | null, data: ChatRoomData | null) => void
-  ) {
-    // db저장
-    return this.chatroomModel.create(chatroomInfo, (err, data) => {
-      if (err) {
-        result(err, null);
-        return;
-      }
-      result(null, data);
-    });
+  async createRooms(chatroomInfo: ChatRoomInfo) {
+    const { workspace_idx } = chatroomInfo;
+    if (!workspace_idx) {
+      throw new CustomError(400, 'workspace_Idx 값이 없습니다');
+    }
+    return await this.chatroomModel.create(chatroomInfo);
   }
 }
 

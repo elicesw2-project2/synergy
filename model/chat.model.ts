@@ -11,33 +11,25 @@ export interface ChatRoomInfo {
 
 export class ChatRoomModel {
   // eslint-disable-next-line class-methods-use-this
-  async getAllChatRooms(
-    workspace_idx: number,
-    result: (err: Error | null, data: ChatRoomData[] | null) => void
-  ) {
-    await sql.query(
-      'SELECT * FROM chatroom where workspace_idx = ?',
-      workspace_idx,
-      (err, res) => {
-        if (err) {
-          result(err, null);
-          return;
+  async findAll(workspace_idx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT * FROM chatroom where workspace_idx = ?',
+        workspace_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res);
         }
-        result(null, res);
-      }
-    );
+      );
+    });
   }
 
-  async create(
-    newchatroomInfo: ChatRoomInfo,
-    result: (err: Error | null, data: ChatRoomData | null) => void
-  ) {
-    sql.query('INSERT INTO chatroom SET ?', newchatroomInfo, (err, res) => {
-      if (err) {
-        result(err, null);
-        return;
-      }
-      result(null, { room_idx: res.insertId, ...newchatroomInfo });
+  async create(newchatroomInfo: ChatRoomInfo) {
+    return new Promise((resolve, reject) => {
+      sql.query('INSERT INTO chatroom SET ?', newchatroomInfo, (err, res) => {
+        return err
+          ? reject(err)
+          : resolve({ room_idx: res.insertId, ...newchatroomInfo });
+      });
     });
   }
 }

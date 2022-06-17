@@ -3,40 +3,31 @@ import { chatService } from '../services/chat.service';
 
 class ChatController {
   // eslint-disable-next-line class-methods-use-this
-  async getChatRooms(req: Request, res: Response, next: NextFunction) {
-    const workspace_idx: number = Number(req.params.workspace_idx);
-
-    await chatService.getRooms(
-      workspace_idx,
-      (err: Error | null, data: any) => {
-        if (err) {
-          next(err);
-        }
-        res.status(200).send({
-          status: 200,
-          message: 'ChatRooms loaded successfully',
-          data,
-        });
-      }
-    );
+  async getAllRooms(req: Request, res: Response, next: NextFunction) {
+    try {
+      const workspace_idx: number = Number(req.params.workspace_idx);
+      const rooms = await chatService.findAllRooms(workspace_idx);
+      res.status(200).send({
+        status: 200,
+        message: '채팅방 조회 성공',
+        data: rooms,
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 
-  async createChatRooms(req: Request, res: Response, next: NextFunction) {
-    if (!req.body) {
-      throw new Error('요청 바디 없음');
-    }
-    // console.log('controller1', req.body);
-    // const workspace_idx = req.body.workspace_idx;
-    await chatService.addChatRoom(req.body, (err: Error | null, data: any) => {
-      if (err) {
-        next(err);
-      }
-      res.status(201).send({
-        status: 201,
-        message: 'ChatRoom created successfully',
-        data,
+  async addRooms(req: Request, res: Response, next: NextFunction) {
+    try {
+      const room = await chatService.createRooms(req.body);
+      res.status(200).send({
+        status: 200,
+        message: '채팅방 생성 성공',
+        data: room,
       });
-    });
+    } catch (err) {
+      next(err);
+    }
   }
 }
 const chatController = new ChatController();
