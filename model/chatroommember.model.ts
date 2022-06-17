@@ -44,6 +44,14 @@ export class ChatRoomMemberModel {
         'DELETE FROM chatroommember where user_idx = ? and room_idx = ?',
         [ChatRoomMemberInfo.user_idx, ChatRoomMemberInfo.room_idx],
         (err, res) => {
+          if (res.affectedRows === 0) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+              status: 404,
+              message: '해당 member를 찾을 수 없습니다.',
+            });
+          }
+
           return err ? reject(err) : resolve({ ...ChatRoomMemberInfo });
         }
       );

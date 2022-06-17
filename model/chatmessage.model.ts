@@ -57,6 +57,13 @@ export class ChatMessageModel {
         'UPDATE chatmessage set message = ? where message_idx = ?',
         [ChatMessageInfo.message, message_idx],
         (err, res) => {
+          if (res.affectedRows === 0) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+              status: 404,
+              message: '해당 message_idx를 찾을 수 없습니다.',
+            });
+          }
           return err
             ? reject(err)
             : resolve({ message_idx: message_idx, ...ChatMessageInfo });
@@ -71,6 +78,14 @@ export class ChatMessageModel {
         'DELETE FROM chatmessage where message_idx = ?',
         message_idx,
         (err, res) => {
+          if (res.affectedRows === 0) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+              status: 404,
+              message: '해당 message_idx를 찾을 수 없습니다.',
+            });
+          }
+
           return err ? reject(err) : resolve({ message_idx: message_idx });
         }
       );
