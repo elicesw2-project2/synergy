@@ -1,43 +1,26 @@
 import {
   chatmessageModel,
   ChatMessageModel,
-  ChatMessageData,
   ChatMessageInfo,
 } from '../model/chatmessage.model';
+import { CustomError } from '../middlewares/customError';
 
 class ChatMessageService {
   constructor(private chatmessageModel: ChatMessageModel) {}
 
-  async getMessages(
-    room_idx: number,
-    result: (err: Error | null, data: ChatMessageData[] | null) => void
-  ) {
-    return this.chatmessageModel.getAllChatMessageByRoom(
-      room_idx,
-      (err: Error | null, data: ChatMessageData[] | null) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
-      }
-    );
+  async findAllChatMessageByRoomId(room_idx: number) {
+    if (!room_idx) {
+      throw new CustomError(400, 'room_idx 값이 없습니다');
+    }
+    return this.chatmessageModel.findAllByRoomId(room_idx);
   }
 
-  async createMessage(
-    ChatMessageInfo: ChatMessageInfo,
-    result: (err: Error | null, data: ChatMessageData | null) => void
-  ) {
-    return this.chatmessageModel.addChatMessage(
-      ChatMessageInfo,
-      (err, data) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
-      }
-    );
+  async createMessage(ChatMessageInfo: ChatMessageInfo) {
+    const { message, room_idx, user_idx } = ChatMessageInfo;
+    if (!message || !room_idx || !user_idx) {
+      throw new CustomError(400, '요청 값을 다시 확인해주세요');
+    }
+    return this.chatmessageModel.create(ChatMessageInfo);
   }
 }
 

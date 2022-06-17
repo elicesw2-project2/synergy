@@ -21,42 +21,34 @@ export interface ToUpdate {
 
 export class ChatMessageModel {
   // eslint-disable-next-line class-methods-use-this
-  async getAllChatMessageByRoom(
-    room_idx: number,
-    result: (err: Error | null, data: ChatMessageData[] | null) => void
-  ) {
-    await sql.query(
-      'SELECT * FROM chatmessage where room_idx = ?',
-      room_idx,
-      (err, res) => {
-        if (err) {
-          result(err, null);
-          return;
+  async findAllByRoomId(room_idx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT * FROM chatmessage where room_idx = ?',
+        room_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res);
         }
-        result(null, res);
-      }
-    );
+      );
+    });
   }
 
-  async addChatMessage(
-    ChatMessageInfo: ChatMessageInfo,
-    result: (err: Error | null, data: ChatMessageData | null) => void
-  ) {
-    await sql.query(
-      'INSERT INTO chatmessage set ?',
-      ChatMessageInfo,
-      (err, res) => {
-        if (err) {
-          result(err, null);
-          return;
+  async create(ChatMessageInfo: ChatMessageInfo) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'INSERT INTO chatmessage set ?',
+        ChatMessageInfo,
+        (err, res) => {
+          return err
+            ? reject(err)
+            : resolve({
+                message_idx: res.insertId,
+                create_time: new Date(),
+                ...ChatMessageInfo,
+              });
         }
-        result(null, {
-          message_idx: res.insertId,
-          create_time: new Date(),
-          ...ChatMessageInfo,
-        });
-      }
-    );
+      );
+    });
   }
 }
 const chatmessageModel = new ChatMessageModel();
