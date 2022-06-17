@@ -1,15 +1,15 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { iChannel } from 'types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import { IChannel } from './SideBar';
 
-interface iProps {
-  channel: iChannel;
-  channels: iChannel[];
-  setChannels: Dispatch<SetStateAction<iChannel[]>>;
+interface IProps {
+  channel: IChannel;
+  channels: IChannel[];
+  setChannels: Dispatch<SetStateAction<IChannel[]>>;
 }
 
-function Channel({ channel, channels, setChannels }: iProps) {
+function Channel({ channel, channels, setChannels }: IProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const handleClick = () => {

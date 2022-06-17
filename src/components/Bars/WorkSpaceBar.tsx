@@ -5,7 +5,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // components
 import WorkSpaceModal from 'components/Modals/WorkSpaceModal';
-import { iWorkSpace } from 'types';
 import SingleWorkSpace from './SingleWorkSpace';
 
 // dummy
@@ -33,8 +32,15 @@ const lists = [
   },
 ];
 
+export interface IWorkSpace {
+  idx: number;
+  title: string;
+  content?: string;
+  image?: string;
+}
+
 function WorkSpaceBar() {
-  const [workSpaceList, setWorkSpaceList] = useState<iWorkSpace[]>(lists);
+  const [workSpaceList, setWorkSpaceList] = useState<IWorkSpace[]>(lists);
 
   // 모달창 여닫기
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

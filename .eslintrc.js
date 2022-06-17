@@ -47,6 +47,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': ['warn'], // react-hook-form
     'react/require-default-props': 'off', // 타입스크립트의 optional 기능을 사용할 수 없음.
+    'import/no-cycle': 'off',
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

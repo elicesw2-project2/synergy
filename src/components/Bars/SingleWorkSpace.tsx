@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
-import { iWorkSpace } from 'types';
+import { IWorkSpace } from 'components/Bars/WorkSpaceBar';
 
 interface iProps {
-  workSpace: iWorkSpace;
-  workSpaceList: iWorkSpace[];
-  setWorkSpaceList: Dispatch<SetStateAction<iWorkSpace[]>>;
+  workSpace: IWorkSpace;
+  workSpaceList: IWorkSpace[];
+  setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
 }
 
 function SingleWorkSpace({

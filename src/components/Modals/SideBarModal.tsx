@@ -1,14 +1,14 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { iChannel } from 'types';
-
 import 'styles/Modals/SideBarModal.scss';
 import RadioButton from 'components/Button/RadioButton';
 
+import { IChannel } from 'components/Bars/SideBar';
+
 interface iProps {
   onClickToggleModal: () => void;
-  channels: iChannel[];
-  setChannels: Dispatch<SetStateAction<iChannel[]>>;
+  channels: IChannel[];
+  setChannels: Dispatch<SetStateAction<IChannel[]>>;
 }
 
 function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {

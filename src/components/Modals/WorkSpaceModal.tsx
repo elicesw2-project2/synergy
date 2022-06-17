@@ -6,14 +6,14 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
-import { iWorkSpace } from 'types';
+import { IWorkSpace } from 'components/Bars/WorkSpaceBar';
 
 import defaultImg from 'assets/default-img.jpeg';
 
 interface iProps {
   onClickToggleModal: () => void;
-  workSpaceList: iWorkSpace[];
-  setWorkSpaceList: Dispatch<SetStateAction<iWorkSpace[]>>;
+  workSpaceList: IWorkSpace[];
+  setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
 }
 
 function WorkSpaceModal({
@@ -25,12 +25,12 @@ function WorkSpaceModal({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iWorkSpace>();
+  } = useForm<IWorkSpace>();
 
   const [preview, setPreview] = useState<string>('');
 
   // 폼 제출
-  const onSubmit: SubmitHandler<iWorkSpace> = (data) => {
+  const onSubmit: SubmitHandler<IWorkSpace> = (data) => {
     const { idx, title } = data;
     let image = preview;
     if (!preview) {

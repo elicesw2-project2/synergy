@@ -6,9 +6,6 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 // css
 import 'styles/Bars/SideBar.scss';
 
-// types
-import { iChannel } from 'types';
-
 // components
 import Channel from './Channel';
 
@@ -33,13 +30,18 @@ const dummyChannels = [
   },
 ];
 
+export interface IChannel {
+  idx: number;
+  title: string;
+}
+
 function SideBar() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const onClickToggleModal = useCallback(() => {
     setIsOpenModal(!isOpenModal);
   }, [isOpenModal]);
 
-  const [channels, setChannels] = useState<iChannel[]>(dummyChannels);
+  const [channels, setChannels] = useState<IChannel[]>(dummyChannels);
 
   return (
     <div className="SideBar">
