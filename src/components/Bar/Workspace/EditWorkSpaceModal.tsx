@@ -1,51 +1,39 @@
-import React, { useState, Dispatch, SetStateAction, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
 
-import defaultImg from 'assets/default-img.jpeg';
-
 interface iProps {
   onClickToggleModal: () => void;
-  workSpaceList: IWorkSpace[];
-  setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
+  workSpace: IWorkSpace;
 }
 
-function AddWorkSpaceModal({
-  onClickToggleModal,
-  workSpaceList,
-  setWorkSpaceList,
-}: iProps) {
+function EditWorkSpaceModal({ onClickToggleModal, workSpace }: iProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IWorkSpace>();
 
-  const [preview, setPreview] = useState<string>('');
+  const [image, setImage] = useState<string | undefined>(workSpace.image);
+  const { ref, ...rest } = register('image');
 
   // 폼 제출
   const onSubmit: SubmitHandler<IWorkSpace> = (data) => {
-    const { idx, title } = data;
-    let image = preview;
-    if (!preview) {
-      image = defaultImg;
-    }
-    const newWorkSpace = { idx, title, image };
-    setWorkSpaceList(workSpaceList.concat(newWorkSpace));
+    const tmp = workSpace;
+    tmp.image = image;
+    // axios data
     onClickToggleModal();
   };
 
   // 사진 업로드 버튼 커스터마이징
-  const photoInput = useRef<HTMLInputElement>(null);
+  const photoInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClickImgUpload = () => {
-    photoInput.current?.click();
+    photoInputRef.current?.click();
   };
 
   // 사진 미리보기
@@ -54,8 +42,7 @@ function AddWorkSpaceModal({
     const img = e.target.files[0];
     const formData = new FormData();
     formData.append('img', img);
-    // axios FormData type?
-    setPreview(URL.createObjectURL(img));
+    setImage(URL.createObjectURL(img));
   };
 
   return (
@@ -72,7 +59,7 @@ function AddWorkSpaceModal({
           </button>
 
           <div className="Modal__Form__Description">
-            <h1>서버 만들기</h1>
+            <h1>서버 수정</h1>
             <h2>서버는 나와 친구들이 함께 어울리는 공간입니다.</h2>
           </div>
 
@@ -85,30 +72,23 @@ function AddWorkSpaceModal({
                 accept="image/*"
                 placeholder="Image Upload..."
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                {...register('image')}
+                {...rest}
+                name="image"
                 style={{ display: 'none' }}
-                ref={photoInput}
+                ref={(e) => {
+                  ref(e);
+                  photoInputRef.current = e;
+                }}
                 onChange={onFileChange}
               />
               {/* 이미지 업로드 버튼 */}
-              {preview ? (
-                <img
-                  src={preview}
-                  alt="preview-img"
-                  className="Modal__Form__image-preview"
-                  onClick={handleClickImgUpload}
-                  aria-hidden="true"
-                />
-              ) : (
-                <div className="Modal__Form__image-upload">
-                  <FontAwesomeIcon
-                    icon={faCamera}
-                    onClick={handleClickImgUpload}
-                    className="Modal__Form__image-upload-icon"
-                  />
-                  <p>Upload</p>
-                </div>
-              )}
+              <img
+                src={image}
+                alt="workspace-img"
+                className="Modal__Form__image-preview"
+                onClick={handleClickImgUpload}
+                aria-hidden="true"
+              />
             </label>
 
             <label htmlFor="title" className="Modal__Form__Title">
@@ -119,19 +99,10 @@ function AddWorkSpaceModal({
                 </div>
               )}
               <input
-                placeholder="Title..."
+                defaultValue={workSpace.title}
                 {...register('title', { required: true })}
               />
             </label>
-
-            {/* <label htmlFor="content" className="Modal__Form__Content">
-              <span>서버 설명</span>
-              <textarea
-              placeholder="Content..."
-              {...register('content', { required: true })}
-              />
-              </label>
-            {errors.content && 'Content is Required!'} */}
 
             {/* 서버 추가 버튼 */}
             <input
@@ -146,4 +117,4 @@ function AddWorkSpaceModal({
   );
 }
 
-export default AddWorkSpaceModal;
+export default EditWorkSpaceModal;

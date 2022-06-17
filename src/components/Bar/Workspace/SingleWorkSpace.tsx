@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
-import WorkSpaceModal from 'components/Bar/Workspace/AddWorkSpaceModal';
+import EditWorkSpaceModal from './EditWorkSpaceModal';
 
 interface iProps {
   workSpace: IWorkSpace;
@@ -25,7 +25,10 @@ function SingleWorkSpace({
     setWorkSpaceList(filtered);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const onClickToggleModal = useCallback(() => {
+    setIsModalOpen(!isModalOpen);
+  }, [isModalOpen]);
 
   return (
     <div>
@@ -45,7 +48,12 @@ function SingleWorkSpace({
           </button>
         </>
       )}
-      {/* {isModalOpen && <WorkSpaceModal />} */}
+      {isModalOpen && (
+        <EditWorkSpaceModal
+          onClickToggleModal={onClickToggleModal}
+          workSpace={workSpace}
+        />
+      )}
     </div>
   );
 }
