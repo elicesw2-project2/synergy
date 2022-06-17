@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sindresorhus/is": "^5.1.0",
     "@types/mysql": "^2.15.21",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",

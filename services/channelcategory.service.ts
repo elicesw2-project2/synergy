@@ -18,6 +18,9 @@ class ChannelCategoryService {
 
   // 채널 카테고리 등록
   async creatChannelCategory(categoryInfo: ChannelCategoryInfo) {
+    if (!categoryInfo.name) {
+      throw new CustomError(400, '요청값을 다시 확인해주세요.');
+    }
     // db에 저장
     // eslint-disable-next-line no-return-await
     return await this.channelCategoryModel.create(categoryInfo);

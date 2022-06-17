@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-unresolved
+// import is from '@sindresorhus/is';
 import { Request, Response, NextFunction } from 'express';
 import { channelCategoryService } from '../services/channelcategory.service';
 import { CustomError } from '../middlewares/customError';
@@ -24,12 +26,12 @@ class ChannelCategoryController {
   // eslint-disable-next-line class-methods-use-this
   async addChannelCategory(req: Request, res: Response, next: NextFunction) {
     try {
-      if (!req.body) {
-        throw new CustomError(
-          400,
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
+      // if (is.emptyObject(req.body)) {
+      //   throw new CustomError(
+      //     400,
+      //     'headers의 Content-Type을 application/json으로 설정해주세요'
+      //   );
+      // }
       const channelCategory = await channelCategoryService.creatChannelCategory(
         req.body
       );

@@ -13,7 +13,7 @@ router.post('/', channelCategoryController.addChannelCategory);
 // 채널 카테고리 수정 (/channelcategory/:category_idx)
 router.patch('/:category_idx', channelCategoryController.setChannelCategory);
 
-// // 채널 카테고리 삭제 (/channelcategory/:category_idx)
+// 채널 카테고리 삭제 (/channelcategory/:category_idx)
 router.delete(
   '/:category_idx',
   channelCategoryController.deleteChannelCategory
