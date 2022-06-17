@@ -13,9 +13,6 @@ chatmessageRouter.post('/', chatmessageController.addChatMessage);
 chatmessageRouter.patch('/:message_idx', chatmessageController.setChatMessage);
 
 // 채팅 메시지 삭제
-// chatmessageRouter.delete(
-//   '/:message_idx',
-//   chatmessageController.deleteChatMessage
-// );
+chatmessageRouter.delete('/:message_idx', chatmessageController.deleteMessage);
 
 export { chatmessageRouter };

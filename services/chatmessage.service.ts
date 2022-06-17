@@ -32,6 +32,13 @@ class ChatMessageService {
     }
     return this.chatmessageModel.update(message_idx, ChatMessageInfo);
   }
+
+  async removeChat(message_idx: number) {
+    if (!message_idx) {
+      throw new CustomError(400, 'message_idx 값이 없습니다');
+    }
+    return this.chatmessageModel.remove(message_idx);
+  }
 }
 
 const chatmessageService = new ChatMessageService(chatmessageModel);

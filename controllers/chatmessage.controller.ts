@@ -58,6 +58,20 @@ class ChatMessageController {
       next(err);
     }
   }
+
+  async deleteMessage(req: Request, res: Response, next: NextFunction) {
+    try {
+      const message_idx: number = Number(req.params.message_idx);
+      const message = await chatmessageService.removeChat(message_idx);
+      res.status(200).send({
+        status: 200,
+        message: '메시지 삭제 성공',
+        data: message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 const chatmessageController = new ChatMessageController();
 

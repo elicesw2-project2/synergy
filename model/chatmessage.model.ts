@@ -64,6 +64,18 @@ export class ChatMessageModel {
       );
     });
   }
+
+  async remove(message_idx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'DELETE FROM chatmessage where message_idx = ?',
+        message_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve({ message_idx: message_idx });
+        }
+      );
+    });
+  }
 }
 const chatmessageModel = new ChatMessageModel();
 export { chatmessageModel };
