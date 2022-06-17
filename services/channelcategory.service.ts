@@ -3,56 +3,46 @@ import {
   channelCategoryModel,
   ChannelCategoryModel,
   ChannelCategoryInfo,
-  ChannelCategoryData,
 } from '../model/channelcategory.model';
-import { customError } from '../middlewares/customError';
+import { CustomError } from '../middlewares/customError';
 
 class ChannelCategoryService {
   // eslint-disable-next-line no-useless-constructor
   constructor(private channelCategoryModel: ChannelCategoryModel) {}
 
   // 채널 카테고리 목록을 받음
-  async getChannelCategory(
-    result: (err: Error | null, data: ChannelCategoryData[] | null) => void
-  ) {
-    await this.channelCategoryModel.getAll(
-      (err: Error | null, data: ChannelCategoryData[] | null) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
-      }
-    );
-
-    // const category = await channelCategoryModel.getAll2();
-    // console.log('서비스');
-    // console.log(category);
+  async getChannelCategory2(workspaceIdx: number) {
+    // eslint-disable-next-line no-return-await
+    return await this.channelCategoryModel.getAllByWorkSpace(workspaceIdx);
   }
 
   // 채널 카테고리 등록
-  async addChannelCategory(
-    categoryInfo: ChannelCategoryInfo,
-    result: (err: Error | null, data: ChannelCategoryData | null) => void
+  async addChannelCategory(categoryInfo: ChannelCategoryInfo) {
+    // db에 저장
+    // eslint-disable-next-line no-return-await
+    return await this.channelCategoryModel.create(categoryInfo);
+  }
+
+  // 채널 카테고리의 이름 수정
+  async updateChannelCategory(
+    categoryIdx: number,
+    categoryInfo: ChannelCategoryInfo
   ) {
-    // db저장
-    return this.channelCategoryModel.create(
-      categoryInfo,
-      (err: Error | null, data: ChannelCategoryData | null) => {
-        if (err) {
-          result(err, null);
-          return;
-        }
-        result(null, data);
-      }
+    if (!categoryInfo.name) {
+      throw new CustomError(400, '카테고리 이름을 넣어주세요');
+    }
+    // eslint-disable-next-line no-return-await
+    return await this.channelCategoryModel.updateById(
+      categoryIdx,
+      categoryInfo
     );
   }
 
-  // 특정 채널 카테고리의 이름 수정
-  // db에서 찾지 못한 경우 에러 던짐
-
   // 채널 카테고리 삭제
-  // db에서 찾지 못한 경우 에러 던짐
+  async deleteChannelCategory(categoryIdx: number) {
+    // eslint-disable-next-line no-return-await
+    return await this.channelCategoryModel.remove(categoryIdx);
+  }
 }
 
 const channelCategoryService = new ChannelCategoryService(channelCategoryModel);

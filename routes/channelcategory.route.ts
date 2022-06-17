@@ -4,16 +4,16 @@ import { channelCategoryController } from '../controllers/channelcategory.contro
 
 const router = Router();
 
-// 채널 카테고리 목록 조회 (/channelcategory)
-router.get('/', channelCategoryController.getAll);
+// 워크스페이스별 채널 카테고리 목록 조회 (/channelcategory/:workspace_idx)
+router.get('/:workspace_idx', channelCategoryController.getAllByWorkspace);
 
 // 채널 카테고리 등록 (/channelcategory)
 router.post('/', channelCategoryController.create);
 
-// // 채널 카테고리 수정 (/channelcategory/:category_idx)
-// router.patch('/', channelcategory.update);
+// 채널 카테고리 수정 (/channelcategory/:category_idx)
+router.patch('/:category_idx', channelCategoryController.update);
 
 // // 채널 카테고리 삭제 (/channelcategory/:category_idx)
-// router.delete('/', channelcategory.delete);
+router.delete('/:category_idx', channelCategoryController.delete);
 
 export default router;

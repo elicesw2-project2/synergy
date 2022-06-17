@@ -12,47 +12,84 @@ export interface ChannelCategoryData {
 }
 
 export class ChannelCategoryModel {
-  // 채널 카테고리 db 조회
+  // workspace_idx로 채널 카테고리 목록 조회
   // eslint-disable-next-line class-methods-use-this
-  async getAll(
-    result: (err: Error | null, data: ChannelCategoryData[] | null) => void
-  ) {
-    sql.query('SELECT * FROM channelcategory;', (err, res) => {
-      if (err) {
-        result(err, null);
-        return;
-      }
-      result(null, res);
+  async getAllByWorkSpace(workspaceIdx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT * FROM channelcategory WHERE workspace_idx = ?',
+        workspaceIdx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res);
+        }
+      );
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  // async getAll2() {
-  //   const category = await sql.query('SELECT * FROM channelcategory;');
-  //   console.log('모델');
-  //   console.log(category);
-  //   return category;
-  // }
-
   // 채널 카테고리 db에 등록
   // eslint-disable-next-line class-methods-use-this
-  async create(
-    newChannelCategory: ChannelCategoryInfo,
-    result: (err: Error | null, data: ChannelCategoryData | null) => void
-  ) {
-    console.log(newChannelCategory);
-    sql.query(
-      'INSERT INTO channelcategory SET ?',
-      newChannelCategory,
-      (err, res) => {
-        if (err) {
-          result(err, null);
-          return;
+  async create(newChannelCategory: ChannelCategoryInfo) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'INSERT INTO channelcategory SET ?',
+        newChannelCategory,
+        (err, res) => {
+          return err
+            ? reject(err)
+            : resolve({ category_idx: res.insertId, ...newChannelCategory });
         }
-        console.log({ category_idx: res.insertId, ...newChannelCategory });
-        result(null, { category_idx: res.insertId, ...newChannelCategory });
-      }
-    );
+      );
+    });
+  }
+
+  // channel_idx로 채널 이름 수정
+  // eslint-disable-next-line class-methods-use-this
+  async updateById(
+    categoryIdx: number,
+    newChannelCategory: ChannelCategoryInfo
+  ) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'UPDATE channelcategory SET name = ? WHERE category_idx = ?',
+        [newChannelCategory.name, categoryIdx],
+        (err, res) => {
+          if (res.affectedRows === 0) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+              status: 404,
+              message: '해당 채널카테고리 id를 찾을 수 없습니다.',
+            });
+          }
+          return err
+            ? reject(err)
+            : resolve({
+                category_idx: categoryIdx,
+                ...newChannelCategory,
+              });
+        }
+      );
+    });
+  }
+
+  // channel_idx로 채널 삭제
+  // eslint-disable-next-line class-methods-use-this
+  async remove(categoryIdx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'DELETE FROM channelcategory WHERE category_idx = ?',
+        categoryIdx,
+        (err, res) => {
+          if (res.affectedRows === 0) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+              status: 404,
+              message: '해당 채널카테고리 id를 찾을 수 없습니다.',
+            });
+          }
+          return err ? reject(err) : resolve({ category_idx: categoryIdx });
+        }
+      );
+    });
   }
 }
 
