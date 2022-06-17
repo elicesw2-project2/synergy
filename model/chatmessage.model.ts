@@ -50,6 +50,20 @@ export class ChatMessageModel {
       );
     });
   }
+
+  async update(message_idx: number, ChatMessageInfo: ChatMessageInfo) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'UPDATE chatmessage set message = ? where message_idx = ?',
+        [ChatMessageInfo.message, message_idx],
+        (err, res) => {
+          return err
+            ? reject(err)
+            : resolve({ message_idx: message_idx, ...ChatMessageInfo });
+        }
+      );
+    });
+  }
 }
 const chatmessageModel = new ChatMessageModel();
 export { chatmessageModel };

@@ -10,9 +10,12 @@ chatmessageRouter.get('/:room_idx', chatmessageController.getAllChatMessages);
 chatmessageRouter.post('/', chatmessageController.addChatMessage);
 
 // 채팅 메시지 수정
-// chatmessageRouter.patch('/', chatmessageController.updateChatMessage);
+chatmessageRouter.patch('/:message_idx', chatmessageController.setChatMessage);
 
 // 채팅 메시지 삭제
-// chatmessageRouter.delete('/', chatmessageController.deleteChatMessage);
+// chatmessageRouter.delete(
+//   '/:message_idx',
+//   chatmessageController.deleteChatMessage
+// );
 
 export { chatmessageRouter };

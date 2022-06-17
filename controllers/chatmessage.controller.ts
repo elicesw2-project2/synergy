@@ -40,6 +40,24 @@ class ChatMessageController {
       next(err);
     }
   }
+
+  async setChatMessage(req: Request, res: Response, next: NextFunction) {
+    try {
+      const message_idx: number = Number(req.params.message_idx);
+      // const update_message: string = req.body.message;
+      const message = await chatmessageService.updateMessage(
+        message_idx,
+        req.body
+      );
+      res.status(200).send({
+        status: 200,
+        message: '메시지 수정 성공',
+        data: message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 const chatmessageController = new ChatMessageController();
 
