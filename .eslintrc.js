@@ -33,6 +33,7 @@ module.exports = {
       'no-shadow': 'off',
       '@typescript-eslint/no-shadow': ['error'],
     },
+    'import/no-import-module-exports': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/'],
   settings: {

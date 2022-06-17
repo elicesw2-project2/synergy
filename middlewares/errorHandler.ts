@@ -11,8 +11,7 @@ function errorHandler(
 
   // 에러는 해당 http status 코드의 JSON 형태로 프론트에 전달됨
   // 지정된게 없다면 500에러로 지정
-  res.status(err.status || 500);
-  res.status(err.status).send({
+  res.status(err.status || 500).send({
     status: err.status || 500,
     message: err.message,
   });
