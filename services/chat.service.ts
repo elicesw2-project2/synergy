@@ -1,9 +1,8 @@
 import {
   chatroomModel,
   ChatRoomModel,
-  ChatRoomData,
   ChatRoomInfo,
-} from '../model/chat.model';
+} from '../model/chatroom.model';
 import { CustomError } from '../middlewares/customError';
 
 class ChatService {
