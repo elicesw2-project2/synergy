@@ -1,15 +1,19 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
-
 import routes from './routes';
+
+import workspaceRouter from './routes/workspace.router';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(bodyParser.json());
 
 app.use('/', routes);
+app.use('/workspaces', workspaceRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('형욱 바보');
