@@ -1,23 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import 'styles/Users/SignUp.scss';
 
 function SignUp() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+
+    const signUpPost = () => {
+      fetch('/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status === 201) {
+            alert(result.message);
+            // 이동할 페이지 작성
+            navigate('/auth/login');
+          } else if (result.status === 409) {
+            // 회원가입 실패 메세지
+            alert('result.message');
+          }
+        });
+    };
+
+    signUpPost();
+  };
+
   return (
     <div className="signUp">
       <section className="signUp_container">
         <h1 className="signUp_title">SYNERGY</h1>
-        <form
-          className="signUp_info"
-          onSubmit={handleSubmit(() => console.log('asdf'))}
-        >
+        <form className="signUp_info" onSubmit={handleSubmit(onSubmit)}>
           <hr />
           <p>
             <input
