@@ -1,4 +1,3 @@
-import is from '@sindresorhus/is';
 import { NextFunction, Request, Response } from 'express';
 import { chatmessageService } from '../services/chatmessage.service';
 import { CustomError } from '../middlewares/customError';
@@ -22,13 +21,16 @@ class ChatMessageController {
 
   async addChatMessage(req: Request, res: Response, next: NextFunction) {
     try {
+      /*
+      const is = await import("@sindresorhus/is")
       // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      // if (is.emptyObject(req.body)) {
-      //   throw new CustomError(
-      //     400,
-      //     'eaders의 Content-Type을 application/json으로 설정해주세요'
-      //   );
-      // }
+      if (is.emptyObject(req.body)) {
+        throw new CustomError(
+          400,
+          'eaders의 Content-Type을 application/json으로 설정해주세요'
+        );
+      }
+      */
 
       const message = await chatmessageService.createMessage(req.body);
       res.status(200).send({
