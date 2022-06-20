@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 
 import workspaceRouter from './routes/workspace.router';
+import imageRouter from './routes/image.routes';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 app.use('/workspaces', workspaceRouter);
-
+app.use('/image', imageRouter);
 app.get('/', (req: Request, res: Response) => {
   res.send('형욱 바보');
 });
