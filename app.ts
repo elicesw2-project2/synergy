@@ -5,8 +5,6 @@ import webSocket from './socket';
 import express, { Request, Response } from 'express';
 import routes from './routes';
 import cors from 'cors';
-
-import routes from './routes';
 import workspaceRouter from './routes/workspace.router';
 import imageRouter from './routes/image.routes';
 import { errorHandler } from './middlewares/errorHandler';
