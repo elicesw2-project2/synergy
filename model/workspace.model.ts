@@ -1,4 +1,3 @@
-import { rejects } from 'assert';
 import db from './db';
 
 export async function findAll() {
