@@ -34,6 +34,7 @@ module.exports = {
       '@typescript-eslint/no-shadow': ['error'],
     },
     'import/no-import-module-exports': 'off',
+    'consistent-return': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/'],
   settings: {

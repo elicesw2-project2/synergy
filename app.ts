@@ -4,13 +4,16 @@ import * as path from 'path';
 import webSocket from './socket';
 import express, { Request, Response } from 'express';
 import routes from './routes';
+import cors from 'cors';
 
+import routes from './routes';
 import workspaceRouter from './routes/workspace.router';
+import imageRouter from './routes/image.routes';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(bodyParser.json());
@@ -20,7 +23,7 @@ webSocket(server);
 
 app.use('/', routes);
 app.use('/workspaces', workspaceRouter);
-
+app.use('/image', imageRouter);
 app.get('/', (req: Request, res: Response) => {
   res.send('형욱 바보');
 });
