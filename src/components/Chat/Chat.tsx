@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import 'styles/Chat/Chat.scss';
 
@@ -16,12 +18,12 @@ function Chat() {
             <div>
               <button
                 type="submit"
-                className="chat"
+                className="chat_close"
                 onClick={() => {
                   setChatView(!chatView);
                 }}
               >
-                x
+                <FontAwesomeIcon icon={faXmark} />
               </button>
             </div>
           </div>
