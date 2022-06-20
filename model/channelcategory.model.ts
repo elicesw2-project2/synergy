@@ -1,4 +1,5 @@
 import sql from './db';
+import { CustomError } from '../middlewares/customError';
 
 export interface ChannelCategoryInfo {
   name: string;
@@ -51,11 +52,9 @@ export class ChannelCategoryModel {
         [newChannelCategory.name, categoryIdx],
         (err, res) => {
           if (res.affectedRows === 0) {
-            // eslint-disable-next-line prefer-promise-reject-errors
-            return reject({
-              status: 404,
-              message: '해당 채널카테고리 id를 찾을 수 없습니다.',
-            });
+            return reject(
+              new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
+            );
           }
           return err
             ? reject(err)
@@ -77,11 +76,9 @@ export class ChannelCategoryModel {
         categoryIdx,
         (err, res) => {
           if (res.affectedRows === 0) {
-            // eslint-disable-next-line prefer-promise-reject-errors
-            return reject({
-              status: 404,
-              message: '해당 채널카테고리 id를 찾을 수 없습니다.',
-            });
+            return reject(
+              new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
+            );
           }
           return err ? reject(err) : resolve({ category_idx: categoryIdx });
         }
