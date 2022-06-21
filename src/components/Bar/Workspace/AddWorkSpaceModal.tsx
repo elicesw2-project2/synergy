@@ -3,12 +3,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
+import defaultImg from 'assets/default-img.jpeg';
+
 import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
-
-import defaultImg from 'assets/default-img.jpeg';
+import { postImageUpload } from 'utils/api';
 
 interface iProps {
   onClickToggleModal: () => void;
@@ -16,45 +17,46 @@ interface iProps {
   setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
 }
 
-function AddWorkSpaceModal({
-  onClickToggleModal,
-  workSpaceList,
-  setWorkSpaceList,
-}: iProps) {
+function AddWorkSpaceModal(props: iProps) {
+  const { onClickToggleModal, workSpaceList, setWorkSpaceList } = props;
+
+  // react-hook-form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IWorkSpace>();
 
+  // state
+  const [imageFile, setImageFile] = useState<File>(defaultImg);
   const [preview, setPreview] = useState<string>('');
 
+  // ref에서 이미지 File 가져오기
+  const { ref, ...rest } = register('image');
+
   // 폼 제출
-  const onSubmit: SubmitHandler<IWorkSpace> = (data) => {
+  const onSubmit: SubmitHandler<IWorkSpace> = async (data) => {
     const { idx, title } = data;
-    let image = preview;
-    if (!preview) {
-      image = defaultImg;
-    }
+    const image = preview || defaultImg;
     const newWorkSpace = { idx, title, image };
     setWorkSpaceList(workSpaceList.concat(newWorkSpace));
+    // 이미지 따로, 이름 따로 api 요청
+    postImageUpload(imageFile);
+
     onClickToggleModal();
   };
 
   // 사진 업로드 버튼 커스터마이징
-  const photoInput = useRef<HTMLInputElement>(null);
-
+  const photoInputRef = useRef<HTMLInputElement | null>(null);
   const handleClickImgUpload = () => {
-    photoInput.current?.click();
+    photoInputRef.current?.click();
   };
 
   // 사진 미리보기
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const img = e.target.files[0];
-    const formData = new FormData();
-    formData.append('img', img);
-    // axios FormData type?
+    setImageFile(img);
     setPreview(URL.createObjectURL(img));
   };
 
@@ -87,7 +89,10 @@ function AddWorkSpaceModal({
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...register('image')}
                 style={{ display: 'none' }}
-                ref={photoInput}
+                ref={(e) => {
+                  ref(e);
+                  photoInputRef.current = e;
+                }}
                 onChange={onFileChange}
               />
               {/* 이미지 업로드 버튼 */}
@@ -124,16 +129,6 @@ function AddWorkSpaceModal({
               />
             </label>
 
-            {/* <label htmlFor="content" className="Modal__Form__Content">
-              <span>서버 설명</span>
-              <textarea
-              placeholder="Content..."
-              {...register('content', { required: true })}
-              />
-              </label>
-            {errors.content && 'Content is Required!'} */}
-
-            {/* 서버 추가 버튼 */}
             <input
               type="submit"
               value="제출"

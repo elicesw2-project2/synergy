@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from 'App';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Reset } from 'styled-reset';
 
 import { BrowserRouter } from 'react-router-dom';
@@ -17,6 +18,7 @@ root.render(
       <BrowserRouter>
         <Reset />
         <App />
+        <ReactQueryDevtools initialIsOpen />
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
