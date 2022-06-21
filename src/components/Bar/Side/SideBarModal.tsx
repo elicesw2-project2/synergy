@@ -23,7 +23,8 @@ function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {
     setChannels(
       channels.concat({
         idx: channels.length,
-        title: `[${channelType}] ${newChannelName}`,
+        title: newChannelName,
+        type: channelType,
       })
     );
   };

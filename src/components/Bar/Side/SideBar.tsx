@@ -12,27 +12,30 @@ import Channel from './Channel';
 const dummyChannels = [
   {
     idx: 0,
-    title: '[문서공유] 채널1',
+    title: '채널1',
+    type: '문서관리',
   },
   {
     idx: 1,
-
-    title: '[일정관리] 채널1',
+    title: '채널1',
+    type: '일정관리',
   },
   {
     idx: 2,
-
-    title: '[문서공유] 채널2',
+    title: '채널2',
+    type: '문서관리',
   },
   {
     idx: 3,
-    title: '[일정관리] 채널2',
+    title: '채널2',
+    type: '일정관리',
   },
 ];
 
 export interface IChannel {
   idx: number;
   title: string;
+  type: string;
 }
 
 function SideBar() {
