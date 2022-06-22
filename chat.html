@@ -1,0 +1,75 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <input id="room" placeholder="room_idx" />
+    <button onClick="setRoom()">ok</button> -->
+    <span>닉네임</span>
+    <input id="nickname" placeholder="nickname" />
+    <br />
+    <input id="msg" placeholder="chat" />
+
+    <button onClick="sendMsg()">send</button>
+    <ul id="messages" type="none">
+      <li></li>
+    </ul>
+    <script src="/api/socket.io.js"></script>
+    <script>
+      // const socket = io();
+      const socket = io('http://localhost:3000', {
+        path: '/api',
+      });
+
+      // socket.aton('message', function (data) {
+      //   console.log(data);
+      // });
+
+      // socket.on 함수로 서버에서 전달하는 신호를 수신
+      // socket.on('usercount', (count) => {
+      //   var userCounter = document.getElementById('usercount');
+      //   userCounter.innerText = '현재 ' + count + '명이 서버에 접속해있습니다.';
+      // });
+
+      // 메시지 수신시 HTML에 메시지 내용 작성
+      socket.on('message', (msg) => {
+        addMessage(msg);
+      });
+
+      // room_idx 입장
+      socket.emit('enter_room', 1, 'nickname');
+
+      // 채팅방 입장 후 알림
+      socket.on('welcome', (user) => {
+        console.log(`${user}님이 입장하셨습니다!`);
+        addMessage(`${user}님이 입장하셨습니다!`);
+      });
+
+      function sendMsg() {
+        const nick_input = document.getElementById('nickname');
+        var nickname = nick_input.value;
+        const input = document.getElementById('msg');
+        var message = input.value;
+        console.log(message);
+        socket.emit('message', message, nickname);
+        input.value = '';
+      }
+
+      function setRoom() {
+        const input = document.getElementById('room');
+        var room_idx = input.value;
+        console.log(room_idx);
+      }
+
+      function addMessage(message) {
+        var messageList = document.getElementById('messages');
+        var messageTag = document.createElement('li');
+        messageTag.innerText = message;
+        messageList.appendChild(messageTag);
+      }
+    </script>
+  </body>
+</html>
