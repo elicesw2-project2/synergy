@@ -1,52 +1,70 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as workspaceService from '../services/workspace.service';
 
 // 모든 목록 가져오기
-export async function getAll(req: Request, res: Response) {
+export async function getAllWorkspaces(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const workspaces = await workspaceService.getWorkspaces();
-    return res.status(200).json(workspaces);
+    const workspaces = await workspaceService.findAllWorkspaces();
+    res.status(200).send({
+      status: 200,
+      message: '워크스페이스 목록 조회 성공',
+      data: workspaces,
+    });
   } catch (err) {
-    // next(err) ??
-    console.log(err);
-    return res.status(500).json(err);
+    next(err);
   }
 }
 // 특정 워크 스페이스 조회
-export async function getById(req: Request, res: Response) {
+export async function getWorkspaceById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const workspaceId = req.params.workspace_idx;
-    const workspace = await workspaceService.getWorkspacesById(
+    const workspace = await workspaceService.findWorkspaceById(
       Number(workspaceId)
     );
-    return res.status(200).json(workspace);
+    res.status(200).send({
+      status: 200,
+      message: '워크스페이스 조회 성공',
+      data: workspace,
+    });
   } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
+    next(err);
   }
 }
 // 새 워크스페이스 등록하기
-export async function create(req: Request, res: Response) {
+export async function addWorkspace(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     console.log(req.body);
 
     const { name, profile } = req.body;
-    const newWorkspace = await workspaceService.addWorkspace({ name, profile });
+    const newWorkspace = await workspaceService.createWorkspace({
+      name,
+      profile,
+    });
     return res.status(201).json(newWorkspace);
   } catch (err) {
-    console.log(err);
-
-    return res.status(500).json(err);
+    next(err);
   }
 }
 
 // 워크스페이스 수정하기
-export async function update(req: Request, res: Response) {
+export async function setWorkspace(req: Request, res: Response) {
   const workspaceId = req.params.workspace_idx;
   const { profile, name } = req.body;
   console.log({ profile, name });
   try {
-    const updated = await workspaceService.setWorkspace(
+    const updated = await workspaceService.updateWorkspace(
       Number(workspaceId),
       req.body
     );
@@ -57,10 +75,10 @@ export async function update(req: Request, res: Response) {
 }
 
 // 워크스페이스 삭제하기
-export async function remove(req: Request, res: Response) {
+export async function deleteWorkspace(req: Request, res: Response) {
   const workspaceId = req.params.workspace_idx;
   try {
-    const deleteWorkspace = await workspaceService.deleteWorkspace(
+    const deleteWorkspace = await workspaceService.removeWorkspace(
       Number(workspaceId)
     );
     return res.status(200).json(deleteWorkspace);

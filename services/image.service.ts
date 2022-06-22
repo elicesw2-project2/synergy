@@ -11,9 +11,7 @@ interface FileResponseDto {
   link: string;
 }
 
-const uploadFileToS3 = async (
-  fileData: Express.Multer.File
-): Promise<FileResponseDto> => {
+const uploadFileToS3 = async (fileData: Express.Multer.File) => {
   const fileContent: Buffer = fs.readFileSync(fileData.path);
   const params: {
     Bucket: string;
@@ -27,8 +25,9 @@ const uploadFileToS3 = async (
   const result = await storage.upload(params).promise();
   const link = result.Location;
   // const fileName = fileData.originalname;
-  const file = await Image(link);
-  return file;
+  const data = await Image(link);
+  console.log(link);
+  return link;
 };
 
 // const uploadFileToS3 = async (

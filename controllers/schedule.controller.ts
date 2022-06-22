@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import findAllSchedules from '../services/schedule.service';
 
 const getAllSchedules = async (res: Response, req: Request) => {
@@ -10,8 +10,7 @@ const getAllSchedules = async (res: Response, req: Request) => {
       data: schedules,
     });
   } catch (err) {
-    console.log(err);
-    return err;
+    res.status(500).json(err);
   }
 };
 

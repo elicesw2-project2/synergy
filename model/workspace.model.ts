@@ -21,7 +21,7 @@ export function create(workspaceInfo: { name: string; profile: string }) {
   });
 }
 
-export function getWorkspaceById(workspaceIdx: number) {
+export function findById(workspaceIdx: number) {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT * FROM workspace WHERE workspace_idx = ?',
@@ -33,7 +33,7 @@ export function getWorkspaceById(workspaceIdx: number) {
   });
 }
 
-export function updateById(
+export function update(
   workspaceIdx: number,
   workspaceInfo: { name: string; profile: string }
 ) {

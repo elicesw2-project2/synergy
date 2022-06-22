@@ -1,7 +1,7 @@
 import * as Workspace from '../model/workspace.model';
 
 // 모든 워크스페이스 목록 조회
-export async function getWorkspaces() {
+export async function findAllWorkspaces() {
   const workspaces = await Workspace.findAll();
   console.log('service', workspaces);
 
@@ -9,14 +9,14 @@ export async function getWorkspaces() {
 }
 
 // id로 워크스페이스 상세 조회
-export async function getWorkspacesById(workspaceIdx: number) {
-  const data = await Workspace.getWorkspaceById(Number(workspaceIdx));
+export async function findWorkspaceById(workspaceIdx: number) {
+  const data = await Workspace.findById(Number(workspaceIdx));
 
   return data;
 }
 
 // 워크스페이스 등록
-export async function addWorkspace(workspaceInfo: {
+export async function createWorkspace(workspaceInfo: {
   name: string;
   profile: string;
 }) {
@@ -27,7 +27,7 @@ export async function addWorkspace(workspaceInfo: {
 }
 
 // 워크스페이스 수정
-export async function setWorkspace(
+export async function updateWorkspace(
   workspaceIdx: number,
   workspaceInfo: {
     name: string;
@@ -36,13 +36,13 @@ export async function setWorkspace(
 ) {
   console.log('service info', workspaceInfo);
 
-  const updated = await Workspace.updateById(workspaceIdx, workspaceInfo);
+  const updated = await Workspace.update(workspaceIdx, workspaceInfo);
   console.log('service', updated);
 
   return updated;
 }
 
 // 워크스페이스 삭제
-export async function deleteWorkspace(workspaceIdx: number) {
+export async function removeWorkspace(workspaceIdx: number) {
   await Workspace.remove(workspaceIdx);
 }
