@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -6,6 +6,8 @@ import 'styles/Users/SignUp.scss';
 
 function SignUp() {
   const navigate = useNavigate();
+  const pwRef = useRef(null);
+  const pwCheckRef = useRef(null);
 
   const {
     register,
@@ -14,28 +16,20 @@ function SignUp() {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data);
-
-    const signUpPost = () => {
-      fetch('/api/users/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.status === 201) {
-            alert(result.message);
-            // 이동할 페이지 작성
-            navigate('/auth/login');
-          } else if (result.status === 409) {
-            // 회원가입 실패 메세지
-            alert('result.message');
-          }
-        });
-    };
-
-    signUpPost();
+    fetch('https://circuit-synergy.herokuapp.com/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === 200) {
+          alert(result.message);
+          navigate('/login');
+        } else if (result.status === 400) {
+          alert(result.message);
+        }
+      });
   };
 
   return (
@@ -64,8 +58,9 @@ function SignUp() {
           </p>
           <p>
             <input
-              {...register('pw', { required: '아이디를 입력하세요.' })}
+              {...register('pw', { required: '비밀번호를 입력하세요.' })}
               type="password"
+              ref={pwRef}
               placeholder="비밀번호 (최소 5자 이상)"
             />
             {errors.pw && (
@@ -74,8 +69,9 @@ function SignUp() {
           </p>
           <p>
             <input
-              {...register('pwCheck', { required: '아이디를 입력하세요.' })}
+              {...register('pwCheck', { required: '비밀번호를 입력하세요.' })}
               type="password"
+              ref={pwCheckRef}
               placeholder="비밀번호 확인"
             />
             {errors.pwCheck && (

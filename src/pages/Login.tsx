@@ -1,23 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import 'styles/Users/Login.scss';
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    fetch('https://circuit-synergy.herokuapp.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.message === '로그인 성공') {
+          navigate('/');
+          localStorage.setItem('id', result.data.id);
+          localStorage.setItem('TOKEN', result.data.token);
+        } else {
+          alert('아이디나 비밀번호를 바르게 입력해주세요.');
+        }
+      });
+  };
   return (
     <div className="login">
       <section className="login_container">
         <h1 className="login_title">SYNERGY</h1>
-        <form
-          className="login_info"
-          onSubmit={handleSubmit(() => console.log('asdf'))}
-        >
+        <form className="login_info" onSubmit={handleSubmit(onSubmit)}>
           <hr />
           <div>
             <input
