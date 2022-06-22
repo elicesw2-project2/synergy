@@ -1,32 +1,38 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import 'styles/Modals/SideBarModal.scss';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import RadioButton from 'components/Button/RadioButton';
 
-import { IChannel } from 'components/Bar/Side/SideBar';
+import 'styles/Modals/SideBarModal.scss';
+import { useMutation, useQueryClient } from 'react-query';
+import { postChannel } from 'utils/api';
+import { IChannel } from './ChannelCategory';
 
 interface iProps {
   onClickToggleModal: () => void;
-  channels: IChannel[];
-  setChannels: Dispatch<SetStateAction<IChannel[]>>;
 }
 
-function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {
-  const [newChannelName, setNewChannelName] = useState<string>('');
-  const [channelType, setChannelType] = useState<string>('문서공유');
+function SideBarModal({ onClickToggleModal }: iProps) {
+  const [channelName, setChannelName] = useState<string>('');
+  const [channelType, setChannelType] = useState<string>('document');
   const handleChangeChannelName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewChannelName(e.target.value);
+    setChannelName(e.target.value);
   };
 
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postChannel, {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries('channels');
+    },
+  });
+
   const handleSubmit = () => {
+    mutation.mutate({
+      name: channelName,
+      type: channelType,
+      category_idx: 1,
+    });
     onClickToggleModal();
-    setChannels(
-      channels.concat({
-        idx: channels.length,
-        title: newChannelName,
-        type: channelType,
-      })
-    );
   };
 
   return (
@@ -43,13 +49,13 @@ function SideBarModal({ onClickToggleModal, channels, setChannels }: iProps) {
           </button>
           <h1>채널 만들기</h1>
           <RadioButton
-            type="문서공유"
+            type="document"
             setChannelType={setChannelType}
             checked
             key="1"
           />
           <RadioButton
-            type="일정관리"
+            type="scheduleboard"
             setChannelType={setChannelType}
             key="2"
           />

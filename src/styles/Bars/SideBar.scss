@@ -1,43 +1,38 @@
 .SideBar {
     background-color: #F8F5EC;
     width: 20rem;
-
-    // 채널 카테고리
-    .SideBar__category {
-        position: relative;
-        background-color: #E8EAAA;
-        text-align: center;
-        .SideBar__category__title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .SideBar__category__add-btn{
-                position: absolute;
-                right: 1rem;
-            }
-        }
-
-        h1 {
-            padding: 0.7rem 0;
-            font-size: 1.5rem;
-        }
-        
-    }
-
     // 채널
     .SideBar__category__channels {
         background-color: #F8F5EC;
-
         li {
             font-size: 1.2rem;
             padding: 0.5rem;
             border: gray;
         }
     }
-
 }
 
+// 채널 카테고리
+.SideBar__category {
+    position: relative;
+    background-color: #E8EAAA;
+    text-align: center;
+    .SideBar__category__title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .SideBar__category__add-btn{
+            position: absolute;
+            right: 1rem;
+        }
+    }
+    h1 {
+        padding: 0.7rem 0;
+        font-size: 1.5rem;
+    }
+    
+}
 // channel component
 .channel {
     position: relative;
