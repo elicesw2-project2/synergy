@@ -2,6 +2,17 @@ import { userModel } from '../model/user.model';
 import { CustomError } from '../middlewares/customError';
 import bcrypt from 'bcrypt';
 
+// 유저 정보 조회
+export async function findUserById(id: string) {
+  const userById = await userModel.findById(id);
+  if (!userById) {
+    throw new CustomError(400, '존재하지 않는 아이디입니다.');
+  } else {
+    const { id, nickname, profile } = userById;
+    return { id, nickname, profile };
+  }
+}
+
 // 유저 정보 수정
 export async function updateUser(
   id: string,
