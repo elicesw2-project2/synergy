@@ -14,7 +14,6 @@ export interface ChannelCategoryData {
 
 export class ChannelCategoryModel {
   // workspace_idx로 채널 카테고리 목록 조회
-  // eslint-disable-next-line class-methods-use-this
   async findByWorkspace(workspaceIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -28,7 +27,6 @@ export class ChannelCategoryModel {
   }
 
   // 채널 카테고리 db에 등록
-  // eslint-disable-next-line class-methods-use-this
   async create(newChannelCategory: ChannelCategoryInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -44,7 +42,6 @@ export class ChannelCategoryModel {
   }
 
   // channel_idx로 채널 이름 수정
-  // eslint-disable-next-line class-methods-use-this
   async update(categoryIdx: number, newChannelCategory: ChannelCategoryInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -68,7 +65,6 @@ export class ChannelCategoryModel {
   }
 
   // channel_idx로 채널 삭제
-  // eslint-disable-next-line class-methods-use-this
   async remove(categoryIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
