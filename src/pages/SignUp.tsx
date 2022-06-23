@@ -1,21 +1,27 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import 'styles/Users/SignUp.scss';
 
+interface SignUp {
+  id: string;
+  nickname: string;
+  pw: string;
+  pwCheck: string;
+}
+
 function SignUp() {
   const navigate = useNavigate();
-  const pwRef = useRef(null);
-  const pwCheckRef = useRef(null);
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm<SignUp>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<SignUp> = (data) => {
     fetch('https://circuit-synergy.herokuapp.com/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -40,7 +46,13 @@ function SignUp() {
           <hr />
           <p>
             <input
-              {...register('id', { required: '아이디를 입력하세요.' })}
+              {...register('id', {
+                required: '아이디를 입력하세요.',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: '이메일 형식으로 입력해주세요',
+                },
+              })}
               placeholder="이메일"
             />
             {errors.id && (
@@ -49,7 +61,11 @@ function SignUp() {
           </p>
           <p>
             <input
-              {...register('nickname', { required: '필수정보 입니다.' })}
+              {...register('nickname', {
+                required: '필수정보 입니다.',
+                maxLength: { value: 8, message: '8자 이하로 입력하세요' },
+                minLength: { value: 2, message: '2자 이상으로 입력하세요' },
+              })}
               placeholder="별명 (최대 8자 이하)"
             />
             {errors.nickname && (
@@ -58,9 +74,11 @@ function SignUp() {
           </p>
           <p>
             <input
-              {...register('pw', { required: '비밀번호를 입력하세요.' })}
+              {...register('pw', {
+                required: '비밀번호를 입력하세요.',
+                minLength: { value: 5, message: '5자 이상으로 입력하세요' },
+              })}
               type="password"
-              ref={pwRef}
               placeholder="비밀번호 (최소 5자 이상)"
             />
             {errors.pw && (
@@ -69,9 +87,16 @@ function SignUp() {
           </p>
           <p>
             <input
-              {...register('pwCheck', { required: '비밀번호를 입력하세요.' })}
+              {...register('pwCheck', {
+                required: '비밀번호를 입력하세요.',
+                validate: {
+                  value: (value) => {
+                    const { pw } = getValues();
+                    return pw === value || '비밀번호가 일치하지 않습니다.';
+                  },
+                },
+              })}
               type="password"
-              ref={pwCheckRef}
               placeholder="비밀번호 확인"
             />
             {errors.pwCheck && (
