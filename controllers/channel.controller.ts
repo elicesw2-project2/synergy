@@ -6,7 +6,6 @@ import { CustomError } from '../middlewares/customError';
 
 class ChannelController {
   // 카테고리별 채널 목록 전체 조회
-  // eslint-disable-next-line class-methods-use-this
   async getByChannelCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const channels = await channelService.findByChannelCategory(
@@ -23,16 +22,15 @@ class ChannelController {
   }
 
   // 채널 상세 조회
-  // eslint-disable-next-line class-methods-use-this
   async getChannelById(req: Request, res: Response, next: NextFunction) {
     try {
-      const channels = await channelService.findChannelById(
+      const channel = await channelService.findChannelById(
         Number(req.params.channel_idx)
       );
       res.status(200).send({
         status: 200,
         message: '채널 상세 조회 성공',
-        data: channels,
+        data: channel,
       });
     } catch (err) {
       next(err);
@@ -40,10 +38,9 @@ class ChannelController {
   }
 
   // 채널 등록
-  // eslint-disable-next-line class-methods-use-this
   async addChannel(req: Request, res: Response, next: NextFunction) {
     try {
-      const channel = await channelService.creatChannel(req.body);
+      const channel = await channelService.createChannel(req.body);
       res.status(201).send({
         status: 201,
         message: '채널 등록 성공',
@@ -55,7 +52,6 @@ class ChannelController {
   }
 
   // 채널 수정
-  // eslint-disable-next-line class-methods-use-this
   async setChannel(req: Request, res: Response, next: NextFunction) {
     try {
       const channel = await channelService.updateChannel(
@@ -73,7 +69,6 @@ class ChannelController {
   }
 
   // 채널 카테고리 삭제
-  // eslint-disable-next-line class-methods-use-this
   async deleteChannel(req: Request, res: Response, next: NextFunction) {
     try {
       const channel = await channelService.removeChannel(

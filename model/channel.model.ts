@@ -16,7 +16,6 @@ export interface ChannelData {
 
 export class ChannelModel {
   // channelcategory_idx 별로 채널 목록 조회
-  // eslint-disable-next-line class-methods-use-this
   async findByChannel(categoryIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -30,7 +29,6 @@ export class ChannelModel {
   }
 
   // 채널 상세 조회
-  // eslint-disable-next-line class-methods-use-this
   async findById(channelIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -44,7 +42,6 @@ export class ChannelModel {
   }
 
   // 채널 카테고리 db에 등록
-  // eslint-disable-next-line class-methods-use-this
   async create(newChannel: ChannelInfo) {
     return new Promise((resolve, reject) => {
       sql.query('INSERT INTO channel SET ?', newChannel, (err, res) => {
@@ -56,7 +53,6 @@ export class ChannelModel {
   }
 
   // channel_idx로 채널 이름 수정
-  // eslint-disable-next-line class-methods-use-this
   async update(channelIdx: number, newChannel: ChannelInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -80,11 +76,10 @@ export class ChannelModel {
   }
 
   // channel_idx로 채널 삭제
-  // eslint-disable-next-line class-methods-use-this
   async remove(channelIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
-        'DELETE FROM channel WHERE category_idx = ?',
+        'DELETE FROM channel WHERE channel_idx = ?',
         channelIdx,
         (err, res) => {
           if (res.affectedRows === 0) {
