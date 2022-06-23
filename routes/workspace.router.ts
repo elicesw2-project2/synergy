@@ -21,3 +21,7 @@ router.patch('/:workspace_idx', parser, workspaceController.setWorkspace);
 router.delete('/:workspace_idx', workspaceController.deleteWorkspace);
 
 export default router;
+
+// 목록 조회는 token을 받아서 해당 id가 속한 모든 워크스페이스를 조회하는 것임
+// 등록 res 값 수정
+// index.ts로 router들 연결하기

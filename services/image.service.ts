@@ -1,6 +1,5 @@
 import fs from 'fs';
 import imageHandler from '../middlewares/imageHandler';
-import Image from '../model/image.model';
 import storage from '../config/s3.config';
 
 interface FileInfo {
@@ -25,7 +24,6 @@ const uploadFileToS3 = async (fileData: Express.Multer.File) => {
   const result = await storage.upload(params).promise();
   const link = result.Location;
   // const fileName = fileData.originalname;
-  const data = await Image(link);
   console.log(link);
   return link;
 };
