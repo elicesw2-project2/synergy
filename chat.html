@@ -8,6 +8,11 @@
   <body>
     <!-- <input id="room" placeholder="room_idx" />
     <button onClick="setRoom()">ok</button> -->
+    <div>
+      <p>방 선택</p>
+      <button onClick="selectOne()">1번방</button>
+      <button onClick="selectTwo()">2번방</button>
+    </div>
     <span>닉네임</span>
     <input id="nickname" placeholder="nickname" />
     <br />
@@ -17,13 +22,11 @@
     <ul id="messages" type="none">
       <li></li>
     </ul>
-    <script src="/api/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       // const socket = io();
-      const socket = io('/', {
-        path: '/api',
-      });
-
+      const socket = io('/');
+      let room_idx = 0;
       // socket.aton('message', function (data) {
       //   console.log(data);
       // });
@@ -39,13 +42,17 @@
         addMessage(msg);
       });
 
-      // room_idx 입장
-      socket.emit('enter_room', 1, 'nickname');
+      // room_idx 입장 => room_idx와 닉네임 전달
+      // socket.emit('enter_room', 1, 'nickname');
 
       // 채팅방 입장 후 알림
       socket.on('welcome', (user) => {
         console.log(`${user}님이 입장하셨습니다!`);
         addMessage(`${user}님이 입장하셨습니다!`);
+      });
+
+      socket.on('disconnection', (msg) => {
+        addMessage(msg);
       });
 
       function sendMsg() {
@@ -54,7 +61,7 @@
         const input = document.getElementById('msg');
         var message = input.value;
         console.log(message);
-        socket.emit('message', message, nickname);
+        socket.emit('message', message, nickname, room_idx);
         input.value = '';
       }
 
@@ -69,6 +76,14 @@
         var messageTag = document.createElement('li');
         messageTag.innerText = message;
         messageList.appendChild(messageTag);
+      }
+      function selectOne() {
+        room_idx = 1;
+        socket.emit('enter_room', room_idx, 'nickname');
+      }
+      function selectTwo() {
+        room_idx = 2;
+        socket.emit('enter_room', room_idx, 'nickname');
       }
     </script>
   </body>
