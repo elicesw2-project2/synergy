@@ -47,7 +47,9 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': 'off', // props를 스프래드 할 수 있다.
     'react/require-default-props': 'off', // 타입스크립트의 optional 기능을 사용할 수 있다.
-    'import/no-cycle': 'off',
+    'import/no-cycle': 'off', // export interface
+    camelcase: 'off', // 카멜케이스 안써도 됨
+    'no-return-await': 'off', // return await 가능하게
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

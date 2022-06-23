@@ -5,27 +5,46 @@ import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import { useMutation, useQueryClient } from 'react-query';
+import { patchWorkspace, postImageUpload } from 'utils/api';
 
 interface iProps {
   onClickToggleModal: () => void;
-  workSpace: IWorkSpace;
+  workspace: IWorkSpace;
 }
 
-function EditWorkSpaceModal({ onClickToggleModal, workSpace }: iProps) {
+function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IWorkSpace>();
 
-  const [image, setImage] = useState<string | undefined>(workSpace.image);
-  const { ref, ...rest } = register('image');
+  const [image, setImage] = useState<string | undefined>(
+    workspace.workspace_img
+  );
+  const [imageFile, setImageFile] = useState<File>();
+  const { ref, ...rest } = register('workspace_img');
 
   // 폼 제출
-  const onSubmit: SubmitHandler<IWorkSpace> = (data) => {
-    const tmp = workSpace;
-    tmp.image = image;
-    // axios data
+  const queryClient = useQueryClient();
+  const mutation = useMutation(patchWorkspace, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('workspaces');
+    },
+  });
+
+  const onSubmit: SubmitHandler<IWorkSpace> = async (data) => {
+    const { name } = data;
+    let newImage;
+    if (imageFile) {
+      newImage = await postImageUpload(imageFile);
+    }
+    mutation.mutate({
+      workspace_idx: workspace.workspace_idx,
+      name,
+      workspace_img: newImage,
+    });
     onClickToggleModal();
   };
 
@@ -42,6 +61,7 @@ function EditWorkSpaceModal({ onClickToggleModal, workSpace }: iProps) {
     const img = e.target.files[0];
     const formData = new FormData();
     formData.append('img', img);
+    setImageFile(img);
     setImage(URL.createObjectURL(img));
   };
 
@@ -91,16 +111,16 @@ function EditWorkSpaceModal({ onClickToggleModal, workSpace }: iProps) {
               />
             </label>
 
-            <label htmlFor="title" className="Modal__Form__Title">
+            <label htmlFor="name" className="Modal__Form__Title">
               <span>서버 이름</span>
-              {errors.title && (
+              {errors.name && (
                 <div className="Modal__Form__error-message">
                   Title is Required!
                 </div>
               )}
               <input
-                defaultValue={workSpace.title}
-                {...register('title', { required: true })}
+                defaultValue={workspace.name}
+                {...register('name', { required: true })}
               />
             </label>
 
