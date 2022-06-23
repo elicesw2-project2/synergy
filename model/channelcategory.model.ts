@@ -41,7 +41,7 @@ export class ChannelCategoryModel {
     });
   }
 
-  // channel_idx로 채널 이름 수정
+  // channelcategory_idx로 채널 이름 수정
   async update(categoryIdx: number, newChannelCategory: ChannelCategoryInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -64,7 +64,7 @@ export class ChannelCategoryModel {
     });
   }
 
-  // channel_idx로 채널 삭제
+  // channelcategory_idx로 채널 삭제
   async remove(categoryIdx: number) {
     return new Promise((resolve, reject) => {
       sql.query(

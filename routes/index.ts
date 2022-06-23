@@ -7,6 +7,7 @@ import channelRouter from './channel.route';
 import { chatRouter } from './chatroom.route';
 import { chatmessageRouter } from './chatmessage.route';
 import { chatroommemberRouter } from './chatroommember.route';
+import documentRouter from './document.route';
 const router = Router();
 
 router.use('/auth', authRouter);
@@ -15,5 +16,6 @@ router.use('/chatrooms', chatRouter);
 router.use('/chatmessage', chatmessageRouter);
 router.use('/chatroommember', chatroommemberRouter);
 router.use('/channel', channelRouter);
+router.use('/documents', documentRouter);
 
 export default router;
