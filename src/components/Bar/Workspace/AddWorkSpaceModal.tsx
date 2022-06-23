@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -9,16 +9,15 @@ import 'styles/Modals/WorkSpaceModal.scss';
 
 // types
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
-import { postImageUpload } from 'utils/api';
+import { postImageUpload, postWorkspace } from 'utils/api';
+import { useMutation, useQueryClient } from 'react-query';
 
 interface iProps {
   onClickToggleModal: () => void;
-  workSpaceList: IWorkSpace[];
-  setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
 }
 
 function AddWorkSpaceModal(props: iProps) {
-  const { onClickToggleModal, workSpaceList, setWorkSpaceList } = props;
+  const { onClickToggleModal } = props;
 
   // react-hook-form
   const {
@@ -32,17 +31,25 @@ function AddWorkSpaceModal(props: iProps) {
   const [preview, setPreview] = useState<string>('');
 
   // ref에서 이미지 File 가져오기
-  const { ref, ...rest } = register('image');
+  const { ref, ...rest } = register('workspace_img');
 
   // 폼 제출
-  const onSubmit: SubmitHandler<IWorkSpace> = async (data) => {
-    const { idx, title } = data;
-    const image = preview || defaultImg;
-    const newWorkSpace = { idx, title, image };
-    setWorkSpaceList(workSpaceList.concat(newWorkSpace));
-    // 이미지 따로, 이름 따로 api 요청
-    postImageUpload(imageFile);
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postWorkspace, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('workspaces');
+    },
+  });
 
+  const onSubmit: SubmitHandler<IWorkSpace> = async (data) => {
+    const { name } = data;
+
+    // 이미지 따로, 이름 따로 api 요청
+    const imageSrc = await postImageUpload(imageFile);
+    const newWorkSpace = { name, profile: imageSrc };
+    mutation.mutate(newWorkSpace);
+
+    // 모달창 닫기
     onClickToggleModal();
   };
 
@@ -87,7 +94,7 @@ function AddWorkSpaceModal(props: iProps) {
                 accept="image/*"
                 placeholder="Image Upload..."
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                {...register('image')}
+                {...register('workspace_img')}
                 style={{ display: 'none' }}
                 ref={(e) => {
                   ref(e);
@@ -116,16 +123,16 @@ function AddWorkSpaceModal(props: iProps) {
               )}
             </label>
 
-            <label htmlFor="title" className="Modal__Form__Title">
+            <label htmlFor="Name" className="Modal__Form__Title">
               <span>서버 이름</span>
-              {errors.title && (
+              {errors.name && (
                 <div className="Modal__Form__error-message">
-                  Title is Required!
+                  Name is Required!
                 </div>
               )}
               <input
-                placeholder="Title..."
-                {...register('title', { required: true })}
+                placeholder="Name..."
+                {...register('name', { required: true })}
               />
             </label>
 

@@ -1,28 +1,29 @@
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import { useMutation, useQueryClient } from 'react-query';
+import { deleteWorkspace } from 'utils/api';
 import EditWorkSpaceModal from './EditWorkSpaceModal';
 
-interface iProps {
-  workSpace: IWorkSpace;
-  workSpaceList: IWorkSpace[];
-  setWorkSpaceList: Dispatch<SetStateAction<IWorkSpace[]>>;
+interface IProps {
+  workspace: IWorkSpace;
 }
 
-function SingleWorkSpace({
-  workSpace,
-  workSpaceList,
-  setWorkSpaceList,
-}: iProps) {
+function SingleWorkSpace({ workspace }: IProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();
     setIsEdit((prev) => !prev);
   };
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteWorkspace, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('workspaces');
+    },
+  });
   const handleClick = () => {
-    const filtered = workSpaceList.filter((selcted) => selcted !== workSpace);
-    setWorkSpaceList(filtered);
+    mutation.mutate(workspace.workspace_idx);
   };
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -33,7 +34,7 @@ function SingleWorkSpace({
   return (
     <div>
       <img
-        src={workSpace.image}
+        src={workspace.workspace_img}
         alt="img"
         className="WorkSpaceBar__box"
         onContextMenu={handleContextMenu}
@@ -51,7 +52,7 @@ function SingleWorkSpace({
       {isModalOpen && (
         <EditWorkSpaceModal
           onClickToggleModal={onClickToggleModal}
-          workSpace={workSpace}
+          workspace={workspace}
         />
       )}
     </div>
