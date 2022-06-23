@@ -26,9 +26,8 @@ interface IProps {
 }
 
 function ChannelCategory({ category }: IProps) {
-  const { isLoading, data: channels } = useQuery<IChannel[]>(
-    'channels',
-    getChannels
+  const { isLoading, data: channels } = useQuery<IChannel[]>('channels', () =>
+    getChannels(category.category_idx)
   );
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

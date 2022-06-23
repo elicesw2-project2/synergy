@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faGear } from '@fortawesome/free-solid-svg-icons';
+import { useMutation, useQueryClient } from 'react-query';
+import { deleteChannel, patchChannel } from 'utils/api';
 import { IChannel } from './ChannelCategory';
 
 interface IProps {
@@ -16,19 +18,31 @@ function Channel({ channel }: IProps) {
     setIsEdit(!isEdit);
   };
 
-  const handleDelete = () => {
-    // delete
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.currentTarget.value);
   };
 
+  // 수정 및 삭제 API 요청 처리
+  const queryClient = useQueryClient();
+  const updateMutation = useMutation(patchChannel, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('channels');
+    },
+  });
   const handleConfirm = () => {
-    // 수정 api 요청
-    const tmp = channel;
-    tmp.name = name;
+    const updatedChannel = channel;
+    updatedChannel.name = name;
+    updateMutation.mutate(updatedChannel);
     setIsEdit(false);
+  };
+
+  const deleteMutation = useMutation(deleteChannel, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('channels');
+    },
+  });
+  const handleDelete = () => {
+    deleteMutation.mutate(channel.channel_idx);
   };
 
   return (

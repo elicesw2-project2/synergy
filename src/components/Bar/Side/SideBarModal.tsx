@@ -1,10 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import RadioButton from 'components/Button/RadioButton';
 
 import 'styles/Modals/SideBarModal.scss';
 import { useMutation, useQueryClient } from 'react-query';
 import { postChannel } from 'utils/api';
-import { IChannel } from './ChannelCategory';
 
 interface iProps {
   onClickToggleModal: () => void;
