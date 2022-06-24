@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
+import { ChatContent, ChatInput } from './Chatting';
+
 import 'styles/Chat/Chat.scss';
 
 function Chat() {
@@ -27,6 +29,8 @@ function Chat() {
               </button>
             </div>
           </div>
+          <ChatContent />
+          <ChatInput />
         </div>
       ) : (
         <button
