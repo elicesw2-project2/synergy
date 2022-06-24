@@ -15,7 +15,9 @@ export function create(workspaceInfo: { name: string; profile: string }) {
       'INSERT INTO workspace SET name=?, workspace_img=?',
       [name, profile],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({ workspace_idx: result.insertId, ...workspaceInfo });
       }
     );
   });
@@ -44,7 +46,9 @@ export function update(
       'UPDATE workspace SET name = ?, workspace_img = ? WHERE workspace_idx = ?',
       [name, profile, workspaceIdx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err
+          ? reject(err)
+          : resolve({ workspace_idx: workspaceIdx, ...workspaceInfo });
       }
     );
   });
@@ -56,7 +60,7 @@ export function remove(workspaceIdx: number) {
       'DELETE from workspace where workspace_idx = ?',
       workspaceIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err ? reject(err) : resolve({ workspace_idx: workspaceIdx });
       }
     );
   });
