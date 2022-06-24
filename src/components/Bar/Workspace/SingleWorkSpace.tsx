@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteWorkspace } from 'utils/api';
+import { Link } from 'react-router-dom';
 import EditWorkSpaceModal from './EditWorkSpaceModal';
 
 interface IProps {
@@ -33,12 +34,14 @@ function SingleWorkSpace({ workspace }: IProps) {
 
   return (
     <div>
-      <img
-        src={workspace.workspace_img}
-        alt="img"
-        className="WorkSpaceBar__box"
-        onContextMenu={handleContextMenu}
-      />
+      <Link to={`/workspace/${workspace.workspace_idx}`}>
+        <img
+          src={workspace.workspace_img}
+          alt="img"
+          className="WorkSpaceBar__box"
+          onContextMenu={handleContextMenu}
+        />
+      </Link>
       {isEdit && (
         <>
           <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
