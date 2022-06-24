@@ -21,9 +21,7 @@ const server: http.Server = http.createServer(app);
 webSocket(server);
 
 app.use('/', routes);
-app.use('/workspaces', workspaceRouter);
-app.use('/image', imageRouter);
-app.use('/schedulecards', scheduleRouter);
+
 app.get('/', (req: Request, res: Response) => {
   res.send('형욱 바보');
 });
