@@ -33,8 +33,8 @@ export async function deleteWorkspace(idx: number | undefined) {
 }
 
 // channels
-export async function getChannelCategory() {
-  const result = await axios.get(`${BASE_URL}/channelcategory/1`);
+export async function getChannelCategory(idx: number) {
+  const result = await axios.get(`${BASE_URL}/channelcategory/${idx}`);
   return result.data.data;
 }
 

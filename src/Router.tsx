@@ -16,7 +16,7 @@ function Router() {
     <Routes>
       <Route element={<Bars />}>
         <Route path="/" element={<Home />} />
-        <Route path="/workspace/:id" element={<WorkspaceHome />} />
+        <Route path="/workspace/:workspaceIdx" element={<WorkspaceHome />} />
         <Route path="/calenderboard" element={<CalenderBoard />} />
       </Route>
       <Route path="/login" element={<Login />} />

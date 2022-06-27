@@ -6,6 +6,7 @@ import 'styles/Bars/SideBar.scss';
 // components
 import { useQuery } from 'react-query';
 import { getChannelCategory } from 'utils/api';
+import { useParams } from 'react-router-dom';
 import ChannelCategory from './ChannelCategory';
 
 export interface IChannelCategory {
@@ -15,9 +16,10 @@ export interface IChannelCategory {
 }
 
 function SideBar() {
+  const { workspaceIdx } = useParams();
   const { isLoading, data: channelCategories } = useQuery<IChannelCategory[]>(
-    'channelCategory',
-    getChannelCategory
+    ['channelCategory', workspaceIdx],
+    () => getChannelCategory(Number(workspaceIdx))
   );
 
   return (
