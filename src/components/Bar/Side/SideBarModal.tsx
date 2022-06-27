@@ -7,9 +7,10 @@ import { postChannel } from 'utils/api';
 
 interface iProps {
   onClickToggleModal: () => void;
+  categoryIdx: number;
 }
 
-function SideBarModal({ onClickToggleModal }: iProps) {
+function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
   const [channelName, setChannelName] = useState<string>('');
   const [channelType, setChannelType] = useState<string>('document');
   const handleChangeChannelName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ function SideBarModal({ onClickToggleModal }: iProps) {
     mutation.mutate({
       name: channelName,
       type: channelType,
-      category_idx: 1,
+      category_idx: categoryIdx,
     });
     onClickToggleModal();
   };

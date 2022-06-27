@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IChannel } from 'components/Bar/Side/ChannelCategory';
+import { IChannelCategory } from 'components/Bar/Side/SideBar';
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
@@ -38,7 +39,15 @@ export async function getChannelCategory(idx: number) {
   return result.data.data;
 }
 
+export async function postChannelCategory(data: {
+  name: string;
+  workspace_idx: string | undefined;
+}) {
+  return await axios.post(`${BASE_URL}/channelcategory`, data);
+}
+
 export async function getChannels(idx: number) {
+  console.log(idx);
   const result = await axios.get(`${BASE_URL}/channel/${idx}`);
   return result.data.data;
 }

@@ -26,8 +26,9 @@ interface IProps {
 }
 
 function ChannelCategory({ category }: IProps) {
-  const { isLoading, data: channels } = useQuery<IChannel[]>('channels', () =>
-    getChannels(category.category_idx)
+  const { isLoading, data: channels } = useQuery<IChannel[]>(
+    ['channels', category.category_idx],
+    () => getChannels(category.category_idx)
   );
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -57,8 +58,13 @@ function ChannelCategory({ category }: IProps) {
           </ul>
         )}
       </div>
-      {/* 채널 카테고리 생성 모달창 */}
-      {isOpenModal && <SideBarModal onClickToggleModal={onClickToggleModal} />}
+      {/* 채널 생성 모달창 */}
+      {isOpenModal && (
+        <SideBarModal
+          onClickToggleModal={onClickToggleModal}
+          categoryIdx={category.category_idx}
+        />
+      )}
     </div>
   );
 }

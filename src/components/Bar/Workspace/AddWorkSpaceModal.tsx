@@ -45,7 +45,10 @@ function AddWorkSpaceModal(props: iProps) {
     const { name } = data;
 
     // 이미지 따로, 이름 따로 api 요청
-    const imageSrc = await postImageUpload(imageFile);
+    let imageSrc = defaultImg;
+    if (preview) {
+      imageSrc = await postImageUpload(imageFile);
+    }
     const newWorkSpace = { name, profile: imageSrc };
     mutation.mutate(newWorkSpace);
 

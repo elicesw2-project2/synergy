@@ -17,22 +17,27 @@
     position: relative;
     background-color: #E8EAAA;
     text-align: center;
+    .SideBar__category__add-btn{
+    position: absolute;
+    right: 1rem;
+    }
     .SideBar__category__title {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        .SideBar__category__add-btn{
-            position: absolute;
-            right: 1rem;
-        }
     }
     h1 {
         padding: 0.7rem 0;
         font-size: 1.5rem;
     }
-    
+    .SideBar__add-button {
+        position: absolute;
+        top: 13px;
+        right: 5px;
+    }
 }
+
 // channel component
 .channel {
     position: relative;
