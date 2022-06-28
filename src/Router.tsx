@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // Components
 import Bars from 'common/Bars';
+import Chat from 'components/Chat/Chat';
 
 // Pages
 import Home from 'pages/Home';
@@ -15,9 +16,11 @@ function Router() {
   return (
     <Routes>
       <Route element={<Bars />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/workspace/:workspaceIdx" element={<WorkspaceHome />} />
-        <Route path="/calenderboard" element={<CalenderBoard />} />
+        <Route element={<Chat />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/workspace/:workspaceIdx" element={<WorkspaceHome />} />
+          <Route path="/calenderboard" element={<CalenderBoard />} />
+        </Route>
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
