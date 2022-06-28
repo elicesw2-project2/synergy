@@ -49,16 +49,12 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
           </button>
           <h1>채널 만들기</h1>
           <RadioButton
-            type="document"
+            type="문서"
             setChannelType={setChannelType}
             checked
             key="1"
           />
-          <RadioButton
-            type="scheduleboard"
-            setChannelType={setChannelType}
-            key="2"
-          />
+          <RadioButton type="일정" setChannelType={setChannelType} key="2" />
           <div className="SideBarModal__Form__Input">
             <h2>채널 이름</h2>
             <input

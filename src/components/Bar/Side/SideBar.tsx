@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 // css
 import 'styles/Bars/SideBar.scss';
@@ -25,6 +25,11 @@ function SideBar() {
     () => getChannelCategory(Number(workspaceIdx))
   );
 
+  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
+  const onClickToggleDropdown = useCallback(() => {
+    setIsOpenDropdown(!isOpenDropdown);
+  }, [isOpenDropdown]);
+
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const onClickToggleModal = useCallback(() => {
     setIsOpenModal(!isOpenModal);
@@ -35,9 +40,44 @@ function SideBar() {
       {/* 워크 스페이스 이름 */}
       <div className="SideBar__category">
         <h1>워크스페이스</h1>
+        {isOpenDropdown && (
+          <div className="SideBar__dropdown">
+            <ul>
+              <li>
+                <button
+                  type="button"
+                  onClick={onClickToggleModal}
+                  className="SideBar__add-category-btn"
+                >
+                  채널 카테고리 추가
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => alert('누르지말라고')}>
+                  누르지 마세요
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => alert('누르지말라고')}>
+                  누르지 마세요
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => alert('누르지말라고')}>
+                  누르지 마세요
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => alert('누르지말라고')}>
+                  누르지 마세요
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
         <FontAwesomeIcon
-          icon={faPlusCircle}
-          onClick={onClickToggleModal}
+          icon={faAngleDown}
+          onClick={onClickToggleDropdown}
           className="SideBar__add-button"
         />
       </div>

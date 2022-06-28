@@ -14,6 +14,8 @@ function Channel({ channel }: IProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>(channel.name);
 
+  const channelIcon = channel.type === 'document' ? '📝' : '🗓';
+
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
@@ -61,7 +63,7 @@ function Channel({ channel }: IProps) {
         </li>
       ) : (
         <li>
-          # [{channel.type}] {channel.name}
+          # {channelIcon} {channel.name}
         </li>
       )}
       {isVisible && (

@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { IChannel } from 'components/Bar/Side/ChannelCategory';
-import { IChannelCategory } from 'components/Bar/Side/SideBar';
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 
 // workspace
 export async function getWorkspaces() {
-  const result = await axios.get(`${BASE_URL}/workspaces`);
+  const result = await axios.get(`${BASE_URL}/workspaces`, {
+    // headers: {
+    //   // authorization: localStorage.getItem('token'),
+    // },
+  });
   return result.data.data;
 }
 
@@ -46,8 +49,11 @@ export async function postChannelCategory(data: {
   return await axios.post(`${BASE_URL}/channelcategory`, data);
 }
 
+export async function deleteChannelCategory(idx: number) {
+  return await axios.delete(`${BASE_URL}/channelcategory/${idx}`);
+}
+
 export async function getChannels(idx: number) {
-  console.log(idx);
   const result = await axios.get(`${BASE_URL}/channel/${idx}`);
   return result.data.data;
 }
