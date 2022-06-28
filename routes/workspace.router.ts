@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import * as workspaceController from '../controllers/workspace.controller';
-import { loginRequired } from '../middlewares/login.required';
+// import { loginRequired } from '../middlewares/login.required';
 
 const parser = bodyParser.urlencoded({ extended: false });
 const router = express.Router();

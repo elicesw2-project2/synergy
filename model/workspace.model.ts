@@ -1,14 +1,10 @@
 import db from './db';
 
-export async function findAll(currentUserIdx: Number) {
+export async function findAll() {
   return new Promise((resolve, reject) => {
-    db.query(
-      'SELECT * FROM workspacemember WHERE user_idx=?',
-      currentUserIdx,
-      (err, result) => {
-        return err ? reject(err) : resolve(result);
-      }
-    );
+    db.query('SELECT * FROM workspace', (err, result) => {
+      return err ? reject(err) : resolve(result);
+    });
   });
 }
 
