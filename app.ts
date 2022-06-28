@@ -7,7 +7,7 @@ import routes from './routes';
 import cors from 'cors';
 import workspaceRouter from './routes/workspace.router';
 import imageRouter from './routes/image.routes';
-import scheduleRouter from './routes/schedule.routes';
+
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
