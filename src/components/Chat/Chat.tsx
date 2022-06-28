@@ -29,7 +29,7 @@ function Chat() {
               </button>
             </div>
           </div>
-          <ChatContent />
+          {/* <ChatContent /> */}
           <ChatInput />
         </div>
       ) : (
