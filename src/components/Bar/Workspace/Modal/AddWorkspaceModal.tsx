@@ -36,8 +36,10 @@ function AddWorkSpaceModal(props: iProps) {
   // 폼 제출
   const queryClient = useQueryClient();
   const mutation = useMutation(postWorkspace, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries('workspaces');
+      console.log(data.data);
+      console.log(data.data.workspace_idx);
     },
   });
 
