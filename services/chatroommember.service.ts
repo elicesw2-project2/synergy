@@ -23,12 +23,22 @@ class ChatRoomMemberService {
     return this.chatroommemberModel.create(ChatRoomMemberInfo);
   }
 
-  async removeMember(ChatRoomMemberInfo: ChatRoomMemberInfo) {
-    const { user_idx, room_idx } = ChatRoomMemberInfo;
-    if (!user_idx || !room_idx) {
+  async removeMember(
+    user_idx: Record<string, any> | undefined,
+    ChatRoomMemberInfo: ChatRoomMemberInfo
+  ) {
+    const { room_idx } = ChatRoomMemberInfo;
+    if (!room_idx) {
       throw new CustomError(400, '요청 값을 다시 확인해주세요');
     }
-    return this.chatroommemberModel.remove(ChatRoomMemberInfo);
+
+    const userId = await this.chatroommemberModel.findUseridxByRoomId(room_idx);
+
+    if (userId != user_idx) {
+      throw new CustomError(400, '해당 유저는 채팅방을 나갈 수 없습니다.');
+    }
+
+    return this.chatroommemberModel.remove(user_idx, ChatRoomMemberInfo);
   }
 }
 const chatroommemberService = new ChatRoomMemberService(chatroommemberModel);

@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import { chatController } from '../controllers/chatroom.controller';
-
+import { loginRequired } from '../middlewares/login.required';
 const chatRouter: Router = express.Router();
 
 /* GET users listing. */
@@ -9,6 +9,6 @@ const chatRouter: Router = express.Router();
 chatRouter.get('/:workspace_idx', chatController.getAllRooms);
 
 // 채팅방 등록
-chatRouter.post('/', chatController.addRooms);
+chatRouter.post('/', loginRequired, chatController.addRooms);
 
 export { chatRouter };
