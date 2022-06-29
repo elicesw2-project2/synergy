@@ -33,6 +33,18 @@ export class ChatMessageModel {
     });
   }
 
+  async findUseridxByMessageId(message_idx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT user_idx FROM chatmessage where message_idx = ?',
+        message_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res[0].user_idx);
+        }
+      );
+    });
+  }
+
   async create(
     user_idx: Record<string, any> | undefined,
     ChatMessageInfo: ChatMessageInfo

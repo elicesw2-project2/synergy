@@ -15,9 +15,17 @@ chatmessageRouter.post(
 );
 
 // 채팅 메시지 수정
-chatmessageRouter.patch('/:message_idx', chatmessageController.setChatMessage);
+chatmessageRouter.patch(
+  '/:message_idx',
+  loginRequired,
+  chatmessageController.setChatMessage
+);
 
 // 채팅 메시지 삭제
-chatmessageRouter.delete('/:message_idx', chatmessageController.deleteMessage);
+chatmessageRouter.delete(
+  '/:message_idx',
+  loginRequired,
+  chatmessageController.deleteMessage
+);
 
 export { chatmessageRouter };
