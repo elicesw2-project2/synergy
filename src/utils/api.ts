@@ -8,7 +8,7 @@ const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 export async function getWorkspaces() {
   const result = await axios.get(`${BASE_URL}/workspaces`, {
     headers: {
-      authorization: localStorage.getItem('token') || 'token not found',
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
   return result.data.data;
