@@ -1,8 +1,13 @@
-import findAll from '../model/workspaceMember.model';
+import {
+  WorkspaceMemberInfo,
+  findAll,
+  addMember,
+} from '../model/workspaceMember.model';
 
-async function findAllUsers(workspaceIdX: Number) {
-  const users = await findAll(workspaceIdX);
-  return users;
+export async function findAllUsers(workspaceIdX: Number) {
+  return await findAll(workspaceIdX);
 }
 
-export default findAllUsers;
+export async function createMember(memberInfo: WorkspaceMemberInfo) {
+  return await addMember(memberInfo);
+}
