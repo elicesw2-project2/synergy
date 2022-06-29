@@ -15,12 +15,15 @@ class ChatMessageService {
     return this.chatmessageModel.findAllByRoomId(room_idx);
   }
 
-  async createMessage(ChatMessageInfo: ChatMessageInfo) {
-    const { message, room_idx, user_idx } = ChatMessageInfo;
-    if (!message || !room_idx || !user_idx) {
+  async createMessage(
+    user_idx: Record<string, any> | undefined,
+    ChatMessageInfo: ChatMessageInfo
+  ) {
+    const { message, room_idx } = ChatMessageInfo;
+    if (!message || !room_idx) {
       throw new CustomError(400, '요청 값을 다시 확인해주세요');
     }
-    return this.chatmessageModel.create(ChatMessageInfo);
+    return this.chatmessageModel.create(user_idx, ChatMessageInfo);
   }
 
   async updateMessage(message_idx: number, ChatMessageInfo: ChatMessageInfo) {

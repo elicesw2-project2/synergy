@@ -32,7 +32,11 @@ class ChatMessageController {
       }
       */
 
-      const message = await chatmessageService.createMessage(req.body);
+      const user_idx: Record<string, any> | undefined = req.currentUserId;
+      const message = await chatmessageService.createMessage(
+        user_idx,
+        req.body
+      );
       res.status(200).send({
         status: 200,
         message: '메시지 등록 성공',
