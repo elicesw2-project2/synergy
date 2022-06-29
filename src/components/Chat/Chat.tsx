@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { io } from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,11 +8,13 @@ import { ChatContent, ChatInput } from './Chatting';
 
 import 'styles/Chat/Chat.scss';
 
+const socket = io('/');
+
 function Chat() {
   const [chatView, setChatView] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className="chat_box">
       {chatView ? (
         <div className="chat_unroll">
           <div className="chat_bar">
