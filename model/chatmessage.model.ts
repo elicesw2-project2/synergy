@@ -33,11 +33,14 @@ export class ChatMessageModel {
     });
   }
 
-  async create(ChatMessageInfo: ChatMessageInfo) {
+  async create(
+    user_idx: Record<string, any> | undefined,
+    ChatMessageInfo: ChatMessageInfo
+  ) {
     return new Promise((resolve, reject) => {
       sql.query(
-        'INSERT INTO chatmessage set ?',
-        ChatMessageInfo,
+        'INSERT INTO chatmessage (message,user_idx,room_idx) values (?,?,?)',
+        [ChatMessageInfo.message, user_idx, ChatMessageInfo.room_idx],
         (err, res) => {
           return err
             ? reject(err)
