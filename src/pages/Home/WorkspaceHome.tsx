@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import 'styles/Home.scss';
+import './Home.scss';
 
 function WorkspaceHome() {
   const { workspaceIdx } = useParams();

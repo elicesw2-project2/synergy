@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { IChannel } from 'components/Bar/Side/ChannelCategory';
-import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import { IChannel } from 'components/Bar/Side/ChannelCategory/ChannelCategory';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 
 // workspace
 export async function getWorkspaces() {
   const result = await axios.get(`${BASE_URL}/workspaces`, {
-    // headers: {
-    //   // authorization: localStorage.getItem('token'),
-    // },
+    headers: {
+      authorization: localStorage.getItem('token') || 'token not found',
+    },
   });
   return result.data.data;
 }

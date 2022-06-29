@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import 'styles/Bars/WorkSpaceBar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
-// components
-import WorkSpaceModal from 'components/Bar/Workspace/AddWorkSpaceModal';
 import { useQuery } from 'react-query';
 import { getWorkspaces } from 'utils/api';
-import SingleWorkSpace from './SingleWorkSpace';
+
+// components
+import WorkSpaceModal from 'components/Bar/Workspace/Modal/AddWorkspaceModal';
+import SingleWorkSpace from '../SingleWorkSpace';
+
+import styles from './WorkspaceBar.module.scss';
 
 export interface IWorkSpace {
   workspace_idx?: number;
@@ -28,7 +29,7 @@ function WorkSpaceBar() {
   }, [isOpenModal]);
 
   return (
-    <div className="WorkSpaceBar">
+    <div className={styles.container}>
       {/* 워크 스페이스 리스트 */}
       {isLoading ? (
         <div>Loading...</div>
@@ -44,10 +45,10 @@ function WorkSpaceBar() {
       {/* 워크스페이스 추가 버튼 */}
       <button
         type="button"
-        className="WorkSpaceBar__box WorkSpaceBar__createBtn"
+        className={`${styles.box} ${styles.create_button}`}
         onClick={onClickToggleModal}
       >
-        <FontAwesomeIcon icon={faPlus} className="WorkSpaceBar__createIcon" />
+        <FontAwesomeIcon icon={faPlus} className={styles.create_icon} />
       </button>
 
       {/* 모달창 */}

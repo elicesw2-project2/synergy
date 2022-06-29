@@ -2,17 +2,17 @@ import React, { useCallback, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { deleteChannelCategory, getChannels } from 'utils/api';
 
 // css
-import 'styles/Bars/SideBar.scss';
+import styles from './ChannelCategory.module.scss';
 
 // components
-import { deleteChannelCategory, getChannels } from 'utils/api';
-import Channel from './Channel';
-import SideBarModal from './SideBarModal';
+import Channel from '../Channel/Channel';
+import SideBarModal from '../SideBarModal/SideBarModal';
 
 // types
-import { IChannelCategory } from './SideBar';
+import { IChannelCategory } from '../SideBar/SideBar';
 
 export interface IChannel {
   channel_idx?: number;
@@ -59,37 +59,32 @@ function ChannelCategory({ category }: IProps) {
   };
 
   return (
-    <div className="SideBar__category">
-      <div className="SideBar__category__title">
+    <div className={styles.category}>
+      <div className={styles.category_title}>
         <h1 onContextMenu={handleContextMenu}>{category.name}</h1>
         <FontAwesomeIcon
           icon={faPlus}
-          className="SideBar__category__add-btn"
+          className={styles.add_button}
           onClick={onClickToggleModal}
         />
       </div>
       {isOpenDropdown && (
-        <div className="SideBar__dropdown">
+        <div className={styles.dropdown}>
           <ul>
             <li>
               <button
                 type="button"
                 onClick={handledeleteCategory}
-                className="SideBar__add-category-btn"
+                className={styles.dropdown_button}
               >
                 채널 카테고리 삭제
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={() => alert('누르지말라고')}>
-                누르지 마세요
               </button>
             </li>
           </ul>
         </div>
       )}
       {/* 채널 */}
-      <div className="SideBar__category__channels">
+      <div className={styles.channels}>
         {isLoading ? (
           <div>Loading..</div>
         ) : (

@@ -1,20 +1,17 @@
-.WorkSpaceBar {
+.container {
     background-color: #8787A1;
     padding: 10px;
 
-    .WorkSpaceBar__createBtn {
-        &:hover {
-            border-radius: 20px;
-        }
-
-        .WorkSpaceBar__createIcon {
+    .create_button {
+        cursor: pointer;  
+        .create_icon {
             font-size: 2rem;
-            color: green;   
+            color: green; 
         }
     }
 }
 
-.WorkSpaceBar__box {
+.box {
     display: flex;
     align-items: center;
     justify-content: center;

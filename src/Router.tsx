@@ -6,11 +6,11 @@ import Bars from 'common/Bars';
 import Chat from 'components/Chat/Chat';
 
 // Pages
-import Home from 'pages/Home';
+import Home from 'pages/Home/Home';
 import CalenderBoard from 'pages/CalendarBoard';
 import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
-import WorkspaceHome from 'components/WorkspaceHome';
+import WorkspaceHome from 'pages/Home/WorkspaceHome';
 
 function Router() {
   return (

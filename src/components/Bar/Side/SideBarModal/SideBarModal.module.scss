@@ -1,20 +1,18 @@
-@import '../base/Modal.scss';
+@import 'styles/base/Modal.module.scss';
 
-.SideBarModal__Form {
+.form {
     h1 {
         font-size: 1.5rem;
         margin-bottom: 3rem;
     }
-
-    .SideBarModal__Form__Type {
+    .type {
         display: flex;
         align-items: center;
         justify-content: space-between;
         border: 1px solid gainsboro;
         padding: 2rem 1rem;
     }
-
-    .SideBarModal__Form__Input {
+    .input {
         h2 {
             padding: 2rem 0 0.5rem 0;
         }

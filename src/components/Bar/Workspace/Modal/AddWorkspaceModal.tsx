@@ -2,15 +2,15 @@ import React, { useState, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { useMutation, useQueryClient } from 'react-query';
+import { postImageUpload, postWorkspace } from 'utils/api';
 
 import defaultImg from 'assets/default-img.jpeg';
 
-import 'styles/Modals/WorkSpaceModal.scss';
-
 // types
-import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
-import { postImageUpload, postWorkspace } from 'utils/api';
-import { useMutation, useQueryClient } from 'react-query';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
+
+import styles from './WorkspaceModal.module.scss';
 
 interface iProps {
   onClickToggleModal: () => void;
@@ -71,26 +71,26 @@ function AddWorkSpaceModal(props: iProps) {
   };
 
   return (
-    <div className="Modal__Background">
-      <div className="Modal__Container">
-        <form onSubmit={handleSubmit(onSubmit)} className="Modal__Form">
+    <div className={styles.background}>
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {/* 나가기 버튼 */}
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="Modal__Form__CloseBtn"
+            className={styles.close_button}
           >
             X
           </button>
 
-          <div className="Modal__Form__Description">
+          <div className={styles.description}>
             <h1>서버 만들기</h1>
             <h2>서버는 나와 친구들이 함께 어울리는 공간입니다.</h2>
           </div>
 
           {/* title, image 입력 */}
-          <div className="Modal__Form__Input">
-            <label htmlFor="image" className="Modal__Form__Image">
+          <div className={styles.input}>
+            <label htmlFor="image" className={styles.image}>
               {/* 업로드 버튼으로 참조 */}
               <input
                 type="file"
@@ -110,28 +110,26 @@ function AddWorkSpaceModal(props: iProps) {
                 <img
                   src={preview}
                   alt="preview-img"
-                  className="Modal__Form__image-preview"
+                  className={styles.image_preview}
                   onClick={handleClickImgUpload}
                   aria-hidden="true"
                 />
               ) : (
-                <div className="Modal__Form__image-upload">
+                <div className={styles.image_upload}>
                   <FontAwesomeIcon
                     icon={faCamera}
                     onClick={handleClickImgUpload}
-                    className="Modal__Form__image-upload-icon"
+                    className={styles.upload_icon}
                   />
                   <p>Upload</p>
                 </div>
               )}
             </label>
 
-            <label htmlFor="Name" className="Modal__Form__Title">
+            <label htmlFor="Name" className={styles.title}>
               <span>서버 이름</span>
               {errors.name && (
-                <div className="Modal__Form__error-message">
-                  Name is Required!
-                </div>
+                <div className={styles.error_message}>Name is Required!</div>
               )}
               <input
                 placeholder="Name..."
@@ -142,7 +140,7 @@ function AddWorkSpaceModal(props: iProps) {
             <input
               type="submit"
               value="제출"
-              className="Modal__Form__SubmitBtn"
+              className={styles.submit_button}
             />
           </div>
         </form>

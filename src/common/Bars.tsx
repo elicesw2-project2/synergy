@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import SideBar from 'components/Bar/Side/SideBar';
+import SideBar from 'components/Bar/Side/SideBar/SideBar';
 import TopBar from 'components/Bar/Top/TopBar';
-import WorkSpaceBar from 'components/Bar/Workspace/WorkSpaceBar';
+import WorkSpaceBar from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 
 import 'styles/base/Grid.scss';
 

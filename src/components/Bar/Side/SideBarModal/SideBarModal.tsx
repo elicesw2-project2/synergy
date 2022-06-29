@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import RadioButton from 'components/Button/RadioButton';
 
-import 'styles/Modals/SideBarModal.scss';
 import { useMutation, useQueryClient } from 'react-query';
 import { postChannel } from 'utils/api';
+
+import styles from './SideBarModal.module.scss';
 
 interface iProps {
   onClickToggleModal: () => void;
@@ -36,14 +37,14 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
   };
 
   return (
-    <div className="Modal__Background">
-      <div className="Modal__Container">
+    <div className={styles.background}>
+      <div className={styles.container}>
         {/* 나가기 버튼 */}
-        <form className="SideBarModal__Form" onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="Modal__Form__CloseBtn"
+            className={styles.close_button}
           >
             X
           </button>
@@ -55,7 +56,7 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
             key="1"
           />
           <RadioButton type="일정" setChannelType={setChannelType} key="2" />
-          <div className="SideBarModal__Form__Input">
+          <div className={styles.input}>
             <h2>채널 이름</h2>
             <input
               placeholder="# 새로운 채널"
@@ -64,11 +65,7 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
             />
           </div>
           {/* 서버 추가 버튼 */}
-          <input
-            type="submit"
-            className="Modal__Form__SubmitBtn"
-            value="제출"
-          />
+          <input type="submit" className={styles.submit_button} value="제출" />
         </form>
       </div>
     </div>

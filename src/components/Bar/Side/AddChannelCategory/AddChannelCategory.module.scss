@@ -1,10 +1,13 @@
-.container {
+@import "styles/base/Modal.module.scss";
+
+.custom_container {
     display: flex;
+    justify-content: center;
     position: relative; 
     height: 10rem;
-    max-width: 30rem;
+    min-width: 15rem;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 3rem 2rem;
     border-radius: 15px;
     background-color: rgb(255, 253, 233);
     /* 팝업이 열릴때 스르륵 열리는 효과 */

@@ -1,4 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+
+import styles from '../Bar/Side/SideBarModal/SideBarModal.module.scss';
 
 interface iProps {
   type: string;
@@ -13,7 +15,7 @@ function RadioButton({ type, setChannelType, checked }: iProps) {
   };
 
   return (
-    <div className="SideBarModal__Form__Type">
+    <div className={styles.type}>
       <span>{type} 채널</span>
       <input
         type="radio"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { postChannelCategory } from 'utils/api';
-import styles from './ModalForm.module.scss';
+import styles from './AddChannelCategory.module.scss';
 
 interface IProps {
   onClickToggleModal: () => void;
@@ -30,23 +30,19 @@ function AddChannelCategory({ onClickToggleModal, workspaceIdx }: IProps) {
   };
 
   return (
-    <div className="Modal__Background">
-      <div className={styles.container}>
+    <div className={styles.background}>
+      <div className={styles.custom_container}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h1>새로운 채널 카테고리 만들기</h1>
+          <h1>채널 카테고리 만들기</h1>
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="Modal__Form__CloseBtn"
+            className={styles.close_button}
           >
             X
           </button>
           <input type="text" onChange={handleChange} />
-          <input
-            type="submit"
-            value="제출"
-            className="Modal__Form__SubmitBtn"
-          />
+          <input type="submit" value="제출" className={styles.submit_button} />
         </form>
       </div>
     </div>

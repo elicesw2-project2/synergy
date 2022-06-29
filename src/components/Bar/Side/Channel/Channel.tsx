@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faGear } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteChannel, patchChannel } from 'utils/api';
-import { IChannel } from './ChannelCategory';
+import { IChannel } from '../ChannelCategory/ChannelCategory';
+
+import styles from './Channel.module.scss';
 
 interface IProps {
   channel: IChannel;
@@ -49,7 +51,7 @@ function Channel({ channel }: IProps) {
 
   return (
     <div
-      className="channel"
+      className={styles.container}
       onMouseEnter={() => {
         setIsVisible(true);
       }}
@@ -59,11 +61,18 @@ function Channel({ channel }: IProps) {
     >
       {isEdit ? (
         <li>
-          <input value={name} className="" onChange={handleChange} />
+          <input
+            value={name}
+            className={styles.channel_name_input}
+            onChange={handleChange}
+          />
         </li>
       ) : (
-        <li>
-          # {channelIcon} {channel.name}
+        <li className={styles.channel_name}>
+          # {channelIcon}{' '}
+          {channel.name.length > 10
+            ? `${channel.name.slice(0, 10)}...`
+            : channel.name}
         </li>
       )}
       {isVisible && (
@@ -72,7 +81,7 @@ function Channel({ channel }: IProps) {
           {isEdit ? (
             <button
               type="button"
-              className="channel__edit-icon"
+              className={styles.edit_icon}
               onClick={handleConfirm}
             >
               확인
@@ -81,12 +90,12 @@ function Channel({ channel }: IProps) {
             <>
               <FontAwesomeIcon
                 icon={faGear}
-                className="channel__edit-icon"
+                className={styles.edit_icon}
                 onClick={handleEdit}
               />
               <FontAwesomeIcon
                 icon={faX}
-                className="channel__delete-icon"
+                className={styles.delete_icon}
                 onClick={handleDelete}
               />
             </>
