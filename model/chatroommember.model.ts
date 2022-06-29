@@ -24,6 +24,18 @@ export class ChatRoomMemberModel {
     });
   }
 
+  async findUseridxByRoomId(room_idx: number) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT user_idx FROM chatroommember where room_idx = ?',
+        room_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res[0].user_idx);
+        }
+      );
+    });
+  }
+
   async create(ChatRoomMemberInfo: ChatRoomMemberInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
@@ -38,11 +50,14 @@ export class ChatRoomMemberModel {
     });
   }
 
-  async remove(ChatRoomMemberInfo: ChatRoomMemberInfo) {
+  async remove(
+    user_idx: Record<string, any> | undefined,
+    ChatRoomMemberInfo: ChatRoomMemberInfo
+  ) {
     return new Promise((resolve, reject) => {
       sql.query(
         'DELETE FROM chatroommember where user_idx = ? and room_idx = ?',
-        [ChatRoomMemberInfo.user_idx, ChatRoomMemberInfo.room_idx],
+        [user_idx, ChatRoomMemberInfo.room_idx],
         (err, res) => {
           if (res.affectedRows === 0) {
             // eslint-disable-next-line prefer-promise-reject-errors

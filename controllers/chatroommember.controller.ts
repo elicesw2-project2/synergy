@@ -31,7 +31,11 @@ class ChatRoomMemberController {
 
   async deleteMember(req: Request, res: Response, next: NextFunction) {
     try {
-      const member = await chatroommemberService.removeMember(req.body);
+      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const member = await chatroommemberService.removeMember(
+        user_idx,
+        req.body
+      );
       res.status(200).send({
         status: 200,
         message: '채팅방 나가기 성공',

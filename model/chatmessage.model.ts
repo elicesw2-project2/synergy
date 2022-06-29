@@ -33,11 +33,26 @@ export class ChatMessageModel {
     });
   }
 
-  async create(ChatMessageInfo: ChatMessageInfo) {
+  async findUseridxByMessageId(message_idx: number) {
     return new Promise((resolve, reject) => {
       sql.query(
-        'INSERT INTO chatmessage set ?',
-        ChatMessageInfo,
+        'SELECT user_idx FROM chatmessage where message_idx = ?',
+        message_idx,
+        (err, res) => {
+          return err ? reject(err) : resolve(res[0].user_idx);
+        }
+      );
+    });
+  }
+
+  async create(
+    user_idx: Record<string, any> | undefined,
+    ChatMessageInfo: ChatMessageInfo
+  ) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'INSERT INTO chatmessage (message,user_idx,room_idx) values (?,?,?)',
+        [ChatMessageInfo.message, user_idx, ChatMessageInfo.room_idx],
         (err, res) => {
           return err
             ? reject(err)

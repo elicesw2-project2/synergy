@@ -32,7 +32,11 @@ class ChatMessageController {
       }
       */
 
-      const message = await chatmessageService.createMessage(req.body);
+      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const message = await chatmessageService.createMessage(
+        user_idx,
+        req.body
+      );
       res.status(200).send({
         status: 200,
         message: '메시지 등록 성공',
@@ -46,8 +50,9 @@ class ChatMessageController {
   async setChatMessage(req: Request, res: Response, next: NextFunction) {
     try {
       const message_idx: number = Number(req.params.message_idx);
-      // const update_message: string = req.body.message;
+      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
       const message = await chatmessageService.updateMessage(
+        user_idx,
         message_idx,
         req.body
       );
@@ -63,8 +68,12 @@ class ChatMessageController {
 
   async deleteMessage(req: Request, res: Response, next: NextFunction) {
     try {
+      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
       const message_idx: number = Number(req.params.message_idx);
-      const message = await chatmessageService.removeChat(message_idx);
+      const message = await chatmessageService.removeChat(
+        user_idx,
+        message_idx
+      );
       res.status(200).send({
         status: 200,
         message: '메시지 삭제 성공',
