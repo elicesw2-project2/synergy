@@ -8,8 +8,8 @@ export async function getAllWorkspaces(
   next: NextFunction
 ) {
   try {
-    // const currentUserIdx = Number(req.currentUserId);
-    const workspaces = await workspaceService.findAllWorkspaces();
+    const currentUserIdx = Number(req.currentUserId);
+    const workspaces = await workspaceService.findAllWorkspaces(currentUserIdx);
     res.status(200).send({
       status: 200,
       message: '워크스페이스 목록 조회 성공',
