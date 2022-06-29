@@ -37,3 +37,20 @@ export async function addMember(
     next(err);
   }
 }
+
+export async function deleteMember(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const user = await workspaceMemberService.removeMember(req.body);
+    res.status(200).send({
+      status: 200,
+      message: '워크스페이스 탈퇴 성공',
+      data: user,
+    });
+  } catch (err) {
+    next(err);
+  }
+}

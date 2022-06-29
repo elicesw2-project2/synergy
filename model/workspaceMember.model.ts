@@ -24,3 +24,15 @@ export async function addMember(memberInfo: WorkspaceMemberInfo) {
     });
   });
 }
+
+export async function remove(memberInfo: WorkspaceMemberInfo) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'DELETE FROM chatroommember where user_idx = ? and workspace_idx = ?',
+      [memberInfo.user_idx, memberInfo.workspace_idx],
+      (err, result) => {
+        return err ? reject(err) : resolve({ user_idx: memberInfo.user_idx });
+      }
+    );
+  });
+}
