@@ -50,6 +50,8 @@ module.exports = {
     'import/no-cycle': 'off', // export interface
     camelcase: 'off', // 카멜케이스 안써도 됨
     'no-return-await': 'off', // return await 가능하게
+    'jsx-a11y/click-events-have-key-events': 'off', // button이 아닌 태그에도 onClick
+    'jsx-a11y/no-static-element-interactions': 'off', // *
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

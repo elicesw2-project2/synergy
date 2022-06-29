@@ -3,13 +3,10 @@
     padding: 10px;
 
     .create_button {
-        &:hover {
-            border-radius: 20px;
-        }
-
+        cursor: pointer;  
         .create_icon {
             font-size: 2rem;
-            color: green;   
+            color: green; 
         }
     }
 }

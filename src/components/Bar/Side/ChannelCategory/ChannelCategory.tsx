@@ -75,7 +75,7 @@ function ChannelCategory({ category }: IProps) {
               <button
                 type="button"
                 onClick={handledeleteCategory}
-                className={styles.delete_button}
+                className={styles.dropdown_button}
               >
                 채널 카테고리 삭제
               </button>

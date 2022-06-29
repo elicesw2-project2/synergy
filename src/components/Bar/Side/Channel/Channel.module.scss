@@ -4,6 +4,10 @@
     justify-content: space-between;
     align-items: center;
 
+    .edit_icon, .delete_icon {
+        cursor: pointer;
+    }
+
     .edit_icon {
        position: absolute;
        right: 1.5rem;
@@ -14,8 +18,14 @@
         right: 0.5rem;
     }
 
-    .channel_name {
+    .channel_name_input {
         width: 6rem;
+    }
+
+    .channel_name {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        border: gray;
     }
    
 }

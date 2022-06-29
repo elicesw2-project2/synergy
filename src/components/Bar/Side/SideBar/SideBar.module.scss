@@ -1,6 +1,19 @@
 .container {
+    position: relative;
     background-color: #F8F5EC;
     width: 20rem;
+}
+
+.workspace_title {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.1rem;
+    background-color: #E8EAAA;
+    border-bottom: 1px solid #868e96;
+    cursor: pointer;
+    h1 {
+        font-size: 1.5rem;
+    }
 }
 
 .dropdown {
@@ -14,15 +27,17 @@
     height: 10rem;
     border-radius: 0.4rem;
     z-index: 99;
-}
-
-.workspace__title {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.1rem;
-    background-color: #E8EAAA;
-    border-bottom: 1px solid gray;
-    h1 {
-        font-size: 1.5rem;
+    
+    .dropdown_button {
+        color: white;
+        border: 0;
+        width: 100%;
+        background-color: inherit;
+        padding: 0.4rem;
+        cursor: pointer;
+        &:hover {
+            background-color: #91a7ff;
+        }
     }
 }
+

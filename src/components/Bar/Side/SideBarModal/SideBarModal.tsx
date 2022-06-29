@@ -37,14 +37,14 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
   };
 
   return (
-    <div className="Modal__Background">
-      <div className="Modal__Container">
+    <div className={styles.background}>
+      <div className={styles.container}>
         {/* 나가기 버튼 */}
         <form className={styles.form} onSubmit={handleSubmit}>
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="Modal__Form__CloseBtn"
+            className={styles.close_button}
           >
             X
           </button>
@@ -65,11 +65,7 @@ function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
             />
           </div>
           {/* 서버 추가 버튼 */}
-          <input
-            type="submit"
-            className="Modal__Form__SubmitBtn"
-            value="제출"
-          />
+          <input type="submit" className={styles.submit_button} value="제출" />
         </form>
       </div>
     </div>

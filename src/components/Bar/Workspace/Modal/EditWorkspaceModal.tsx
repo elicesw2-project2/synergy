@@ -66,14 +66,14 @@ function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
   };
 
   return (
-    <div className="Modal__Background">
-      <div className="Modal__Container">
-        <form onSubmit={handleSubmit(onSubmit)} className="Modal__Form">
+    <div className={styles.background}>
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {/* 나가기 버튼 */}
           <button
             type="button"
             onClick={onClickToggleModal}
-            className="Modal__Form__CloseBtn"
+            className={styles.close_button}
           >
             X
           </button>
@@ -85,7 +85,7 @@ function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
 
           {/* title, image 입력 */}
           <div className={styles.input}>
-            <label htmlFor="image" className={styles.input}>
+            <label htmlFor="image" className={styles.image}>
               {/* 업로드 버튼으로 참조 */}
               <input
                 type="file"
@@ -126,7 +126,7 @@ function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
             <input
               type="submit"
               value="제출"
-              className="Modal__Form__SubmitBtn"
+              className={styles.submit_button}
             />
           </div>
         </form>

@@ -1,4 +1,4 @@
-.Modal__Background {
+.modal_background {
     display: flex;
     align-items: center;
     position: fixed;
@@ -9,7 +9,7 @@
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.6);
   
-    .Modal__Container {
+    .modal_container {
       position: relative; 
       width: 80%;
       height: 30rem;
@@ -24,18 +24,18 @@
       background-color: #fff;
     }
 
-    .Modal__Form {
+    .modal_form {
       height: 80%;
     }
 
-    .Modal__Form__CloseBtn {
+    .modal_close-button {
       position: absolute;
       cursor: pointer;
       top: 1rem;
       right: 1rem;
     }
 
-    .Modal__Form__SubmitBtn {
+    .modal_submit-button {
       position: absolute;
       right: 1.5rem;
       bottom: 2rem;

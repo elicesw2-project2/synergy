@@ -1,4 +1,4 @@
-@import 'styles/base/Modal.scss';
+@import 'styles/base/Modal.module.scss';
 
 .description {
   text-align: center;
@@ -12,8 +12,6 @@
     margin-bottom: 0.7rem;
   }
 }
-
-
 
 .input {
   display: flex;
@@ -50,7 +48,7 @@
   }
 }
 
-.image {
+.input {
   .image_preview {
     width: 10rem;
     height: 10rem;

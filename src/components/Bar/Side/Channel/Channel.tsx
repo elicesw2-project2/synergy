@@ -63,12 +63,12 @@ function Channel({ channel }: IProps) {
         <li>
           <input
             value={name}
-            className="channel_name"
+            className={styles.channel_name_input}
             onChange={handleChange}
           />
         </li>
       ) : (
-        <li>
+        <li className={styles.channel_name}>
           # {channelIcon}{' '}
           {channel.name.length > 10
             ? `${channel.name.slice(0, 10)}...`

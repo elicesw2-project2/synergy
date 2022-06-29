@@ -38,7 +38,7 @@ function SideBar() {
   return (
     <div className={styles.container}>
       {/* 워크 스페이스 이름 */}
-      <div className={styles.workspace__title}>
+      <div className={styles.workspace_title} onClick={onClickToggleDropdown}>
         <h1>워크스페이스</h1>
         {isOpenDropdown && (
           <div className={styles.dropdown}>
@@ -47,7 +47,7 @@ function SideBar() {
                 <button
                   type="button"
                   onClick={onClickToggleModal}
-                  className="SideBar__add-category-btn"
+                  className={styles.dropdown_button}
                 >
                   채널 카테고리 추가
                 </button>
@@ -55,11 +55,7 @@ function SideBar() {
             </ul>
           </div>
         )}
-        <FontAwesomeIcon
-          icon={faAngleDown}
-          onClick={onClickToggleDropdown}
-          className="SideBar__add-button"
-        />
+        <FontAwesomeIcon icon={faAngleDown} onClick={onClickToggleDropdown} />
       </div>
 
       {isOpenModal && (
