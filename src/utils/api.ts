@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IChannel } from 'components/Bar/Side/ChannelCategory';
 import { IChannelCategory } from 'components/Bar/Side/SideBar';
 import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import { IChat } from 'components/Chat/Chatting';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 
@@ -65,4 +66,15 @@ export async function patchChannel(channel: IChannel) {
 
 export async function deleteChannel(idx: number | undefined) {
   return await axios.delete(`${BASE_URL}/channel/${idx}`);
+}
+
+// chat
+export async function postChatRoom(idx: number) {
+  const result = await axios.post(`${BASE_URL}/chatrooms`, idx);
+  return result.data.data;
+}
+
+export async function postChatting(message: IChat) {
+  const result = await axios.post(`${BASE_URL}/chatmessage`, message);
+  return result.data.data;
 }
