@@ -1,0 +1,28 @@
+.container {
+    background-color: #F8F5EC;
+    width: 20rem;
+}
+
+.dropdown {
+    top: 3rem;
+    right: 5%;
+    position: absolute;
+    color: wheat;
+    background-color: #212529;
+    width: 90%;
+    padding: 1rem 0;
+    height: 10rem;
+    border-radius: 0.4rem;
+    z-index: 99;
+}
+
+.workspace__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.1rem;
+    background-color: #E8EAAA;
+    border-bottom: 1px solid gray;
+    h1 {
+        font-size: 1.5rem;
+    }
+}

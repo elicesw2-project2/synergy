@@ -1,6 +1,6 @@
-@import '../base/Modal.scss';
+@import 'styles/base/Modal.scss';
 
-.Modal__Form__Description {
+.description {
   text-align: center;
   h1 {
     font-size: 2rem;
@@ -15,12 +15,12 @@
 
 
 
-.Modal__Form__Input {
+.input {
   display: flex;
   flex-direction: column;
   padding: 15px;
 
-  .Modal__Form__Image, .Modal__Form__Title, .Modal__Form__Content {
+  .image, .title {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +30,7 @@
       margin-bottom: 0.8rem;
       margin-right: auto;
     }
-    .Modal__Form__error-message {
+    .error_message {
       position: absolute;
       right: 2rem;
       color: red;
@@ -50,13 +50,13 @@
   }
 }
 
-.Modal__Form__Image {
-  .Modal__Form__image-preview{
+.image {
+  .image_preview {
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
   }
-  .Modal__Form__image-upload {
+  .image_upload {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,7 +73,7 @@
       opacity: 0.7;
     }
 
-    .Modal__Form__image-upload-icon {
+    .upload_icon {
       width: 3rem;
       height: 3rem;
     }

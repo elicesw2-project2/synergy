@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react';
 
-import { IWorkSpace } from 'components/Bar/Workspace/WorkSpaceBar';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteWorkspace } from 'utils/api';
 import { Link } from 'react-router-dom';
-import EditWorkSpaceModal from './EditWorkSpaceModal';
+import EditWorkSpaceModal from './Modal/EditWorkspaceModal';
+
+import styles from './WorkspaceBar/WorkspaceBar.module.scss';
 
 interface IProps {
   workspace: IWorkSpace;
@@ -38,7 +40,7 @@ function SingleWorkSpace({ workspace }: IProps) {
         <img
           src={workspace.workspace_img}
           alt="img"
-          className="WorkSpaceBar__box"
+          className={styles.box}
           onContextMenu={handleContextMenu}
         />
       </Link>

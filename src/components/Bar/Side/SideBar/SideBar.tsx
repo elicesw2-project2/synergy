@@ -1,16 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
-// css
-import 'styles/Bars/SideBar.scss';
-
-// components
 import { useQuery } from 'react-query';
 import { getChannelCategory } from 'utils/api';
 import { useParams } from 'react-router-dom';
-import ChannelCategory from './ChannelCategory';
-import AddChannelCategory from './AddChannelCategory/AddChannelCategory';
+
+// css
+import styles from './SideBar.module.scss';
+
+// components
+import ChannelCategory from '../ChannelCategory/ChannelCategory';
+import AddChannelCategory from '../AddChannelCategory/AddChannelCategory';
 
 export interface IChannelCategory {
   category_idx: number;
@@ -36,12 +36,12 @@ function SideBar() {
   }, [isOpenModal]);
 
   return (
-    <div className="SideBar">
+    <div className={styles.container}>
       {/* 워크 스페이스 이름 */}
-      <div className="SideBar__category">
+      <div className={styles.workspace__title}>
         <h1>워크스페이스</h1>
         {isOpenDropdown && (
-          <div className="SideBar__dropdown">
+          <div className={styles.dropdown}>
             <ul>
               <li>
                 <button
@@ -50,26 +50,6 @@ function SideBar() {
                   className="SideBar__add-category-btn"
                 >
                   채널 카테고리 추가
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => alert('누르지말라고')}>
-                  누르지 마세요
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => alert('누르지말라고')}>
-                  누르지 마세요
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => alert('누르지말라고')}>
-                  누르지 마세요
-                </button>
-              </li>
-              <li>
-                <button type="button" onClick={() => alert('누르지말라고')}>
-                  누르지 마세요
                 </button>
               </li>
             </ul>

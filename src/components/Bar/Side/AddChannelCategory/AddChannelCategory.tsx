@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { postChannelCategory } from 'utils/api';
-import styles from './ModalForm.module.scss';
+import styles from './AddChannelCategory.module.scss';
 
 interface IProps {
   onClickToggleModal: () => void;

@@ -1,0 +1,21 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .edit_icon {
+       position: absolute;
+       right: 1.5rem;
+    }
+
+    .delete_icon {
+        position: absolute;
+        right: 0.5rem;
+    }
+
+    .channel_name {
+        width: 6rem;
+    }
+   
+}
