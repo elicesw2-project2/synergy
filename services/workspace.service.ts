@@ -1,7 +1,7 @@
 import * as Workspace from '../model/workspace.model';
 
 // 모든 워크스페이스 목록 조회
-export async function findAllWorkspaces(currentUserIdx: Number) {
+export async function findAllWorkspaces(currentUserIdx: number) {
   const workspaces = await Workspace.findAll(currentUserIdx);
   console.log('service', workspaces);
 

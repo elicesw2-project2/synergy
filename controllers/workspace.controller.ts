@@ -8,7 +8,8 @@ export async function getAllWorkspaces(
   next: NextFunction
 ) {
   try {
-    const currentUserIdx = Number(req.currentUserId);
+    const currentUserIdx = Number(req.currentUserIdx);
+
     const workspaces = await workspaceService.findAllWorkspaces(currentUserIdx);
     res.status(200).send({
       status: 200,
@@ -57,8 +58,6 @@ export async function addWorkspace(
   next: NextFunction
 ) {
   try {
-    console.log(req.body);
-
     const { name, profile } = req.body;
     const newWorkspace = await workspaceService.createWorkspace({
       name,

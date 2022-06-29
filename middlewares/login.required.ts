@@ -24,6 +24,7 @@ function loginRequired(req: Request, res: Response, next: NextFunction) {
 
     const userId = jwtDecoded.userId;
     const userIdx = jwtDecoded.userIdx;
+
     req.currentUserId = userId;
     req.currentUserIdx = userIdx;
 
