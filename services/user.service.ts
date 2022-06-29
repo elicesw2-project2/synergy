@@ -8,8 +8,8 @@ export async function findUserById(id: string) {
   if (!userById) {
     throw new CustomError(400, '존재하지 않는 아이디입니다.');
   } else {
-    const { id, nickname, profile } = userById;
-    return { id, nickname, profile };
+    const { user_idx, id, nickname, profile } = userById;
+    return { user_idx, id, nickname, profile };
   }
 }
 

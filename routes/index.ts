@@ -11,6 +11,7 @@ import { chatroommemberRouter } from './chatroommember.route';
 import documentRouter from './document.route';
 import workspaceRouter from './workspace.router';
 import imageRouter from './image.routes';
+import workspacememberRouer from './workspaceMember.router';
 // import scheduleRouter from './schedule.routes';
 const router = Router();
 
@@ -23,6 +24,7 @@ router.use('/chatroommember', chatroommemberRouter);
 router.use('/channel', channelRouter);
 router.use('/documents', documentRouter);
 router.use('/workspaces', workspaceRouter);
+router.use('/workspacemembers', workspacememberRouer);
 router.use('/image', imageRouter);
 // router.use('/schedulecards', scheduleRouter);
 

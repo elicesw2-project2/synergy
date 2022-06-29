@@ -52,9 +52,13 @@ class AuthService {
 
     // 로그인 성공 : JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-    const token = jwt.sign({ userId: user.id }, secretKey);
+    const token = jwt.sign(
+      { userId: user.id, userIdx: user.user_idx },
+      secretKey
+    );
 
-    return { token, id };
+    const user_idx = user.user_idx;
+    return { token, id, user_idx };
   }
 }
 
