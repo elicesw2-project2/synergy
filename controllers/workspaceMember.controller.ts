@@ -8,8 +8,8 @@ export async function getAllUser(
   next: NextFunction
 ) {
   try {
-    const currentUserIdx = Number(req.currentUserId);
-    const users = await findAllUsers(currentUserIdx);
+    const workspaceIdx = Number(req.params.id);
+    const users = await findAllUsers(workspaceIdx);
     res.status(200).send({
       status: 200,
       message: '워크스페이스 유저 목록 조회 성공',

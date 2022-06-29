@@ -1,7 +1,7 @@
 import findAll from '../model/workspaceMember.model';
 
-async function findAllUsers(currentUserIdx: Number) {
-  const users = await findAll(currentUserIdx);
+async function findAllUsers(workspaceIdX: Number) {
+  const users = await findAll(workspaceIdX);
   return users;
 }
 
