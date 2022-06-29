@@ -63,9 +63,18 @@ function ChatInput() {
     console.log('채팅방생성');
     // postChatRoom(48);
     await axios
-      .post(`https://circuit-synergy.herokuapp.com/chatrooms`, {
-        workspace_idx: 'asdf',
-      })
+      .post(
+        `https://circuit-synergy.herokuapp.com/chatrooms`,
+        {
+          workspace_idx: 64,
+        },
+        {
+          headers: {
+            Authorization:
+              `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
       })
@@ -77,7 +86,7 @@ function ChatInput() {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify({
-    //     workspace_idx: 4,
+    //     workspace_idx: 64,
     //   }),
     // })
     //   .then((res) => res.json())
