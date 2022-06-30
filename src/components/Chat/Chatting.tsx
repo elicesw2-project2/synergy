@@ -14,10 +14,6 @@ export interface IChat {
 
 const socket = io('/');
 
-socket.on('message', (message) => {
-  console.log(message);
-});
-
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
   const { content } = prop;
@@ -49,66 +45,26 @@ function ChatInput() {
 
   // 방 입장 테스트 버튼
   function roomConnect() {
-    socket.emit('enter_room', 1, '닉네임');
+    socket.emit('enter_room', 64, '닉네임');
   }
-  // useEffect(() => {
+
   socket.on('message', (message) => {
     setContent([...content, message]);
     console.log(message);
   });
-  // }, []);
 
-  // 채팅방 생성 api post 테스트 함수 -> 워크스페이스 생성시 함께 생성되도록 옮겨야함
-  async function postChatTest() {
-    console.log('채팅방생성');
-    // postChatRoom(48);
-    await axios
-      .post(
-        `https://circuit-synergy.herokuapp.com/chatrooms`,
-        {
-          workspace_idx: 64,
-        },
-        {
-          headers: {
-            Authorization:
-              `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    /// ////////////
-    // await fetch(`https://circuit-synergy.herokuapp.com/chatrooms`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     workspace_idx: 64,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
-  }
-  // 아무거나 테스트 버튼 지금은 워크스페이스 get
+  // 아무거나 테스트 버튼 지금은 채팅방 get
   async function realTest() {
-    await fetch(`https://circuit-synergy.herokuapp.com/workspaces/48`)
+    await fetch(`https://circuit-synergy.herokuapp.com/chatrooms/73`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
+        console.log(data);
       });
   }
   return (
     <>
       <button type="button" onClick={roomConnect}>
-        1번방
-      </button>
-      <button type="button" onClick={postChatTest}>
-        방만들기 버튼
+        방입장 버튼
       </button>
       <button type="button" onClick={realTest}>
         테스트 버튼
