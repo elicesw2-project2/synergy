@@ -4,12 +4,12 @@ import 'styles/Chat/Chatting.scss';
 
 // 테스트로 채팅방 만들기위한 import
 import axios from 'axios';
-import { postChatRoom } from 'utils/api';
+import { postChatMessage, getChatMessage, getUsers } from 'utils/api';
 
 export interface IChat {
-  message: string;
+  message: string | undefined;
   room_idx: number;
-  user_idx: number;
+  nickname: string;
 }
 
 const socket = io('/');
@@ -33,33 +33,56 @@ function ChatInput() {
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState<string | undefined>('');
   const [content, setContent] = useState<any>([]);
+  const [nicknames, setNickname] = useState<string>('');
 
-  // 채팅 전송 submit
-  function chatSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const newChat = contentRef?.current?.value;
-
-    socket.emit('message', newChat, '닉네임', 1);
-    setText('');
-  }
-
-  // 방 입장 테스트 버튼
-  function roomConnect() {
-    socket.emit('enter_room', 64, '닉네임');
-  }
-
+  socket.on('welcome', (user) => {
+    console.log(`${user}님이 입장하셨습니다!`);
+  });
+  socket.on('disconnection', (msg) => {
+    setContent([...content, msg]);
+    console.log(msg);
+  });
   socket.on('message', (message) => {
     setContent([...content, message]);
     console.log(message);
   });
 
-  // 아무거나 테스트 버튼 지금은 채팅방 get
-  async function realTest() {
-    await fetch(`https://circuit-synergy.herokuapp.com/chatrooms/73`)
+  useEffect(() => {
+    getUsers(localStorage.getItem('id'))
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setNickname(data.data.nickname);
       });
+  }, []);
+
+  // 채팅 전송 submit
+  function chatSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const newChat = contentRef?.current?.value;
+    postChatMessage({ message: newChat, nickname: nicknames, room_idx: 1 });
+    socket.emit('message', newChat, nicknames, 1);
+    setText('');
+  }
+
+  // 방 입장 테스트 버튼
+  function roomConnect() {
+    socket.emit('enter_room', 1, '닉네임');
+  }
+
+  // 아무거나 테스트 버튼 유저정보, 채팅 메시지
+  async function realTest() {
+    getChatMessage();
+    const result = await fetch(
+      `https://circuit-synergy.herokuapp.com/chatrooms/86`,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data.data));
   }
   return (
     <>
