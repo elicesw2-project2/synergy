@@ -7,7 +7,9 @@ import routes from './routes';
 import cors from 'cors';
 import workspaceRouter from './routes/workspace.router';
 import imageRouter from './routes/image.routes';
-import scheduleRouter from './routes/schedule.routes';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
@@ -17,6 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(bodyParser.json());
 
+const swaggerSpec = YAML.load(path.join(__dirname, './swagger.yaml'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const server: http.Server = http.createServer(app);
 webSocket(server);
 

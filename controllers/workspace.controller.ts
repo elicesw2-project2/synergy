@@ -8,7 +8,9 @@ export async function getAllWorkspaces(
   next: NextFunction
 ) {
   try {
-    const workspaces = await workspaceService.findAllWorkspaces();
+    const currentUserIdx = Number(req.currentUserIdx);
+
+    const workspaces = await workspaceService.findAllWorkspaces(currentUserIdx);
     res.status(200).send({
       status: 200,
       message: '워크스페이스 목록 조회 성공',
@@ -38,6 +40,17 @@ export async function getWorkspaceById(
     next(err);
   }
 }
+
+//특정 유저가 속해있는 워크 스페이스 조회
+// export async function getWorkspaceByUserId(
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ){
+//   try{
+
+//   }
+// }
 // 새 워크스페이스 등록하기
 export async function addWorkspace(
   req: Request,
@@ -45,8 +58,6 @@ export async function addWorkspace(
   next: NextFunction
 ) {
   try {
-    console.log(req.body);
-
     const { name, profile } = req.body;
     const newWorkspace = await workspaceService.createWorkspace({
       name,

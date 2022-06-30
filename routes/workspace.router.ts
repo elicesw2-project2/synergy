@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import * as workspaceController from '../controllers/workspace.controller';
+import { loginRequired } from '../middlewares/login.required';
 
 const parser = bodyParser.urlencoded({ extended: false });
 const router = express.Router();
 
 // 전체 워크스페이스 목록 조회
-router.get('/', workspaceController.getAllWorkspaces);
+router.get('/', loginRequired, workspaceController.getAllWorkspaces);
 
 // 워크 스페이스 id로 상세 조회
 router.get('/:workspace_idx', workspaceController.getWorkspaceById);

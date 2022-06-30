@@ -1,10 +1,28 @@
 import * as Workspace from '../model/workspace.model';
+import { CustomError } from '../middlewares/customError';
+
+interface workpaceData {
+  workspace_idx: number;
+  name: string;
+  workspace_img: string;
+}
 
 // 모든 워크스페이스 목록 조회
-export async function findAllWorkspaces() {
-  const workspaces = await Workspace.findAll();
-  console.log('service', workspaces);
+export async function findAllWorkspaces(currentUserIdx: number) {
+  if (!currentUserIdx) {
+    throw new CustomError(400, 'user_idx 값이 없습니다');
+  }
+  const workspaceIdx = await Workspace.findAllIdx(currentUserIdx);
 
+  let workspaces: workpaceData[] = [];
+  for (let i = 0; i < workspaceIdx.length; i++) {
+    const workspace = await Workspace.findAll(workspaceIdx[i]);
+    console.log(workspaces.push(workspace));
+  }
+  // workspaceIdx.map(async (data) => {
+  //   const workspace = await Workspace.findAll(data);
+  //   console.log(workspaces.push(workspace));
+  // });
   return workspaces;
 }
 

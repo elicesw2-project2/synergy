@@ -25,7 +25,6 @@ export class UserModel {
   async findById(id: string): Promise<UserData> {
     return new Promise((resolve, reject) => {
       sql.query(`SELECT * FROM user WHERE id = ?`, id, (err, res) => {
-        // console.log('-------res', res[0]);
         return err ? reject(err) : resolve(res[0]);
       });
     });
@@ -57,6 +56,29 @@ export class UserModel {
             : resolve({ user_idx: res.insertId, ...userInfo });
         }
       );
+    });
+  }
+
+  // 유저 정보 수정
+  async update(id: string, userInfo: { nickname: string; profile: string }) {
+    const { nickname, profile } = userInfo;
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'UPDATE user SET nickname = ?, profile = ? WHERE id = ?',
+        [nickname, profile, id],
+        (err, res) => {
+          return err ? reject(err) : resolve({ id, ...userInfo });
+        }
+      );
+    });
+  }
+
+  // 유저 정보 삭제
+  async remove(id: string) {
+    return new Promise((resolve, reject) => {
+      sql.query('DELETE from user where id = ?', id, (err, res) => {
+        return err ? reject(err) : resolve({ id });
+      });
     });
   }
 }
