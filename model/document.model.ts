@@ -63,19 +63,16 @@ export class DocumentModel {
           documentIdx,
         ],
         (err, res) => {
-          console.log(res);
-          console.log(res.affectedRows);
-          if (res.affectedRows === 0) {
-            return reject(
-              new CustomError(404, '해당 문서 id를 찾을 수 없습니다.')
-            );
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.affectedRows === 0) {
+              return reject(
+                new CustomError(404, '해당 문서 id를 찾을 수 없습니다.')
+              );
+            }
+            return resolve({ document_idx: documentIdx, ...newDocument });
           }
-          return err
-            ? reject(err)
-            : resolve({
-                document_idx: documentIdx,
-                ...newDocument,
-              });
         }
       );
     });
@@ -88,12 +85,16 @@ export class DocumentModel {
         'DELETE FROM document WHERE document_idx = ?',
         documentIdx,
         (err, res) => {
-          if (res.affectedRows === 0) {
-            return reject(
-              new CustomError(404, '해당 문서 id를 찾을 수 없습니다.')
-            );
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.affectedRows === 0) {
+              return reject(
+                new CustomError(404, '해당 문서 id를 찾을 수 없습니다.')
+              );
+            }
+            return resolve({ document_idx: documentIdx });
           }
-          return err ? reject(err) : resolve({ document_idx: documentIdx });
         }
       );
     });

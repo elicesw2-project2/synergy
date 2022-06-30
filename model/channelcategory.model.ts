@@ -48,17 +48,19 @@ export class ChannelCategoryModel {
         'UPDATE channelcategory SET name = ? WHERE category_idx = ?',
         [newChannelCategory.name, categoryIdx],
         (err, res) => {
-          if (res.affectedRows === 0) {
-            return reject(
-              new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
-            );
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.affectedRows === 0) {
+              return reject(
+                new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
+              );
+            }
+            return resolve({
+              category_idx: categoryIdx,
+              ...newChannelCategory,
+            });
           }
-          return err
-            ? reject(err)
-            : resolve({
-                category_idx: categoryIdx,
-                ...newChannelCategory,
-              });
         }
       );
     });
@@ -71,12 +73,16 @@ export class ChannelCategoryModel {
         'DELETE FROM channelcategory WHERE category_idx = ?',
         categoryIdx,
         (err, res) => {
-          if (res.affectedRows === 0) {
-            return reject(
-              new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
-            );
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.affectedRows === 0) {
+              return reject(
+                new CustomError(404, '해당 채널카테고리 id를 찾을 수 없습니다.')
+              );
+            }
+            return resolve({ category_idx: categoryIdx });
           }
-          return err ? reject(err) : resolve({ category_idx: categoryIdx });
         }
       );
     });
