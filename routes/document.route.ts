@@ -18,9 +18,13 @@ router.get('/:document_idx', loginRequired, documentController.getDocumentById);
 router.post('/', loginRequired, documentController.addDocument);
 
 // 문서 수정 (/documents/:document_idx)
-router.patch('/:document_idx', documentController.setDocument);
+router.patch('/:document_idx', loginRequired, documentController.setDocument);
 
 // 문서 삭제 (/documents/:document_idx)
-router.delete('/:document_idx', documentController.deleteDocument);
+router.delete(
+  '/:document_idx',
+  loginRequired,
+  documentController.deleteDocument
+);
 
 export default router;
