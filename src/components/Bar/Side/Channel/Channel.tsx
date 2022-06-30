@@ -70,7 +70,7 @@ function Channel({ channel }: IProps) {
         </li>
       ) : (
         <Link
-          to={`channel/${channel.channel_idx}`}
+          to={`channels/${channel.category_idx}/channel/${channel.channel_idx}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <li className={styles.channel_name}>

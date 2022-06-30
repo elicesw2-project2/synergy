@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from 'react-query';
@@ -19,7 +19,8 @@ export interface IWorkSpace {
 function WorkSpaceBar() {
   const { isLoading, data: workspaces } = useQuery<IWorkSpace[]>(
     'workspaces',
-    getWorkspaces
+    getWorkspaces,
+    { staleTime: 10000 }
   );
 
   // 모달창 여닫기
