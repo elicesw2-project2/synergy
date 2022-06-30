@@ -29,7 +29,8 @@ function SideBar() {
 
   const { data: workspaces } = useQuery<IWorkSpace[]>(
     'workspaces',
-    getWorkspaces
+    getWorkspaces,
+    { staleTime: 5000 }
   );
 
   const filteredWorkspace = workspaces?.find(
