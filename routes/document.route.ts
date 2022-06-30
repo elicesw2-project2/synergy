@@ -4,8 +4,12 @@ import { loginRequired } from '../middlewares/login.required';
 
 const router = Router();
 
-// 채널별 문서 목록 조회 (/documents/:channel_idx)
-router.get('/:channel_idx', loginRequired, documentController.getAllDocument);
+// 채널별 문서 목록 조회 (/documents/channel/:channel_idx)
+router.get(
+  '/channel/:channel_idx',
+  loginRequired,
+  documentController.getAllDocument
+);
 
 // 문서 상세 조회 (/documents/:document_idx)
 router.get('/:document_idx', loginRequired, documentController.getDocumentById);
