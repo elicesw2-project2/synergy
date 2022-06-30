@@ -1,7 +1,9 @@
-import getAll from '../model/scheduleCard.model';
+import { getAll, scheduleCardInfo, create } from '../model/scheduleCard.model';
 
-async function findAllScheduleCard() {
+export async function findAllScheduleCard() {
   return await getAll();
 }
 
-export default findAllScheduleCard;
+export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {
+  return await create(scheduleCardInfo);
+}

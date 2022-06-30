@@ -1,7 +1,10 @@
 import express from 'express';
-import getAllScheduleCards from '../controllers/scheduleCard.controller';
+import * as scheduleCardController from '../controllers/scheduleCard.controller';
 const router = express.Router();
 
-router.get('/', getAllScheduleCards);
+router.get('/', scheduleCardController.getAllScheduleCards);
+// router.get('/:schedulecontainer_idx');
 
+//등록
+router.post('/', scheduleCardController.addScheduleCard);
 export default router;
