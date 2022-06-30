@@ -20,26 +20,19 @@ class DocumentService {
   }
 
   // 문서 등록
-  async createDocument(documentInfo: DocumentInfo) {
-    if (
-      !documentInfo.nickname ||
-      !documentInfo.title ||
-      !documentInfo.user_idx ||
-      !documentInfo.channel_idx
-    ) {
+  async createDocument(user_idx: number, documentInfo: DocumentInfo) {
+    const { nickname, title, channel_idx } = documentInfo;
+    if (!nickname || !title || !channel_idx) {
       throw new CustomError(400, '요청값을 다시 확인해주세요.');
     }
     // db에 저장
-    return await this.documentModel.create(documentInfo);
+    return await this.documentModel.create(user_idx, documentInfo);
   }
 
   // 문서 수정
   async updateDocument(documentIdx: number, documentInfo: DocumentInfo) {
-    if (
-      !documentInfo.title ||
-      !documentInfo.content ||
-      !documentInfo.channel_idx
-    ) {
+    const { title, content, channel_idx } = documentInfo;
+    if (!title || !content || !channel_idx) {
       throw new CustomError(400, '요청값을 다시 확인해주세요.');
     }
     return await this.documentModel.update(documentIdx, documentInfo);

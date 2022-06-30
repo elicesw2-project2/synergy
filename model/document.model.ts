@@ -37,17 +37,22 @@ export class DocumentModel {
   }
 
   // 문서 카테고리 db에 등록
-  async create(newDocument: DocumentInfo) {
+  async create(user_idx: number, newDocument: DocumentInfo) {
+    const { nickname, title, content, channel_idx } = newDocument;
     return new Promise((resolve, reject) => {
-      sql.query('INSERT INTO document SET ?', newDocument, (err, res) => {
-        return err
-          ? reject(err)
-          : resolve({
-              document_idx: res.insertId,
-              date: new Date(),
-              ...newDocument,
-            });
-      });
+      sql.query(
+        'INSERT INTO document (nickname, title, content, user_idx, channel_idx) values (?, ?, ?, ?, ?)',
+        [nickname, title, content, user_idx, channel_idx],
+        (err, res) => {
+          return err
+            ? reject(err)
+            : resolve({
+                document_idx: res.insertId,
+                date: new Date(),
+                ...newDocument,
+              });
+        }
+      );
     });
   }
 

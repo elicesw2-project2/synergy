@@ -37,7 +37,8 @@ class DocumentController {
   // 문서 등록
   async addDocument(req: Request, res: Response, next: NextFunction) {
     try {
-      const document = await documentService.createDocument(req.body);
+      const user_idx: number = Number(req.currentUserIdx);
+      const document = await documentService.createDocument(user_idx, req.body);
       res.status(201).send({
         status: 201,
         message: '문서 등록 성공',
