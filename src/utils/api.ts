@@ -96,7 +96,48 @@ export async function postChatRoom(idx: number) {
   return result.data.data;
 }
 
-export async function postChatting(message: IChat) {
-  const result = await axios.post(`${BASE_URL}/chatmessage`, message);
+export async function postChatMessage(message: IChat) {
+  const result = await axios.post(
+    `${BASE_URL}/chatmessage`,
+    {
+      message: message.message,
+      room_idx: message.room_idx,
+      nickname: message.nickname,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
   return result.data.data;
+}
+
+export async function getChatMessage() {
+  const result = await axios.get(`${BASE_URL}/chatmessage/1`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  console.log(result.data.data);
+  return result.data.data;
+}
+
+export async function getChatRoom() {
+  const result = await axios.get(`${BASE_URL}/chatrooms/1`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result;
+}
+
+// user
+export async function getUsers(userid: string | null) {
+  const result = await fetch(`${BASE_URL}/users/${userid}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result;
 }

@@ -75,5 +75,5 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "2.6.2"
   },
-  "proxy": "https://circuit-synergy.herokuapp.com/"
+  "proxy": "https://synergy-dev.netlify.app/"
 }
