@@ -12,7 +12,7 @@ import documentRouter from './document.route';
 import workspaceRouter from './workspace.router';
 import imageRouter from './image.routes';
 import workspacememberRouer from './workspaceMember.router';
-// import scheduleRouter from './schedule.routes';
+import scheduleRouter from './scheduleCard.router';
 const router = Router();
 
 router.use('/auth', authRouter);
@@ -26,6 +26,6 @@ router.use('/documents', documentRouter);
 router.use('/workspaces', workspaceRouter);
 router.use('/workspacemembers', workspacememberRouer);
 router.use('/image', imageRouter);
-// router.use('/schedulecards', scheduleRouter);
+router.use('/schedulecards', scheduleRouter);
 
 export default router;
