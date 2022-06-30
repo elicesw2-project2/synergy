@@ -1,3 +1,4 @@
+import { stringList } from 'aws-sdk/clients/datapipeline';
 import sql from './db';
 
 export interface ChatMessageData {
@@ -6,17 +7,20 @@ export interface ChatMessageData {
   user_idx: number;
   room_idx: number;
   create_time: Date;
+  nickname: string;
 }
 
 export interface ChatMessageInfo {
   message: string;
   room_idx: number;
   user_idx: number;
+  nickname: string;
 }
 
 export interface ToUpdate {
   message_idx: number;
   message: string;
+  nickname: string;
 }
 
 export class ChatMessageModel {
@@ -45,14 +49,16 @@ export class ChatMessageModel {
     });
   }
 
-  async create(
-    user_idx: Record<string, any> | undefined,
-    ChatMessageInfo: ChatMessageInfo
-  ) {
+  async create(user_idx: number, ChatMessageInfo: ChatMessageInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
-        'INSERT INTO chatmessage (message,user_idx,room_idx) values (?,?,?)',
-        [ChatMessageInfo.message, user_idx, ChatMessageInfo.room_idx],
+        'INSERT INTO chatmessage (message,user_idx,room_idx,nickname) values (?,?,?,?)',
+        [
+          ChatMessageInfo.message,
+          user_idx,
+          ChatMessageInfo.room_idx,
+          ChatMessageInfo.nickname,
+        ],
         (err, res) => {
           return err
             ? reject(err)
