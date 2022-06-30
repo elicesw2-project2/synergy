@@ -1,3 +1,4 @@
+import { CustomError } from '../middlewares/customError';
 import sql from './db';
 
 export interface ChatRoomMemberData {
@@ -30,7 +31,16 @@ export class ChatRoomMemberModel {
         'SELECT user_idx FROM chatroommember where room_idx = ?',
         room_idx,
         (err, res) => {
-          return err ? reject(err) : resolve(res[0].user_idx);
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.length === 0) {
+              return reject(
+                new CustomError(404, '해당 user_idx를 찾을 수 없습니다.')
+              );
+            }
+            return resolve(res[0].user_idx);
+          }
         }
       );
     });
@@ -50,10 +60,7 @@ export class ChatRoomMemberModel {
     });
   }
 
-  async remove(
-    user_idx: Record<string, any> | undefined,
-    ChatRoomMemberInfo: ChatRoomMemberInfo
-  ) {
+  async remove(user_idx: number, ChatRoomMemberInfo: ChatRoomMemberInfo) {
     return new Promise((resolve, reject) => {
       sql.query(
         'DELETE FROM chatroommember where user_idx = ? and room_idx = ?',

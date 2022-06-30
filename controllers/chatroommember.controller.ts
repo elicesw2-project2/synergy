@@ -31,7 +31,7 @@ class ChatRoomMemberController {
 
   async deleteMember(req: Request, res: Response, next: NextFunction) {
     try {
-      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const user_idx: number = Number(req.currentUserIdx);
       const member = await chatroommemberService.removeMember(
         user_idx,
         req.body

@@ -1,4 +1,3 @@
-import { stringList } from 'aws-sdk/clients/datapipeline';
 import { CustomError } from '../middlewares/customError';
 import sql from './db';
 
@@ -48,9 +47,8 @@ export class ChatMessageModel {
             return reject(err);
           } else {
             if (res.length === 0) {
-              console.log('if문 들어옴');
               return reject(
-                new CustomError(404, '해당 message_idx를 찾을 수 없습니다.')
+                new CustomError(404, '해당 user_idx를 찾을 수 없습니다.')
               );
             }
             return resolve(res[0].user_idx);

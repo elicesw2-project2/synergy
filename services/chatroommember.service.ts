@@ -23,10 +23,7 @@ class ChatRoomMemberService {
     return this.chatroommemberModel.create(ChatRoomMemberInfo);
   }
 
-  async removeMember(
-    user_idx: Record<string, any> | undefined,
-    ChatRoomMemberInfo: ChatRoomMemberInfo
-  ) {
+  async removeMember(user_idx: number, ChatRoomMemberInfo: ChatRoomMemberInfo) {
     const { room_idx } = ChatRoomMemberInfo;
     if (!room_idx) {
       throw new CustomError(400, '요청 값을 다시 확인해주세요');

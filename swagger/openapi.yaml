@@ -1,7 +1,22 @@
-openapi: 3.0.0
-info:
-  version: 1.0.0
-  title: Synergy
-  description: 'Synergy API 문서'
-servers:
-  - url: http://localhost:3000/
+# openapi: 3.0.0
+# info:
+#   version: 1.0.0
+#   title: Synergy
+#   description: 'Synergy API 문서'
+# servers:
+#   - url: http://localhost:3000/
+{
+  swagger": '2.0',
+  'info':
+    {
+      'version': '1.0.0',
+      'title': 'Synergy API',
+      'description': 'Synergy API 문서',
+      'license':
+        {
+          'name': 'Apache 2.0',
+          'url': 'http://www.apache.org/licenses/LICENSE-2.0',
+        },
+    },
+  'host': 'http://localhost:3000/',
+}
