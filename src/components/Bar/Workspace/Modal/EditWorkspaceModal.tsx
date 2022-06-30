@@ -36,7 +36,7 @@ function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
 
   const onSubmit: SubmitHandler<IWorkSpace> = async (data) => {
     const { name } = data;
-    let newImage;
+    let newImage = workspace.workspace_img;
     if (imageFile) {
       newImage = await postImageUpload(imageFile);
     }
