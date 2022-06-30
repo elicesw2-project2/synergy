@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from 'react-query';
-import { postImageUpload, postWorkspace } from 'utils/api';
+import { postImageUpload, postWorkspace, postChatRoom } from 'utils/api';
 
 import defaultImg from 'assets/default-img.jpeg';
 
@@ -38,8 +38,7 @@ function AddWorkSpaceModal(props: iProps) {
   const mutation = useMutation(postWorkspace, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('workspaces');
-      console.log(data.data);
-      console.log(data.data.workspace_idx);
+      postChatRoom(data.data.workspace_idx);
     },
   });
 

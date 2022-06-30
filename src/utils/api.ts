@@ -76,7 +76,15 @@ export async function deleteChannel(idx: number | undefined) {
 
 // chat
 export async function postChatRoom(idx: number) {
-  const result = await axios.post(`${BASE_URL}/chatrooms`, idx);
+  const result = await axios.post(
+    `${BASE_URL}/chatrooms`,
+    { workspace_idx: idx },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
   return result.data.data;
 }
 
