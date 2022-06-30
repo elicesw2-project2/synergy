@@ -11,7 +11,7 @@ function Bars() {
     <div className="Grid__container">
       <WorkSpaceBar />
       <Routes>
-        <Route path="/workspace/:workspaceIdx" element={<SideBar />} />
+        <Route path="/workspace/:workspaceIdx/*" element={<SideBar />} />
       </Routes>
       <div className="Main__container">
         <TopBar />

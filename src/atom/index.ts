@@ -1,12 +1,23 @@
 import { atom } from 'recoil';
 
-// export const channelState = atom({
+// export interface IWorkspaceState {
+//   workspaceName: string;
+// }
+
+// export const workspaceState = atom<IWorkspaceState>({
+//   key: 'workspaceState',
+//   default: {
+//     workspaceName: '',
+//   },
+// });
+
+// export interface IChannelState {
+//   channelName: string;
+// }
+
+// export const channelState = atom<IChannelState>({
 //   key: 'channelState',
-//   default: [
-//     {
-//       idx: 0,
-//       title: '로딩중...',
-//       type: '',
-//     },
-//   ],
+//   default: {
+//     channelName: '',
+//   },
 // });

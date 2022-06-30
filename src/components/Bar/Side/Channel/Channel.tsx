@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faGear } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteChannel, patchChannel } from 'utils/api';
+import { Link } from 'react-router-dom';
 import { IChannel } from '../ChannelCategory/ChannelCategory';
 
 import styles from './Channel.module.scss';
@@ -68,12 +69,17 @@ function Channel({ channel }: IProps) {
           />
         </li>
       ) : (
-        <li className={styles.channel_name}>
-          # {channelIcon}{' '}
-          {channel.name.length > 10
-            ? `${channel.name.slice(0, 10)}...`
-            : channel.name}
-        </li>
+        <Link
+          to={`channel/${channel.channel_idx}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <li className={styles.channel_name}>
+            # {channelIcon}{' '}
+            {channel.name.length > 10
+              ? `${channel.name.slice(0, 10)}...`
+              : channel.name}
+          </li>
+        </Link>
       )}
       {isVisible && (
         // eslint-disable-next-line react/jsx-no-useless-fragment

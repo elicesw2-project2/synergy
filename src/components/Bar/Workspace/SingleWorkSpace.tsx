@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteWorkspace } from 'utils/api';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import EditWorkSpaceModal from './Modal/EditWorkspaceModal';
 
 import styles from './WorkspaceBar/WorkspaceBar.module.scss';
@@ -13,6 +14,7 @@ interface IProps {
 }
 
 function SingleWorkSpace({ workspace }: IProps) {
+  const { workspaceIdx } = useParams();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault();

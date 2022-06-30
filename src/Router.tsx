@@ -7,10 +7,10 @@ import Chat from 'components/Chat/Chat';
 
 // Pages
 import Home from 'pages/Home/Home';
-import CalenderBoard from 'pages/CalendarBoard';
 import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
 import WorkspaceHome from 'pages/Home/WorkspaceHome';
+import ChannelHome from 'pages/Home/ChannelHome';
 
 function Router() {
   return (
@@ -19,7 +19,10 @@ function Router() {
         <Route element={<Chat />}>
           <Route path="/" element={<Home />} />
           <Route path="/workspace/:workspaceIdx" element={<WorkspaceHome />} />
-          <Route path="/calenderboard" element={<CalenderBoard />} />
+          <Route
+            path="/workspace/:workspaceIdx/channel/:channelIdx"
+            element={<ChannelHome />}
+          />
         </Route>
       </Route>
       <Route path="/login" element={<Login />} />

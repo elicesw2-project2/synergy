@@ -2,10 +2,12 @@ import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from 'react-query';
-import { getChannelCategory } from 'utils/api';
+import { getChannelCategory, getWorkspaces } from 'utils/api';
 import { useParams } from 'react-router-dom';
 
 // css
+
+import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import styles from './SideBar.module.scss';
 
 // components
@@ -25,6 +27,15 @@ function SideBar() {
     () => getChannelCategory(Number(workspaceIdx))
   );
 
+  const { data: workspaces } = useQuery<IWorkSpace[]>(
+    'workspaces',
+    getWorkspaces
+  );
+
+  const filteredWorkspace = workspaces?.find(
+    (workspace) => workspace.workspace_idx === Number(workspaceIdx)
+  );
+
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const onClickToggleDropdown = useCallback(() => {
     setIsOpenDropdown(!isOpenDropdown);
@@ -39,7 +50,7 @@ function SideBar() {
     <div className={styles.container}>
       {/* 워크 스페이스 이름 */}
       <div className={styles.workspace_title} onClick={onClickToggleDropdown}>
-        <h1>워크스페이스</h1>
+        <h1>{filteredWorkspace?.name}</h1>
         {isOpenDropdown && (
           <div className={styles.dropdown}>
             <ul>
