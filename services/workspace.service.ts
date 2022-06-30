@@ -14,15 +14,12 @@ export async function findAllWorkspaces(currentUserIdx: number) {
   }
   const workspaceIdx = await Workspace.findAllIdx(currentUserIdx);
 
-  let workspaces: workpaceData[] = [];
-  for (let i = 0; i < workspaceIdx.length; i++) {
-    const workspace = await Workspace.findAll(workspaceIdx[i]);
-    console.log(workspaces.push(workspace));
-  }
-  // workspaceIdx.map(async (data) => {
-  //   const workspace = await Workspace.findAll(data);
-  //   console.log(workspaces.push(workspace));
-  // });
+  const workspaces: workpaceData[] = await Promise.all(
+    workspaceIdx.map((data) => {
+      return Workspace.findAll(data);
+    })
+  );
+
   return workspaces;
 }
 
