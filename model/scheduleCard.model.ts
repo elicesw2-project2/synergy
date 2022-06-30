@@ -9,7 +9,8 @@ export interface scheduleCardInfo {
   user_idx: Number;
 }
 
-export async function getAll() {
+//전체 조회
+export async function getAll(): Promise<scheduleCardInfo[]> {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM schedulecard', (err, result) => {
       return err ? reject(err) : resolve(result);
@@ -17,6 +18,7 @@ export async function getAll() {
   });
 }
 
+//등록
 export async function create(scheduleCardInfo: scheduleCardInfo) {
   return new Promise((resolve, reject) => {
     let { channel_idx, title, category, content, due_date, user_idx } =
