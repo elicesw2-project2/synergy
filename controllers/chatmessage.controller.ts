@@ -32,7 +32,7 @@ class ChatMessageController {
       }
       */
 
-      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const user_idx: number = Number(req.currentUserIdx);
       const message = await chatmessageService.createMessage(
         user_idx,
         req.body
@@ -50,7 +50,7 @@ class ChatMessageController {
   async setChatMessage(req: Request, res: Response, next: NextFunction) {
     try {
       const message_idx: number = Number(req.params.message_idx);
-      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const user_idx: number = Number(req.currentUserIdx);
       const message = await chatmessageService.updateMessage(
         user_idx,
         message_idx,
@@ -68,7 +68,7 @@ class ChatMessageController {
 
   async deleteMessage(req: Request, res: Response, next: NextFunction) {
     try {
-      const user_idx: Record<string, any> | undefined = req.currentUserIdx;
+      const user_idx: number = Number(req.currentUserIdx);
       const message_idx: number = Number(req.params.message_idx);
       const message = await chatmessageService.removeChat(
         user_idx,
