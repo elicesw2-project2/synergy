@@ -39,7 +39,11 @@ export async function deleteWorkspace(idx: number | undefined) {
 
 // channels
 export async function getChannelCategory(idx: number) {
-  const result = await axios.get(`${BASE_URL}/channelcategory/${idx}`);
+  const result = await axios.get(`${BASE_URL}/channelcategory/${idx}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
   return result.data.data;
 }
 
@@ -55,7 +59,11 @@ export async function deleteChannelCategory(idx: number) {
 }
 
 export async function getChannels(idx: number) {
-  const result = await axios.get(`${BASE_URL}/channel/${idx}`);
+  const result = await axios.get(`${BASE_URL}/channel/${idx}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
   return result.data.data;
 }
 
