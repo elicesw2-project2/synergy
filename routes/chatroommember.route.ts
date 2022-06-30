@@ -6,6 +6,7 @@ const chatroommemberRouter: Router = express.Router();
 // 채팅방 멤버 목록 조회
 chatroommemberRouter.get(
   '/:room_idx',
+  loginRequired,
   chatroommemberController.getMemberByRoomId
 );
 
