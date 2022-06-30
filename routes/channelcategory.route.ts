@@ -1,11 +1,16 @@
 import { Router } from 'express';
 // import * as channelcategory from '../controllers/channelcategory.controller';
 import { channelCategoryController } from '../controllers/channelcategory.controller';
+import { loginRequired } from '../middlewares/login.required';
 
 const router = Router();
 
 // 워크스페이스별 채널 카테고리 목록 조회 (/channelcategory/:workspace_idx)
-router.get('/:workspace_idx', channelCategoryController.getByWorkspace);
+router.get(
+  '/:workspace_idx',
+  loginRequired,
+  channelCategoryController.getByWorkspace
+);
 
 // 채널 카테고리 등록 (/channelcategory)
 router.post('/', channelCategoryController.addChannelCategory);

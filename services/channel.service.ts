@@ -30,8 +30,8 @@ class ChannelService {
 
   // 채널 이름 수정
   async updateChannel(channelIdx: number, channelInfo: ChannelInfo) {
-    if (!channelInfo.name) {
-      throw new CustomError(400, '채널 이름을 넣어주세요');
+    if (!channelInfo.name || !channelInfo.category_idx) {
+      throw new CustomError(400, '요청값을 다시 확인해주세요.');
     }
     return await this.channelModel.update(channelIdx, channelInfo);
   }
