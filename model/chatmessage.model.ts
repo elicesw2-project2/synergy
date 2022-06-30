@@ -1,4 +1,5 @@
 import { stringList } from 'aws-sdk/clients/datapipeline';
+import { CustomError } from '../middlewares/customError';
 import sql from './db';
 
 export interface ChatMessageData {
@@ -43,7 +44,17 @@ export class ChatMessageModel {
         'SELECT user_idx FROM chatmessage where message_idx = ?',
         message_idx,
         (err, res) => {
-          return err ? reject(err) : resolve(res[0].user_idx);
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.length === 0) {
+              console.log('if문 들어옴');
+              return reject(
+                new CustomError(404, '해당 message_idx를 찾을 수 없습니다.')
+              );
+            }
+            return resolve(res[0].user_idx);
+          }
         }
       );
     });
@@ -76,18 +87,19 @@ export class ChatMessageModel {
     return new Promise((resolve, reject) => {
       sql.query(
         'UPDATE chatmessage set message = ? where message_idx = ?',
-        [ChatMessageInfo.message, message_idx],
+        [ChatMessageInfo.message, message_idx, ChatMessageInfo.message],
         (err, res) => {
-          if (res.affectedRows === 0) {
-            // eslint-disable-next-line prefer-promise-reject-errors
-            return reject({
-              status: 404,
-              message: '해당 message_idx를 찾을 수 없습니다.',
-            });
+          if (err) {
+            return reject(err);
+          } else {
+            if (res.affectedRows === 0) {
+              // eslint-disable-next-line prefer-promise-reject-errors
+              return reject(
+                new CustomError(404, '해당 message_idx를 찾을 수 없습니다.')
+              );
+            }
+            return resolve({ message_idx: message_idx, ...ChatMessageInfo });
           }
-          return err
-            ? reject(err)
-            : resolve({ message_idx: message_idx, ...ChatMessageInfo });
         }
       );
     });

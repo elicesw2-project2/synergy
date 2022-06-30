@@ -40,7 +40,7 @@ class ChatMessageService {
       throw new CustomError(400, '해당 유저는 이 메시지를 수정할 수 없습니다.');
     }
 
-    if (!ChatMessageInfo.message) {
+    if (!ChatMessageInfo.message || !ChatMessageInfo.nickname) {
       throw new CustomError(400, '요청 값을 다시 확인해주세요');
     }
     return this.chatmessageModel.update(message_idx, ChatMessageInfo);
