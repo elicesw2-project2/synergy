@@ -66,7 +66,7 @@ export async function findAll(workspaceIdx: Number): Promise<workpaceData> {
       'SELECT * FROM workspace WHERE workspace_idx=?',
       workspaceIdx,
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err ? reject(err) : resolve(result[0]);
       }
     );
   });
