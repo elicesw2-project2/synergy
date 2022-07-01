@@ -8,6 +8,7 @@ export interface UserInfo {
   pw: string;
   profile: string;
   nickname: string;
+  refresh_token: string;
 }
 
 export interface UserData {
@@ -17,6 +18,7 @@ export interface UserData {
   profile: string;
   nickname: string;
   role: string;
+  refresh_token: string;
 }
 
 export class UserModel {
@@ -79,6 +81,19 @@ export class UserModel {
       sql.query('DELETE from user where id = ?', id, (err, res) => {
         return err ? reject(err) : resolve({ id });
       });
+    });
+  }
+
+  // refresh 토큰 저장(수정)
+  async updateRefreshToken(id: string, refreshToken: string) {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'UPDATE user SET refresh_token =? WHERE id = ?',
+        [refreshToken, id],
+        (err, res) => {
+          return err ? reject(err) : resolve({ id, ...userInfo });
+        }
+      );
     });
   }
 }
