@@ -13,10 +13,20 @@ export interface IChat {
 }
 
 const socket = io('/');
+socket.on('welcome', (user) => {
+  console.log(`${user}님이 입장하셨습니다!`);
+});
 
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
   const { content } = prop;
+  // const [beforecontent, setBeforeContent] = useState<any>([]);
+  // useEffect(() => {
+  //   getChatMessage(1).then((res) => {
+  //     res.map((el: any) => setBeforeContent([...beforecontent, el.message]));
+  //   });
+  // }, []);
+
   return (
     <div className="chat_content">
       <ul>
@@ -34,6 +44,14 @@ function ChatInput() {
   const [text, setText] = useState<string | undefined>('');
   const [content, setContent] = useState<any>([]);
   const [nicknames, setNickname] = useState<string>('');
+  const [connect, setConnect] = useState<boolean>(false);
+
+  // 별명 불러오기
+  useEffect(() => {
+    getUsers(localStorage.getItem('id')).then((res) => {
+      setNickname(res.nickname);
+    });
+  }, []);
 
   socket.on('welcome', (user) => {
     console.log(`${user}님이 입장하셨습니다!`);
@@ -47,43 +65,29 @@ function ChatInput() {
     console.log(message);
   });
 
-  useEffect(() => {
-    getUsers(localStorage.getItem('id'))
-      .then((res) => res.json())
-      .then((data) => {
-        setNickname(data.data.nickname);
-      });
-  }, []);
-
   // 채팅 전송 submit
   function chatSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const newChat = contentRef?.current?.value;
+    // api 채팅 메시지 저장
     postChatMessage({ message: newChat, nickname: nicknames, room_idx: 1 });
+    // 소켓io 채팅 메시지 보내기
     socket.emit('message', newChat, nicknames, 1);
     setText('');
   }
 
   // 방 입장 테스트 버튼
   function roomConnect() {
-    socket.emit('enter_room', 1, '닉네임');
+    socket.emit('enter_room', 1, nicknames);
   }
 
-  // 아무거나 테스트 버튼 유저정보, 채팅 메시지
+  // 아무거나 테스트 버튼 / 채팅 메시지
   async function realTest() {
-    getChatMessage();
-    const result = await fetch(
-      `https://circuit-synergy.herokuapp.com/chatrooms/86`,
-      {
-        headers: {
-          Authorization:
-            `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data.data));
+    getChatMessage(1).then((res) =>
+      res.map((el: any) => console.log(el.message))
+    );
   }
+
   return (
     <>
       <button type="button" onClick={roomConnect}>
@@ -108,4 +112,3 @@ function ChatInput() {
 }
 
 export { ChatContent, ChatInput };
-// export default ChatInput;
