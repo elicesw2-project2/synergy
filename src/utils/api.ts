@@ -12,7 +12,7 @@ export async function getWorkspaces() {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
-  console.log('test test');
+  console.log('test test test');
   return result.data.data;
 }
 
