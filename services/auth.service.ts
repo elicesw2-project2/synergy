@@ -52,10 +52,22 @@ class AuthService {
 
     // 로그인 성공 : JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    // expiresIn : 유효시간 1분 (수정하기)
     const token = jwt.sign(
       { userId: user.id, userIdx: user.user_idx },
-      secretKey
+      secretKey,
+      {
+        expiresIn: '1d',
+      }
     );
+
+    // refresh 토큰 생성
+    const refreshToken = jwt.sign({}, secretKey, {
+      expiresIn: '14d',
+    });
+
+    // refresh 토큰을 db에 저장(update)
+    await userModel.updateRefreshToken(id, refreshToken);
 
     const user_idx = user.user_idx;
     return { token, id, user_idx };
