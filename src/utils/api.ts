@@ -84,6 +84,7 @@ export async function deleteChannel(idx: number | undefined) {
 }
 
 // chat
+// 채팅방 만들기(완료)
 export async function postChatRoom(idx: number) {
   const result = await axios.post(
     `${BASE_URL}/chatrooms`,
@@ -97,6 +98,7 @@ export async function postChatRoom(idx: number) {
   return result.data.data;
 }
 
+// 메시지 등록
 export async function postChatMessage(message: IChat) {
   const result = await axios.post(
     `${BASE_URL}/chatmessage`,
@@ -114,16 +116,17 @@ export async function postChatMessage(message: IChat) {
   return result.data.data;
 }
 
-export async function getChatMessage() {
-  const result = await axios.get(`${BASE_URL}/chatmessage/1`, {
+// 메시지 조회
+export async function getChatMessage(idx: number) {
+  const result = await axios.get(`${BASE_URL}/chatmessage/${idx}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
-  console.log(result.data.data);
   return result.data.data;
 }
 
+// 채팅방 조회(아무대도 안쓰는중)
 export async function getChatRoom() {
   const result = await axios.get(`${BASE_URL}/chatrooms/1`, {
     headers: {
@@ -135,10 +138,10 @@ export async function getChatRoom() {
 
 // user
 export async function getUsers(userid: string | null) {
-  const result = await fetch(`${BASE_URL}/users/${userid}`, {
+  const result = await axios.get(`${BASE_URL}/users/${userid}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
-  return result;
+  return result.data.data;
 }
