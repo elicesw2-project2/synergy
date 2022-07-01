@@ -1,0 +1,52 @@
+.background {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .container {
+    position: relative; 
+    width: 80%;
+    height: 30rem;
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    background-color: rgb(255, 253, 233);
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .form {
+    height: 80%;
+  }
+
+  .close_button {
+    position: absolute;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 0;
+    top: 1rem;
+    right: 1rem;
+    background: inherit;
+  }
+
+  .submit_button {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 2rem;
+    cursor: pointer;
+    border: 0;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #748ffc;
+  }
+  
+}

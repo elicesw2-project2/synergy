@@ -1,0 +1,28 @@
+@import "styles/base/Modal.module.scss";
+
+.custom_container {
+    display: flex;
+    justify-content: center;
+    position: relative; 
+    height: 10rem;
+    min-width: 15rem;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    background-color: rgb(255, 253, 233);
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        margin-bottom: 1rem;
+    }
+}
+

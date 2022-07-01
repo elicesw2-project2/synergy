@@ -1,0 +1,16 @@
+.TopBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+    background-color: #89AA54;
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .TopBar__icon {
+        font-size: 1.3rem;
+        padding: 0 10px;
+    }
+}
+

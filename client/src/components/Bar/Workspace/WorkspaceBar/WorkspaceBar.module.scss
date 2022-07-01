@@ -1,0 +1,25 @@
+.container {
+    background-color: #8787A1;
+    padding: 10px;
+
+    .create_button {
+        cursor: pointer;  
+        .create_icon {
+            font-size: 2rem;
+            color: green; 
+        }
+    }
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 50%;
+    background-color: whitesmoke;
+}
+
