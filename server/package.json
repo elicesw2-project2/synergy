@@ -12,7 +12,7 @@
     "lint": "eslint **/*.ts",
     "api-docs": "swagger-cli bundle ./swagger/openapi.yaml --outfile ./swagger.yaml --type yaml",
     "predev": "npm run api-docs",
-    "deploy": "git subtree push --prefix server heroku main",
+    "deploy": "git subtree push --prefix ../server heroku main",
     "deploy:force": "git push heroku `git subtree split --prefix server main`:main --force"
   },
   "author": "",
