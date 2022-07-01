@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  title: Synergy API
+  description: Synergy API docs
+  version: 1.0.0
+host: 'localhost:3000'
+basePath: /api-docs
+schemes:
+  - http
+paths:
+  '/chatrooms/{workspace_idx}':
+    get:
+      summary: 전체 채팅방 목록 조회
+      parameters:
+        - in: path
+          name: workspace_idx
+          required: true
+          type: integer
+      responses:
+        '200': null
+        description: 성공
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 채팅방 조회 성공
+            data:
+              type: object
+              properties:
+                room_idx:
+                  type: integer
+                workspace_idx:
+                  type: integer
+  /chatrooms:
+    post:
+      summary: 새 채팅방 등록
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          schema:
+            type: object
+            required:
+              - workspace_idx
+            properties:
+              workspace_idx:
+                type: integer
+    responses:
+      '200':
+        description: 성공
+        schema:
+          type: object
+          properties:
+            status:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: 채팅방 생성 성공
+            data:
+              type: object
+              properties:
+                room_idx:
+                  type: number
+                workspace_idx:
+                  type: number

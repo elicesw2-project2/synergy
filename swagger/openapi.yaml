@@ -1,41 +1,11 @@
 swagger: '2.0'
 info:
-  title: Sample API
-  description: API description in Markdown.
+  title: Synergy API
+  description: Synergy API docs
   version: 1.0.0
-host: localhost:3000/
-basePath: /
+host: localhost:3000
+basePath: /api-docs
 schemes:
   - http
 paths:
-  /users:
-    get:
-      summary: Returns a list of users.
-      description: Optional extended description in Markdown.
-      produces:
-        - application/json
-      responses:
-        200:
-          description: OK
-# swagger: "2.0"
-# info:
-#   version: 1.0.0
-#   title: Synergy API docs
-#   description: Synergy API 문서
-#   license:
-#     name: MIT
-# servers:
-#   - url: http://localhost:3000/
-
-# {
-#   'swagger': '2.0',
-#   'info':
-#     {
-#       'title': 'Synergy API docs',
-#       'description': 'Synergy API 문서',
-#       'version': '1.0.0',
-#     },
-#   'host': 'localhost:3000',
-#   'basePath': '/',
-#   'schemes': ['http'],
-# }
+  $ref: './paths/chatroom.yaml'
