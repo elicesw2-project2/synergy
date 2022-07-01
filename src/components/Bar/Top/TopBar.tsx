@@ -14,7 +14,7 @@ import { IChannel } from '../Side/ChannelCategory/ChannelCategory';
 function TopBar() {
   const { channelCategoryIdx, channelIdx } = useParams();
   const { data: channels } = useQuery<IChannel[]>(
-    ['channels', channelCategoryIdx],
+    ['channels', Number(channelCategoryIdx)],
     () => getChannels(Number(channelCategoryIdx))
   );
 

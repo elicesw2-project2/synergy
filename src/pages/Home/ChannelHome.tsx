@@ -9,7 +9,7 @@ import './Home.scss';
 function ChannelHome() {
   const { channelCategoryIdx, channelIdx } = useParams();
   const { data: channels } = useQuery<IChannel[]>(
-    ['channels', channelCategoryIdx],
+    ['channels', Number(channelCategoryIdx)],
     () => getChannels(Number(channelCategoryIdx))
   );
 
