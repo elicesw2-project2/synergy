@@ -60,7 +60,7 @@ module.exports = {
     },
     'import/resolver': {
       typescript: {
-        directory: './tsconfig.json',
+        directory: './client/tsconfig.json',
       },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
