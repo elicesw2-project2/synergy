@@ -5,8 +5,8 @@ interface objType {
   process: scheduleCardInfo[];
   done: scheduleCardInfo[];
 }
-export async function findAllScheduleCard() {
-  const scheduleCards = await getAll();
+export async function findAllScheduleCard(channelIdx: Number) {
+  const scheduleCards = await getAll(channelIdx);
   let filteredObj: objType = {
     todo: [],
     process: [],
@@ -37,8 +37,6 @@ export async function findAllScheduleCard() {
   // });
   // scheduleCardsArr.push(todo);
   // console.log(scheduleCardsArr);
-
-  return scheduleCards;
 }
 
 export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {

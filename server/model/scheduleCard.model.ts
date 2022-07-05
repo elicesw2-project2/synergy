@@ -10,11 +10,15 @@ export interface scheduleCardInfo {
 }
 
 //전체 조회
-export async function getAll(): Promise<scheduleCardInfo[]> {
+export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schedulecard', (err, result) => {
-      return err ? reject(err) : resolve(result);
-    });
+    db.query(
+      'SELECT * FROM schedulecard WHERE channel_idx = ?',
+      channelIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
   });
 }
 

@@ -8,7 +8,9 @@ export async function getAllScheduleCards(
   next: NextFunction
 ) {
   try {
-    const scheduleCards = await scheduleCardService.findAllScheduleCard();
+    const scheduleCards = await scheduleCardService.findAllScheduleCard(
+      Number(req.params.channel_idx)
+    );
     res.status(200).send({
       status: 200,
       message: '모든 스케줄 조회 성공',
