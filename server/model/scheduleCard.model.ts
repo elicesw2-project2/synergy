@@ -14,7 +14,7 @@ export interface scheduleCardInfo {
 export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM schedulecard WHERE channel_idx = ?',
+      'SELECT schedulecard.* , user.nickname FROM schedulecard LEFT JOIN user on schedulecard.user_idx = user.user_idx WHERE channel_idx = ?',
       channelIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
@@ -26,7 +26,7 @@ export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
 export async function getScheduleCardById(schedulecard_idx: Number) {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM schedulecard WHERE schedulecard_idx = ?',
+      'SELECT schedulecard.* , user.nickname FROM schedulecard LEFT JOIN user on schedulecard.user_idx = user.user_idx WHERE schedulecard_idx = ?',
       schedulecard_idx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
