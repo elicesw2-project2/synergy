@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import 'styles/Chat/Chatting.scss';
 
-import { postChatMessage, getChatMessage, getUsers } from 'utils/api';
+import { postChatMessage, getChatMessage } from 'utils/api';
 
 export interface IChat {
   message: string | undefined;
@@ -15,8 +15,17 @@ const socket = io('/');
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
   const { content, newContent } = prop;
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [content, newContent]);
   return (
-    <div className="chat_content">
+    <div className="chat_content" ref={scrollRef}>
       <ul>
         {content.map((el: any) => {
           return (
@@ -59,15 +68,12 @@ function ChatInput(prop: any) {
   // 소켓IO 입장, 퇴장, 메시지 입력
   socket.on('welcome', (user) => {
     setNewContent([...newcontent, `${user} 님이 입장하셨습니다`]);
-    console.log(`${user}님이 입장하셨습니다!`);
   });
   socket.on('disconnection', (msg) => {
     setNewContent([...newcontent, msg]);
-    console.log(msg);
   });
   socket.on('message', (message) => {
     setNewContent([...newcontent, message]);
-    console.log(message);
   });
 
   // 채팅 전송 submit
