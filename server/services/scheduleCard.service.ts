@@ -46,6 +46,9 @@ export async function findAllScheduleCard(channelIdx: Number) {
 export async function findScheduleCardById(schedulecardIdx: Number) {
   return await getScheduleCardById(schedulecardIdx);
 }
-export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {
-  return await create(scheduleCardInfo);
+export async function createScheduleCard(
+  user_idx: Number,
+  scheduleCardInfo: scheduleCardInfo
+) {
+  return await create(user_idx, scheduleCardInfo);
 }

@@ -36,10 +36,12 @@ export async function getScheduleCardById(schedulecard_idx: Number) {
 }
 
 //등록
-export async function create(scheduleCardInfo: scheduleCardInfo) {
+export async function create(
+  user_idx: Number,
+  scheduleCardInfo: scheduleCardInfo
+) {
   return new Promise((resolve, reject) => {
-    let { channel_idx, title, category, content, due_date, user_idx } =
-      scheduleCardInfo;
+    let { channel_idx, title, category, content, due_date } = scheduleCardInfo;
     due_date = new Date(due_date);
     let create_date = new Date().toISOString().split('T')[0];
     db.query(

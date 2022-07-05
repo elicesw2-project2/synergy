@@ -43,7 +43,11 @@ export async function addScheduleCard(
   next: NextFunction
 ) {
   try {
-    const scheduleCard = await scheduleCardService.createScheduleCard(req.body);
+    const user_idx: number = Number(req.currentUserIdx);
+    const scheduleCard = await scheduleCardService.createScheduleCard(
+      user_idx,
+      req.body
+    );
     res.status(201).send({
       status: 201,
       message: '스케줄카드 등록 성공',
