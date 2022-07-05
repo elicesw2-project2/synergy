@@ -9,9 +9,12 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styles from './ScheduleBoard.module.scss';
 
 export interface IScheduleCard {
-  category: string;
+  schedulecard_idx: number;
+  channel_idx: number;
   title: string;
+  category: string;
   content: string;
+  duedate: string;
 }
 
 export interface IScheduleCardType {

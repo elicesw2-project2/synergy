@@ -1,4 +1,20 @@
 .card {
-    width: 90%;
-    border: 1px solid brown;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 5rem;
+  padding: 15px;
+  border: 1px solid #15aabf;
+  border-radius: 4px;
+  &:not(:first-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.delete_icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
 }
