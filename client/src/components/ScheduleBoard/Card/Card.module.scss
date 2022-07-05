@@ -1,4 +1,32 @@
 .card {
-    width: 90%;
-    border: 1px solid brown;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+  height: 5rem;
+  padding: 15px;
+  border: 1px solid #15aabf;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #bac8ff;
+    opacity: 0.5;
+  }
+
+  &:not(:first-child) {
+    margin-bottom: 1rem;
+  }
+
+  .card_title {
+    padding-top: 5px;
+  }
+}
+
+.delete_icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IChannel } from 'components/Bar/Side/ChannelCategory/ChannelCategory';
 import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import { IChat } from 'components/Chat/Chatting';
+import { IScheduleCard } from 'pages/ScheduleBoard/ScheduleBoard';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 
@@ -156,4 +157,20 @@ export async function getScheduleCards(channelIdx: string | undefined) {
     }
   );
   return result.data.data;
+}
+
+export async function postScheduleCard(data: Partial<IScheduleCard>) {
+  const result = await axios.post(`${BASE_URL}/schedulecards`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result;
+}
+
+export async function deleteScheduleCard(schedulecardIdx: number) {
+  const result = await axios.delete(
+    `${BASE_URL}/schedulecards/${schedulecardIdx}`
+  );
+  return result;
 }

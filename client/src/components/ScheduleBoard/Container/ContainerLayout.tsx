@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IScheduleCard } from 'pages/ScheduleBoard/ScheduleBoard';
+import { useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from 'react-query';
+import { postScheduleCard } from 'utils/api';
 import styles from './ContainerLayout.module.scss';
+import Card from '../Card/Card';
 
 interface IProps {
   type: string;
@@ -13,14 +17,30 @@ function ContainerLayout({ type, data }: IProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [issue, setIssue] = useState<string>('');
 
+  const { channelIdx } = useParams();
+
+  const queryClient = useQueryClient();
+  const createMutation = useMutation(postScheduleCard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('scheduleCards');
+    },
+  });
+
+  const handleCreateCard = () => {
+    createMutation.mutate({
+      channel_idx: Number(channelIdx),
+      title: issue,
+      category: type,
+      content: '',
+      due_date: new Date().toISOString().slice(0, 10),
+    });
+  };
+
   return (
     <div className={styles.container}>
       <span className={styles.type}>{type}</span>
       {data?.map((card) => (
-        <div className={styles.card}>
-          <span>{card.title}</span>
-          <span>{card.content}</span>
-        </div>
+        <Card card={card} />
       ))}
       <div>
         {!isOpen ? (
@@ -34,7 +54,11 @@ function ContainerLayout({ type, data }: IProps) {
               value={issue}
               onChange={(e) => setIssue(e.target.value)}
             />
-            <button type="button" className={styles.add_button}>
+            <button
+              type="button"
+              className={styles.add_button}
+              onClick={handleCreateCard}
+            >
               만들기
             </button>
             <button
