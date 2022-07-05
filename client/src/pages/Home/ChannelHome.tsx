@@ -1,22 +1,19 @@
-import { IChannel } from 'components/Bar/Side/ChannelCategory/ChannelCategory';
 import React from 'react';
-import { useQuery } from 'react-query';
+
 import { useParams } from 'react-router-dom';
-import { getChannels } from 'utils/api';
+import ScheduleBoard from 'pages/ScheduleBoard/ScheduleBoard';
 
 import './Home.scss';
 
 function ChannelHome() {
-  const { channelCategoryIdx, channelIdx } = useParams();
-  const { data: channels } = useQuery<IChannel[]>(
-    ['channels', Number(channelCategoryIdx)],
-    () => getChannels(Number(channelCategoryIdx))
-  );
+  const { channelType } = useParams();
 
-  const filteredChannel = channels?.find(
-    (channel) => channel.channel_idx === Number(channelIdx)
+  return (
+    <>
+      {channelType === '0' ? <ScheduleBoard /> : null}
+      <div>메롱</div>
+    </>
   );
-  return <div className="Home">{filteredChannel?.name} 채널입니다.</div>;
 }
 
 export default ChannelHome;

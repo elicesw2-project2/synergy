@@ -20,7 +20,7 @@ function Router() {
           <Route path="/" element={<Home />} />
           <Route path="/workspace/:workspaceIdx" element={<WorkspaceHome />} />
           <Route
-            path="/workspace/:workspaceIdx/channels/:channelCategoryIdx/channel/:channelIdx"
+            path="/workspace/:workspaceIdx/channels/:channelCategoryIdx/channel/:channelIdx/:channelType"
             element={<ChannelHome />}
           />
         </Route>

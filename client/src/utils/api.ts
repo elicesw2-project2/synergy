@@ -12,7 +12,6 @@ export async function getWorkspaces() {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
-  console.log('test test');
   return result.data.data;
 }
 
@@ -143,5 +142,18 @@ export async function getUsers(userid: string | null) {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
+  return result.data.data;
+}
+
+// schedule card
+export async function getScheduleCards(channelIdx: string | undefined) {
+  const result = await axios.get(
+    `${BASE_URL}/schedulecards/channel/${channelIdx}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
   return result.data.data;
 }
