@@ -1,22 +1,33 @@
 import { RequestPaymentConfiguration } from '@aws-sdk/client-s3';
-import { getAll, scheduleCardInfo, create } from '../model/scheduleCard.model';
-
-export async function findAllScheduleCard() {
-  const scheduleCards = await getAll();
-  let scheduleCardsArr: scheduleCardInfo[] = [];
-  let todo: scheduleCardInfo[] = [];
-  let process: scheduleCardInfo[] = [];
-  let done: scheduleCardInfo[] = [];
+import {
+  getAll,
+  scheduleCardInfo,
+  create,
+  getScheduleCardById,
+  remove,
+} from '../model/scheduleCard.model';
+interface objType {
+  todo: scheduleCardInfo[];
+  process: scheduleCardInfo[];
+  done: scheduleCardInfo[];
+}
+export async function findAllScheduleCard(channelIdx: Number) {
+  const scheduleCards = await getAll(channelIdx);
+  let filteredObj: objType = {
+    todo: [],
+    process: [],
+    done: [],
+  };
   scheduleCards.map((data) => {
     if (data.category == 'todo') {
-      todo.push(data);
+      filteredObj.todo.push(data);
     } else if (data.category == 'process') {
-      process.push(data);
+      filteredObj.process.push(data);
     } else {
-      done.push(data);
+      filteredObj.done.push(data);
     }
   });
-  return [todo, process, done];
+  return filteredObj;
   // console.log(scheduleCards);
   // const todo: scheduleCardInfo[] = await Promise.all(
   //   scheduleCards.filter((data) => {
@@ -32,10 +43,17 @@ export async function findAllScheduleCard() {
   // });
   // scheduleCardsArr.push(todo);
   // console.log(scheduleCardsArr);
-
-  return scheduleCards;
+}
+export async function findScheduleCardById(schedulecardIdx: Number) {
+  return await getScheduleCardById(schedulecardIdx);
+}
+export async function createScheduleCard(
+  user_idx: Number,
+  scheduleCardInfo: scheduleCardInfo
+) {
+  return await create(user_idx, scheduleCardInfo);
 }
 
-export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {
-  return await create(scheduleCardInfo);
+export async function removeScheduleCard(schedulecard_idx: Number) {
+  return await remove(schedulecard_idx);
 }

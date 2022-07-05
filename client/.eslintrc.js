@@ -52,6 +52,7 @@ module.exports = {
     'no-return-await': 'off', // return await 가능하게
     'jsx-a11y/click-events-have-key-events': 'off', // button이 아닌 태그에도 onClick
     'jsx-a11y/no-static-element-interactions': 'off', // *
+    'import/no-unresolved': 'off', // https://cocoze.tistory.com/108
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -59,9 +60,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      typescript: {
-        directory: './tsconfig.json',
-      },
+      typescript: {},
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },

@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import db from './db';
 
 export interface scheduleCardInfo {
@@ -10,19 +11,37 @@ export interface scheduleCardInfo {
 }
 
 //전체 조회
-export async function getAll(): Promise<scheduleCardInfo[]> {
+export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schedulecard', (err, result) => {
-      return err ? reject(err) : resolve(result);
-    });
+    db.query(
+      'SELECT schedulecard.* , user.nickname FROM schedulecard LEFT JOIN user on schedulecard.user_idx = user.user_idx WHERE channel_idx = ?',
+      channelIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+}
+//상세 조회
+export async function getScheduleCardById(schedulecard_idx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT schedulecard.* , user.nickname FROM schedulecard LEFT JOIN user on schedulecard.user_idx = user.user_idx WHERE schedulecard_idx = ?',
+      schedulecard_idx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
   });
 }
 
 //등록
-export async function create(scheduleCardInfo: scheduleCardInfo) {
+export async function create(
+  user_idx: Number,
+  scheduleCardInfo: scheduleCardInfo
+) {
   return new Promise((resolve, reject) => {
-    let { channel_idx, title, category, content, due_date, user_idx } =
-      scheduleCardInfo;
+    let { channel_idx, title, category, content, due_date } = scheduleCardInfo;
     due_date = new Date(due_date);
     let create_date = new Date().toISOString().split('T')[0];
     db.query(
@@ -36,6 +55,18 @@ export async function create(scheduleCardInfo: scheduleCardInfo) {
               create_date,
               ...scheduleCardInfo,
             });
+      }
+    );
+  });
+}
+
+export async function remove(schedulecard_idx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'DELETE from schedulecard WHERE schedulecard_idx = ?',
+      schedulecard_idx,
+      (err, result) => {
+        return err ? reject(err) : resolve({ schedulecard_idx });
       }
     );
   });

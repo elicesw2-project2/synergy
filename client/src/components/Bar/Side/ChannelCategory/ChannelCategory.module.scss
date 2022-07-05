@@ -1,61 +1,59 @@
 .category {
-    position: relative;
-    background-color: #E8EAAA;
-    text-align: center;
+  position: relative;
+  background-color: #e8eaaa;
+  text-align: center;
 
-    .category_title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-left: 1rem;
-    }
+  .category_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+  }
 
-    .add_button {
-        position: absolute;
-        right: 1rem;
-        opacity: 0.6;
-        cursor: pointer;
-    }
+  .add_button {
+    position: absolute;
+    right: 1rem;
+    opacity: 0.6;
+    cursor: pointer;
+  }
 
-    .dropdown {
-        top: 2rem;
-        right: 5%;
-        position: absolute;
-        color: wheat;
-        background-color: #212529;
-        width: 90%;
-        padding: 1rem 0;
-        height: 10rem;
-        border-radius: 0.4rem;
-        z-index: 99;
-    }
+  .dropdown {
+    top: 2rem;
+    right: 5%;
+    position: absolute;
+    color: wheat;
+    background-color: #212529;
+    width: 90%;
+    padding: 1rem 0;
+    border-radius: 0.4rem;
+    z-index: 99;
+  }
 
-    .dropdown_button {
-        color: white;
-        border: 0;
-        width: 100%;
-        background-color: inherit;
-        padding: 0.4rem;
-        cursor: pointer;
-        // border-bottom: 1px solid #868e96;
-        &:hover {
-            background-color: #91a7ff;
-        }
+  .dropdown_button {
+    color: white;
+    border: 0;
+    width: 100%;
+    background-color: inherit;
+    padding: 0.4rem;
+    cursor: pointer;
+    // border-bottom: 1px solid #868e96;
+    &:hover {
+      background-color: #91a7ff;
     }
+  }
 
-    h1 {
-        padding: 0.5rem 0;
-        font-size: 1.1rem;
-    }
+  h1 {
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+  }
 
-    .SideBar__add-button {
-        position: absolute;
-        top: 20px;
-        right: 15px;
-    }
+  .SideBar__add-button {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+  }
 
-    .channels {
-        background-color: #F8F5EC;
-    }
+  .channels {
+    background-color: #f8f5ec;
+  }
 }
-
