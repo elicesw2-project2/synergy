@@ -17,7 +17,7 @@ function Channel({ channel }: IProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>(channel.name);
 
-  const channelIcon = channel.type === 0 ? '🗓' : '📝';
+  const channelIcon = channel.type === 1 ? '🗓' : '📝';
 
   const handleEdit = () => {
     setIsEdit(!isEdit);
