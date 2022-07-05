@@ -11,9 +11,6 @@ export interface IChat {
 }
 
 const socket = io('/');
-socket.on('welcome', (user) => {
-  console.log(`${user}님이 입장하셨습니다!`);
-});
 
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
@@ -39,12 +36,12 @@ function ChatContent(prop: any) {
 }
 
 // 채팅 입력 컴포넌트
-function ChatInput() {
+function ChatInput(prop: any) {
+  const { nicknames } = prop;
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState<string | undefined>('');
   const [content, setContent] = useState<any[]>([]);
   const [newcontent, setNewContent] = useState<any[]>([]);
-  const [nicknames, setNickname] = useState<string>('');
 
   // 채팅내용 불러오기
   useEffect(() => {
@@ -54,18 +51,18 @@ function ChatInput() {
     });
   }, []);
 
-  // 별명 불러오기
+  // 채팅방 접속하기
   useEffect(() => {
-    getUsers(localStorage.getItem('id')).then((res) => {
-      setNickname(res.nickname);
-    });
+    socket.emit('enter_room', 1, nicknames);
   }, []);
 
+  // 소켓IO 입장, 퇴장, 메시지 입력
   socket.on('welcome', (user) => {
+    setNewContent([...newcontent, `${user} 님이 입장하셨습니다`]);
     console.log(`${user}님이 입장하셨습니다!`);
   });
   socket.on('disconnection', (msg) => {
-    setContent([...content, msg]);
+    setNewContent([...newcontent, msg]);
     console.log(msg);
   });
   socket.on('message', (message) => {
@@ -84,11 +81,6 @@ function ChatInput() {
     setText('');
   }
 
-  // 방 입장 테스트 버튼
-  function roomConnect() {
-    socket.emit('enter_room', 1, nicknames);
-  }
-
   // 아무거나 테스트 버튼 / 채팅 메시지
   async function realTest() {
     getChatMessage(1).then((res) => {
@@ -99,9 +91,6 @@ function ChatInput() {
 
   return (
     <>
-      <button type="button" onClick={roomConnect}>
-        방입장 버튼
-      </button>
       <button type="button" onClick={realTest}>
         테스트 버튼
       </button>
