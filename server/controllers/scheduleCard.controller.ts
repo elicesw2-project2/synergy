@@ -57,3 +57,23 @@ export async function addScheduleCard(
     next(err);
   }
 }
+
+export async function deleteScheduleCard(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const schedulecard_idx = Number(req.params.schedulecard_idx);
+    const scheduleCard = await scheduleCardService.removeScheduleCard(
+      schedulecard_idx
+    );
+    res.status(200).send({
+      status: 200,
+      message: '스케줄 카드 삭제',
+      data: scheduleCard,
+    });
+  } catch (err) {
+    next(err);
+  }
+}

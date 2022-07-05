@@ -59,3 +59,15 @@ export async function create(
     );
   });
 }
+
+export async function remove(schedulecard_idx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'DELETE from schedulecard WHERE schedulecard_idx = ?',
+      schedulecard_idx,
+      (err, result) => {
+        return err ? reject(err) : resolve({ schedulecard_idx });
+      }
+    );
+  });
+}

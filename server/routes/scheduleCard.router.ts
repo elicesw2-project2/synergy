@@ -11,4 +11,8 @@ router.get('/:schedulecard_idx', scheduleCardController.getScheduleCardById);
 //등록
 router.post('/', loginRequired, scheduleCardController.addScheduleCard);
 //
+
+//삭제
+router.delete('/:schedulecard_idx', scheduleCardController.deleteScheduleCard);
+
 export default router;

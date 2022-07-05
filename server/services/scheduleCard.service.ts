@@ -4,6 +4,7 @@ import {
   scheduleCardInfo,
   create,
   getScheduleCardById,
+  remove,
 } from '../model/scheduleCard.model';
 interface objType {
   todo: scheduleCardInfo[];
@@ -51,4 +52,8 @@ export async function createScheduleCard(
   scheduleCardInfo: scheduleCardInfo
 ) {
   return await create(user_idx, scheduleCardInfo);
+}
+
+export async function removeScheduleCard(schedulecard_idx: Number) {
+  return await remove(schedulecard_idx);
 }
