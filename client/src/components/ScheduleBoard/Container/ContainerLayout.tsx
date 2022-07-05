@@ -32,7 +32,7 @@ function ContainerLayout({ type, data }: IProps) {
       title: issue,
       category: type,
       content: '',
-      duedate: new Date().toISOString().slice(0, 10),
+      due_date: new Date().toISOString().slice(0, 10),
     });
   };
 

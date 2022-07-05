@@ -14,7 +14,8 @@ export interface IScheduleCard {
   title: string;
   category: string;
   content: string;
-  duedate: string;
+  due_date: string;
+  nickname: string;
 }
 
 export interface IScheduleCardType {
