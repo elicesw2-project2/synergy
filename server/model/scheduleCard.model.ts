@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import db from './db';
 
 export interface scheduleCardInfo {
@@ -10,11 +11,27 @@ export interface scheduleCardInfo {
 }
 
 //전체 조회
-export async function getAll(): Promise<scheduleCardInfo[]> {
+export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM schedulecard', (err, result) => {
-      return err ? reject(err) : resolve(result);
-    });
+    db.query(
+      'SELECT * FROM schedulecard WHERE channel_idx = ?',
+      channelIdx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+}
+//상세 조회
+export async function getScheduleCardById(schedulecard_idx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM schedulecard WHERE schedulecard_idx = ?',
+      schedulecard_idx,
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
   });
 }
 

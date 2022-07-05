@@ -8,7 +8,9 @@ export async function getAllScheduleCards(
   next: NextFunction
 ) {
   try {
-    const scheduleCards = await scheduleCardService.findAllScheduleCard();
+    const scheduleCards = await scheduleCardService.findAllScheduleCard(
+      Number(req.params.channel_idx)
+    );
     res.status(200).send({
       status: 200,
       message: '모든 스케줄 조회 성공',
@@ -19,7 +21,21 @@ export async function getAllScheduleCards(
   }
 }
 
-//채널 id
+// 상세 조회
+export async function getScheduleCardById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const scheduleCard = await scheduleCardService.findScheduleCardById(
+    Number(req.params.schedulecard_idx)
+  );
+  res.status(200).send({
+    status: 200,
+    message: '아이디로 스케줄 조회 성공',
+    data: scheduleCard,
+  });
+}
 // 등록
 export async function addScheduleCard(
   req: Request,

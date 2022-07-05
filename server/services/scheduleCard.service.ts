@@ -1,12 +1,17 @@
 import { RequestPaymentConfiguration } from '@aws-sdk/client-s3';
-import { getAll, scheduleCardInfo, create } from '../model/scheduleCard.model';
+import {
+  getAll,
+  scheduleCardInfo,
+  create,
+  getScheduleCardById,
+} from '../model/scheduleCard.model';
 interface objType {
   todo: scheduleCardInfo[];
   process: scheduleCardInfo[];
   done: scheduleCardInfo[];
 }
-export async function findAllScheduleCard() {
-  const scheduleCards = await getAll();
+export async function findAllScheduleCard(channelIdx: Number) {
+  const scheduleCards = await getAll(channelIdx);
   let filteredObj: objType = {
     todo: [],
     process: [],
@@ -37,10 +42,10 @@ export async function findAllScheduleCard() {
   // });
   // scheduleCardsArr.push(todo);
   // console.log(scheduleCardsArr);
-
-  return scheduleCards;
 }
-
+export async function findScheduleCardById(schedulecardIdx: Number) {
+  return await getScheduleCardById(schedulecardIdx);
+}
 export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {
   return await create(scheduleCardInfo);
 }
