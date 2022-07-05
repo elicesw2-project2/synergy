@@ -1,44 +1,43 @@
 .chat_content {
-    background-color: greenyellow;
-    height: 70%;
-    overflow: auto;
-    ul{
-        display: flex;
-        flex-direction: column;
-        li{
-            text-align: left;
-            padding: 2px;
-        }
+  background-color: greenyellow;
+  height: 70%;
+  overflow-y: auto;
+  ul {
+    display: flex;
+    flex-direction: column;
+    li {
+      text-align: left;
+      padding: 2px;
     }
+  }
 }
 
 //아래부터 채팅 입력
 .chat_inputBar {
-    // position: absolute;
-    // bottom: 0px;
-    width: 100%;
-    
+  // position: absolute;
+  // bottom: 0px;
+  width: 100%;
 }
 
-.chat_info{
-    display: flex;
-    padding: 5px 5px;
-    border-radius: 0 0 0.5rem 0.5rem;
-    background-color: white;
-    textarea {
-        border: none;
-        padding: 0 5px;
-        width: 80%;
-        height: 4rem;
-        resize: none;
-    }
-    textarea:focus {
-        outline: none;
-    }
-    button {
-        border: 1px solid transparent;
-        border-radius: 2px;
-        width: 20%;
-        cursor: pointer;
-    }
+.chat_info {
+  display: flex;
+  padding: 5px 5px;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: white;
+  textarea {
+    border: none;
+    padding: 0 5px;
+    width: 80%;
+    height: 4rem;
+    resize: none;
+  }
+  textarea:focus {
+    outline: none;
+  }
+  button {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    width: 20%;
+    cursor: pointer;
+  }
 }
