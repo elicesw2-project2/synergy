@@ -1,5 +1,10 @@
 import { RequestPaymentConfiguration } from '@aws-sdk/client-s3';
-import { getAll, scheduleCardInfo, create } from '../model/scheduleCard.model';
+import {
+  getAll,
+  scheduleCardInfo,
+  create,
+  getScheduleCardById,
+} from '../model/scheduleCard.model';
 interface objType {
   todo: scheduleCardInfo[];
   process: scheduleCardInfo[];
@@ -38,7 +43,9 @@ export async function findAllScheduleCard(channelIdx: Number) {
   // scheduleCardsArr.push(todo);
   // console.log(scheduleCardsArr);
 }
-
+export async function findScheduleCardById(schedulecardIdx: Number) {
+  return await getScheduleCardById(schedulecardIdx);
+}
 export async function createScheduleCard(scheduleCardInfo: scheduleCardInfo) {
   return await create(scheduleCardInfo);
 }
