@@ -10,8 +10,8 @@ function ChannelHome() {
 
   return (
     <>
-      {channelType === '0' ? <ScheduleBoard /> : null}
-      <div>메롱</div>
+      {channelType === '1' ? <ScheduleBoard /> : null}
+      <div>Home</div>
     </>
   );
 }
