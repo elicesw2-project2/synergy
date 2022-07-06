@@ -44,7 +44,11 @@ function ContainerLayout({ type, data }: IProps) {
       ))}
       <div>
         {!isOpen ? (
-          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className={styles.create_issue_button}
+          >
             <FontAwesomeIcon icon={faPlus} className={styles.plus_icon} />
             이슈 만들기
           </button>

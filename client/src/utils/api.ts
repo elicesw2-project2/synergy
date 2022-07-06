@@ -174,3 +174,17 @@ export async function deleteScheduleCard(schedulecardIdx: number) {
   );
   return result;
 }
+
+export async function patchScheduleCard(data: Partial<IScheduleCard>) {
+  const result = await axios.patch(
+    `${BASE_URL}/schedulecards/${data.schedulecard_idx}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
+  console.log(result);
+  return result;
+}

@@ -14,7 +14,7 @@
     opacity: 0.7;
   }
 
-  button {
+  .create_issue_button {
     background-color: inherit;
     border: none;
     justify-content: flex-start;
@@ -34,6 +34,7 @@
   position: relative;
   height: 7rem;
   margin: 0 auto;
+  border-radius: 8px;
 
   textarea {
     width: 100%;
@@ -45,13 +46,26 @@
   .close_button {
     position: absolute;
     bottom: 0;
+    background: inherit;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
   }
 
   .add_button {
     right: 3rem;
+    background: #a9e34b;
+    &:hover {
+      background: #74b816;
+    }
   }
 
   .close_button {
     right: 0;
+    &:hover {
+      background: #dee2e6;
+    }
   }
 }
