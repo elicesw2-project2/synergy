@@ -2,9 +2,9 @@ import { IScheduleCard } from 'pages/ScheduleBoard/ScheduleBoard';
 import React, { useCallback, useState } from 'react';
 import 'styles/base/Modal.module.scss';
 import { useMutation, useQueryClient } from 'react-query';
-import { patchScheduleCard } from 'utils/api';
+import { deleteScheduleCard, patchScheduleCard } from 'utils/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faX, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import styles from './DetailModal.module.scss';
 
 interface IProps {
@@ -47,6 +47,17 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
       content,
     });
     onClickToggleContent();
+  };
+
+  const deleteMutation = useMutation(deleteScheduleCard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('scheduleCards');
+    },
+  });
+
+  const handleDeleteCard = () => {
+    deleteMutation.mutate(card.schedulecard_idx);
+    onClickToggleModal();
   };
 
   return (
@@ -135,6 +146,11 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
           >
             X
           </button>
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            className={styles.delete_icon}
+            onClick={handleDeleteCard}
+          />
         </form>
       </div>
     </div>
