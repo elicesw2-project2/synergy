@@ -55,6 +55,7 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
         <form className={styles.form}>
           {/* 나가기 버튼 */}
           <div className={styles.input_container}>
+            <span className={styles.category}>{card.category}</span>
             {isOpenTitle ? (
               <>
                 <input
@@ -85,7 +86,9 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
                 {card.title}
               </button>
             )}
-
+            <span className={styles.due_date}>
+              {card.create_date.slice(0, 10)}
+            </span>
             <span className={styles.description}>설명</span>
             {isOpenContent ? (
               <div>
@@ -116,9 +119,13 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
             )}
           </div>
           <div className={styles.detail_container}>
-            <div>상태: {card.category}</div>
-            <div>
-              <span>작성자: {card.nickname}</span>
+            <div className={styles.detail_box}>
+              <span className={styles.detail_background}>마감일</span>
+              <span>{card.due_date.slice(0, 10)}</span>
+            </div>
+            <div className={styles.detail_box}>
+              <span className={styles.detail_background}>작성자</span>
+              <span>{card.nickname}</span>
             </div>
           </div>
           <button
