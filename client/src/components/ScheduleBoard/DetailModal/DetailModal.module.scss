@@ -2,24 +2,117 @@
 
 .custom_container {
   position: relative;
-  width: 80%;
-  height: 35rem;
+  width: 60%;
+  height: 25rem;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 3rem 3rem;
   border-radius: 15px;
   background-color: rgb(255, 253, 233);
-  /* 팝업이 열릴때 스르륵 열리는 효과 */
-  animation: modal-show 0.3s;
   overflow: hidden;
   background-color: #fff;
 }
 
+.form {
+  display: flex;
+  width: 100%;
+}
+
 .input_container {
   display: flex;
+  position: relative;
   flex-direction: column;
+  width: 60%;
+  margin-right: 3rem;
+
+  .issue_title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    border: 0;
+    background: inherit;
+    text-align: left;
+  }
+
+  .issue_title_button {
+    cursor: pointer;
+    &:hover {
+      background: #dee2e6;
+    }
+  }
+
+  .title_save_button,
+  .title_close_button {
+    position: absolute;
+    top: 4.5rem;
+    font-size: 0.8rem;
+    padding: 12px 12px;
+    border-radius: 4px;
+    background: #e9ecef;
+    &:hover {
+      background: #ced4da;
+    }
+  }
+
+  .title_save_button {
+    right: 2.5rem;
+  }
+
+  .title_close_button {
+    right: 0;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .add_button {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+    background: inherit;
+    text-align: left;
+    opacity: 0.7;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ced4da;
+    }
+  }
 
   textarea {
-    width: 80%;
+    width: 30rem;
+    height: 15rem;
     resize: none;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.content_save_button,
+.content_close_button {
+  background: inherit;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.content_save_button {
+  background: #a9e34b;
+  &:hover {
+    background: #74b816;
+  }
+  margin-right: 0.2rem;
+}
+
+.content_close_button {
+  background: inherit;
+  border: 0;
+  &:hover {
+    background: #dee2e6;
   }
 }
