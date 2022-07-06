@@ -22,7 +22,8 @@ function Card({ card }: IProps) {
     },
   });
 
-  const handleDeleteCard = () => {
+  const handleDeleteCard = (e: React.FormEvent) => {
+    e.stopPropagation();
     deleteMutation.mutate(card.schedulecard_idx);
   };
 

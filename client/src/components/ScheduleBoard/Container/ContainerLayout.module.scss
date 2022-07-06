@@ -5,6 +5,8 @@
   border: 1px solid #495057;
   width: 25%;
   height: 30rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .type {
     font-size: 1.5rem;
