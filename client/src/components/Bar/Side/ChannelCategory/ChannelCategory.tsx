@@ -18,7 +18,7 @@ export interface IChannel {
   channel_idx?: number;
   category_idx: number;
   name: string;
-  type: string;
+  type: number;
 }
 
 interface IProps {

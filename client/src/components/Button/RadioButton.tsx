@@ -4,14 +4,18 @@ import styles from '../Bar/Side/SideBarModal/SideBarModal.module.scss';
 
 interface iProps {
   type: string;
-  setChannelType: Dispatch<SetStateAction<string>>;
+  setChannelType: Dispatch<SetStateAction<number>>;
   checked?: boolean;
 }
 
 function RadioButton({ type, setChannelType, checked }: iProps) {
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    setChannelType(target.value);
+    if (target.value === '일정') {
+      setChannelType(1);
+    } else if (target.value === '문서') {
+      setChannelType(2);
+    }
   };
 
   return (

@@ -3,14 +3,14 @@ import { CustomError } from '../middlewares/customError';
 
 export interface ChannelInfo {
   name: string;
-  type: string;
+  type: number;
   category_idx: number;
 }
 
 export interface ChannelData {
   channel_idx: number;
   name: string;
-  type: string;
+  type: number;
   category_idx: number;
 }
 

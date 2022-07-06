@@ -17,7 +17,7 @@ function Channel({ channel }: IProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>(channel.name);
 
-  const channelIcon = channel.type === 'document' ? '📝' : '🗓';
+  const channelIcon = channel.type === 1 ? '🗓' : '📝';
 
   const handleEdit = () => {
     setIsEdit(!isEdit);
@@ -70,7 +70,7 @@ function Channel({ channel }: IProps) {
         </li>
       ) : (
         <Link
-          to={`channels/${channel.category_idx}/channel/${channel.channel_idx}`}
+          to={`channels/${channel.category_idx}/channel/${channel.channel_idx}/${channel.type}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <li className={styles.channel_name}>

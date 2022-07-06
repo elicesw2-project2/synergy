@@ -1,43 +1,41 @@
 .container {
-    position: relative;
-    background-color: #F8F5EC;
-    width: 20rem;
+  position: relative;
+  background-color: #f8f5ec;
+  width: 20rem;
 }
 
 .workspace_title {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.1rem;
-    background-color: #E8EAAA;
-    border-bottom: 1px solid #868e96;
-    cursor: pointer;
-    h1 {
-        font-size: 1.5rem;
-    }
+  display: flex;
+  justify-content: space-between;
+  padding: 1.1rem;
+  background-color: #e8eaaa;
+  border-bottom: 1px solid #868e96;
+  cursor: pointer;
+  h1 {
+    font-size: 1.5rem;
+  }
 }
 
 .dropdown {
-    top: 3rem;
-    right: 5%;
-    position: absolute;
-    color: wheat;
-    background-color: #212529;
-    width: 90%;
-    padding: 1rem 0;
-    height: 10rem;
-    border-radius: 0.4rem;
-    z-index: 99;
-    
-    .dropdown_button {
-        color: white;
-        border: 0;
-        width: 100%;
-        background-color: inherit;
-        padding: 0.4rem;
-        cursor: pointer;
-        &:hover {
-            background-color: #91a7ff;
-        }
-    }
-}
+  top: 3rem;
+  right: 5%;
+  position: absolute;
+  color: wheat;
+  background-color: #212529;
+  width: 90%;
+  padding: 1rem 0;
+  border-radius: 0.4rem;
+  z-index: 99;
 
+  .dropdown_button {
+    color: white;
+    border: 0;
+    width: 100%;
+    background-color: inherit;
+    padding: 0.4rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #91a7ff;
+    }
+  }
+}

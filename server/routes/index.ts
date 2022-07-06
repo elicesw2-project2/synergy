@@ -13,6 +13,7 @@ import workspaceRouter from './workspace.router';
 import imageRouter from './image.routes';
 import workspacememberRouer from './workspaceMember.router';
 import scheduleRouter from './scheduleCard.router';
+import invitationRouter from './invitation.route';
 const router = Router();
 
 router.use('/auth', authRouter);
@@ -27,5 +28,6 @@ router.use('/workspaces', workspaceRouter);
 router.use('/workspacemembers', workspacememberRouer);
 router.use('/image', imageRouter);
 router.use('/schedulecards', scheduleRouter);
+router.use('/invitation', invitationRouter);
 
 export default router;

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { Outlet } from 'react-router-dom';
+import { getUsers } from 'utils/api';
 import { ChatContent, ChatInput } from './Chatting';
 
 import 'styles/Chat/Chat.scss';
@@ -12,6 +13,14 @@ const socket = io('/');
 
 function Chat() {
   const [chatView, setChatView] = useState<boolean>(false);
+  const [nickname, setNickname] = useState<string>('');
+
+  useEffect(() => {
+    getUsers(localStorage.getItem('id')).then((res) => {
+      const userNick = res.nickname;
+      setNickname(userNick);
+    });
+  }, []);
 
   return (
     <>
@@ -35,7 +44,7 @@ function Chat() {
               </div>
             </div>
             {/* <ChatContent /> */}
-            <ChatInput />
+            <ChatInput nicknames={nickname} />
           </div>
         ) : (
           <button
