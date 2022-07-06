@@ -38,7 +38,9 @@ function ContainerLayout({ type, data }: IProps) {
 
   return (
     <div className={styles.container}>
-      <span className={styles.type}>{type}</span>
+      <span className={styles.type}>
+        {type} ({data?.length})
+      </span>
       {data?.map((card) => (
         <Card card={card} />
       ))}

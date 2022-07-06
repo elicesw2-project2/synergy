@@ -1,10 +1,10 @@
 import Container from 'components/ScheduleBoard/Container/ContainerLayout';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getScheduleCards } from 'utils/api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './ScheduleBoard.module.scss';
 
@@ -33,14 +33,14 @@ function ScheduleBoard() {
     () => getScheduleCards(channelIdx)
   );
 
-  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
-  const onClickToggleDropdown = useCallback(() => {
-    setIsOpenDropdown(!isOpenDropdown);
-  }, [isOpenDropdown]);
+  // const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
+  // const onClickToggleDropdown = useCallback(() => {
+  //   setIsOpenDropdown(!isOpenDropdown);
+  // }, [isOpenDropdown]);
 
   return (
     <div className={styles.home}>
-      <FontAwesomeIcon
+      {/* <FontAwesomeIcon
         icon={faEllipsis}
         className={styles.menu_icon}
         onClick={onClickToggleDropdown}
@@ -61,7 +61,7 @@ function ScheduleBoard() {
             </li>
           </ul>
         </div>
-      )}
+      )} */}
       <div className={styles.board}>
         <Container type="todo" data={scheduleCards?.todo} />
         <Container type="process" data={scheduleCards?.process} />

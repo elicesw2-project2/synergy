@@ -6,13 +6,15 @@
   justify-content: center;
   height: 100vh;
   background-color: #d9d9d9;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .menu_icon {
   position: absolute;
   font-size: 1.3rem;
-  top: 80px;
-  right: 70px;
+  top: 20px;
+  right: 80px;
   cursor: pointer;
 }
 
@@ -20,11 +22,11 @@
   width: 90%;
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0;
+  padding: 2rem 1.5rem 0 1rem;
 }
 
 .dropdown {
-  top: 6.5rem;
+  top: 2.5rem;
   right: 3.5rem;
   position: absolute;
   color: wheat;
