@@ -4,8 +4,11 @@ import {
   scheduleCardInfo,
   create,
   getScheduleCardById,
+  update,
   remove,
+  newScheduleCard,
 } from '../model/scheduleCard.model';
+import { CustomError } from '../middlewares/customError';
 interface objType {
   todo: scheduleCardInfo[];
   process: scheduleCardInfo[];
@@ -52,6 +55,22 @@ export async function createScheduleCard(
   scheduleCardInfo: scheduleCardInfo
 ) {
   return await create(user_idx, scheduleCardInfo);
+}
+
+export async function updateScheduleCard(
+  user_idx: Number,
+  scheduleCardInfo: scheduleCardInfo
+) {
+  const scheduleCard: newScheduleCard = await update(
+    user_idx,
+    scheduleCardInfo
+  );
+  console.log(scheduleCard);
+
+  if (scheduleCard.user_idx != user_idx) {
+    throw new CustomError(400, '작성자가 아닙니다.');
+  }
+  return scheduleCard;
 }
 
 export async function removeScheduleCard(schedulecard_idx: Number) {
