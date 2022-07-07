@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IChannel } from 'components/Bar/Side/ChannelCategory/ChannelCategory';
 import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import { IChat } from 'components/Chat/Chatting';
+import { IDocument } from 'pages/Document/Document';
 import { IScheduleCard } from 'pages/ScheduleBoard/ScheduleBoard';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
@@ -185,6 +186,24 @@ export async function patchScheduleCard(data: Partial<IScheduleCard>) {
       },
     }
   );
-  console.log(result);
+  return result;
+}
+
+// document
+export async function getDocument(channelIdx: string | undefined) {
+  const result = await axios.get(`${BASE_URL}/documents/${channelIdx}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result.data.data[0];
+}
+
+export async function postDocument(data: Partial<IDocument>) {
+  const result = await axios.post(`${BASE_URL}/documents`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
   return result;
 }
