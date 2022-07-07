@@ -13,7 +13,7 @@ interface iProps {
 
 function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
   const [channelName, setChannelName] = useState<string>('');
-  const [channelType, setChannelType] = useState<number>(1);
+  const [channelType, setChannelType] = useState<number>(2);
   const handleChangeChannelName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChannelName(e.target.value);
   };
