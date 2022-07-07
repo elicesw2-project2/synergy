@@ -65,7 +65,7 @@
     position: absolute;
     top: 6.5rem;
     font-size: 0.8rem;
-    padding: 12px 12px;
+    padding: 8px;
     border-radius: 4px;
     background: #e9ecef;
     &:hover {
@@ -74,7 +74,7 @@
   }
 
   .title_save_button {
-    right: 2.5rem;
+    right: 2rem;
   }
 
   .title_close_button {
@@ -157,11 +157,12 @@
 
 .delete_icon {
   position: absolute;
-  top: 1.1rem;
-  right: 3rem;
+  bottom: 1rem;
+  right: 1rem;
   border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 0.9rem;
+  padding: 8px;
+  color: #e03131;
+  font-size: 2rem;
   cursor: pointer;
   &:hover {
     background: #ced4da;
