@@ -2,9 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 5rem;
-  padding: 15px;
+  height: auto;
+  padding: 0.8rem;
   border: 1px solid black;
   border-radius: 4px;
   transition: background-color 0.5s ease;
@@ -20,7 +19,19 @@
   }
 
   .card_title {
-    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .card_nickname {
+    font-size: 0.89rem;
+  }
+
+  .card_create_date {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.6rem;
   }
 }
 

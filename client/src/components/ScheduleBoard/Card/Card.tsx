@@ -17,7 +17,10 @@ function Card({ card }: IProps) {
     <>
       <div className={styles.card} onClick={onClickToggleModal}>
         <span className={styles.card_title}>{card.title}</span>
-        <span>{card.nickname}</span>
+        <span className={styles.card_nickname}>{card.nickname}</span>
+        <span className={styles.card_create_date}>
+          {card.create_date.slice(0, 10)}
+        </span>
       </div>
       {isOpenModal && (
         <DetailModal onClickToggleModal={onClickToggleModal} card={card} />
