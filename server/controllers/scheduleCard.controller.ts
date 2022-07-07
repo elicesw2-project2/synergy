@@ -72,8 +72,9 @@ export async function setScheduleCard(
 ) {
   try {
     const user_idx = Number(req.currentUserIdx);
-    console.log(user_idx);
+    const scheduleCard_idx = Number(req.params.schedulecard_idx);
     const scheduleCard = await scheduleCardService.updateScheduleCard(
+      scheduleCard_idx,
       user_idx,
       req.body
     );

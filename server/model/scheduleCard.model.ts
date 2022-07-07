@@ -33,13 +33,15 @@ export async function getAll(channelIdx: Number): Promise<scheduleCardInfo[]> {
   });
 }
 //상세 조회
-export async function getScheduleCardById(schedulecard_idx: Number) {
+export async function getScheduleCardById(
+  schedulecard_idx: Number
+): Promise<scheduleCardInfo> {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT schedulecard.* , user.nickname FROM schedulecard LEFT JOIN user on schedulecard.user_idx = user.user_idx WHERE schedulecard_idx = ?',
       schedulecard_idx,
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err ? reject(err) : resolve(result[0]);
       }
     );
   });
@@ -71,6 +73,7 @@ export async function create(
 }
 
 export async function update(
+  scheduleCard_idx: Number,
   user_idx: Number,
   scheduleCardInfo: scheduleCardInfo
 ): Promise<newScheduleCard> {
@@ -79,10 +82,19 @@ export async function update(
     due_date = new Date(due_date);
     let create_date = new Date();
     db.query(
-      'UPDATE schedulecard SET category=?,create_date=?, title=?, content=?, due_date=?, user_idx=?, channel_idx=?',
-      [category, create_date, title, content, due_date, user_idx, channel_idx],
+      'UPDATE schedulecard SET category=?,create_date=?, title=?, content=?, due_date=?, user_idx=?, channel_idx=? WHERE schedulecard_idx = ?',
+      [
+        category,
+        create_date,
+        title,
+        content,
+        due_date,
+        user_idx,
+        channel_idx,
+        scheduleCard_idx,
+      ],
       (err, result) => {
-        console.log(result.user_idx);
+        // console.log(result.user_idx);
 
         return err
           ? reject(err)

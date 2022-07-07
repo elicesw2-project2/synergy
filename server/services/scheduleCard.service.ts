@@ -58,19 +58,15 @@ export async function createScheduleCard(
 }
 
 export async function updateScheduleCard(
-  user_idx: Number,
+  scheduleCard_idx: Number,
+  currentUserIdx: Number,
   scheduleCardInfo: scheduleCardInfo
 ) {
-  const scheduleCard: newScheduleCard = await update(
-    user_idx,
-    scheduleCardInfo
-  );
-  console.log(scheduleCard);
-
-  if (scheduleCard.user_idx != user_idx) {
+  const getById: scheduleCardInfo = await getScheduleCardById(scheduleCard_idx);
+  if (currentUserIdx != getById.user_idx) {
     throw new CustomError(400, '작성자가 아닙니다.');
   }
-  return scheduleCard;
+  return await update(scheduleCard_idx, currentUserIdx, scheduleCardInfo);
 }
 
 export async function removeScheduleCard(schedulecard_idx: Number) {
