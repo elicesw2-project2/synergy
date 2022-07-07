@@ -34,13 +34,17 @@ function ContainerLayout({ type, data }: IProps) {
       content: '',
       due_date: new Date().toISOString().slice(0, 10),
     });
+    setIsOpen(false);
   };
 
   return (
     <div className={styles.container}>
-      <span className={styles.type}>
-        {type} ({data?.length})
-      </span>
+      <div className={styles.title_container}>
+        <span className={styles.type}>
+          {type} ({data?.length})
+        </span>
+        <FontAwesomeIcon icon={faPlus} className={styles.title_plus_icon} />
+      </div>
       {data?.map((card) => (
         <Card card={card} />
       ))}

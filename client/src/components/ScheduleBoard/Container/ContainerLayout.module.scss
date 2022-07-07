@@ -3,7 +3,12 @@
   flex-direction: column;
   padding: 1.5rem 1.5rem;
   width: 30%;
-  height: 40rem;
+  height: 100%;
+
+  .title_container {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .type {
     font-size: 1.3rem;
