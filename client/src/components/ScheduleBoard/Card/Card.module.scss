@@ -4,13 +4,15 @@
   flex-direction: column;
   height: auto;
   padding: 0.8rem;
-  border: 1px solid white;
+  // border: 1px solid white;
+  color: white;
+  background-color: #495057;
   border-radius: 4px;
   transition: background-color 0.5s ease;
   cursor: pointer;
 
   &:hover {
-    background-color: #bac8ff;
+    background-color: #94d82d;
     opacity: 0.7;
   }
 

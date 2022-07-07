@@ -1,6 +1,6 @@
 .category {
   position: relative;
-  background-color: #e8eaaa;
+  background-color: #212529;
   text-align: center;
 
   .category_title {
@@ -11,6 +11,7 @@
   }
 
   .add_button {
+    color: #94d82d;
     position: absolute;
     right: 1rem;
     opacity: 0.6;
@@ -54,6 +55,7 @@
   }
 
   .channels {
-    background-color: #f8f5ec;
+    background-color: #262a2e;
+    padding: 0 0.7rem;
   }
 }
