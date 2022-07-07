@@ -12,10 +12,10 @@ export async function findAllWorkspaces(currentUserIdx: number) {
   if (!currentUserIdx) {
     throw new CustomError(400, 'user_idx 값이 없습니다');
   }
-  const workspaceIdx = await Workspace.findAllIdx(currentUserIdx);
+  const workspaceList = await Workspace.findAllIdx(currentUserIdx);
 
   const workspaces: workpaceData[] = await Promise.all(
-    workspaceIdx.map((data) => {
+    workspaceList.map((data) => {
       return Workspace.findAll(data);
     })
   );
