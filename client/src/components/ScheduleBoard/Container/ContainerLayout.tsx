@@ -14,7 +14,8 @@ interface IProps {
 }
 
 function ContainerLayout({ type, data }: IProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isBottomOpen, setIsBottomOpen] = useState<boolean>(false);
+  const [isTopOpen, setIsTopOpen] = useState<boolean>(false);
   const [issue, setIssue] = useState<string>('');
 
   const { channelIdx } = useParams();
@@ -34,7 +35,8 @@ function ContainerLayout({ type, data }: IProps) {
       content: '',
       due_date: new Date().toISOString().slice(0, 10),
     });
-    setIsOpen(false);
+    setIsBottomOpen(false);
+    setIsTopOpen(false);
   };
 
   return (
@@ -43,16 +45,44 @@ function ContainerLayout({ type, data }: IProps) {
         <span className={styles.type}>
           {type} ({data?.length})
         </span>
-        <FontAwesomeIcon icon={faPlus} className={styles.title_plus_icon} />
+        <FontAwesomeIcon
+          icon={faPlus}
+          className={styles.title_plus_icon}
+          onClick={() => setIsTopOpen(true)}
+        />
+      </div>
+      <div>
+        {isTopOpen && (
+          <div className={styles.text_container}>
+            <textarea
+              value={issue}
+              onChange={(e) => setIssue(e.target.value)}
+            />
+            <button
+              type="button"
+              className={styles.add_button}
+              onClick={handleCreateCard}
+            >
+              만들기
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsTopOpen(!isTopOpen)}
+              className={styles.close_button}
+            >
+              닫기
+            </button>
+          </div>
+        )}
       </div>
       {data?.map((card) => (
         <Card card={card} />
       ))}
       <div>
-        {!isOpen ? (
+        {!isBottomOpen ? (
           <button
             type="button"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsBottomOpen(!isBottomOpen)}
             className={styles.create_issue_button}
           >
             <FontAwesomeIcon icon={faPlus} className={styles.plus_icon} />
@@ -73,7 +103,7 @@ function ContainerLayout({ type, data }: IProps) {
             </button>
             <button
               type="button"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsBottomOpen(!isBottomOpen)}
               className={styles.close_button}
             >
               닫기
