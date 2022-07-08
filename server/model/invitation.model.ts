@@ -18,20 +18,20 @@ export interface InvitationData {
 
 export class InvitationModel {
   // invitation_idx로 초대링크 정보 받음
-  async findByLink(invitationIdx: number) {
+  async findOneByWorkspace(workspaceIdx: number): Promise<InvitationData> {
     return new Promise((resolve, reject) => {
       sql.query(
-        'SELECT * FROM invitation WHERE invitation_idx = ?',
-        invitationIdx,
+        'SELECT * FROM invitation WHERE workspace_idx = ?',
+        workspaceIdx,
         (err, res) => {
-          return err ? reject(err) : resolve(res);
+          return err ? reject(err) : resolve(res[0]);
         }
       );
     });
   }
 
   // 초대링크 db에 등록
-  async create(invitationInfo: InvitationInfo) {
+  async create(invitationInfo: InvitationInfo): Promise<InvitationData> {
     return new Promise((resolve, reject) => {
       sql.query('INSERT INTO invitation SET ?', invitationInfo, (err, res) => {
         return err
@@ -41,24 +41,26 @@ export class InvitationModel {
     });
   }
 
-  // invitation_idx로 초대링크의 링크, 유효기간, 최대사용횟수 수정
-  async update(invitationIdx: number, invitationInfo: InvitationInfo) {
+  // workspace_idx로 초대링크의 링크, 유효기간, 최대사용횟수 갱신
+  async update(
+    workspaceIdx: number,
+    invitationInfo: InvitationInfo
+  ): Promise<InvitationInfo> {
     const { link, expires_date, maximum_cnt } = invitationInfo;
     return new Promise((resolve, reject) => {
       sql.query(
-        'UPDATE invitation SET link = ?, expires_date = ?, maximum_cnt = ? WHERE invitation_idx = ?',
-        [link, expires_date, maximum_cnt, invitationIdx],
+        'UPDATE invitation SET link = ?, expires_date = ?, maximum_cnt = ? WHERE workspace_idx = ?',
+        [link, expires_date, maximum_cnt, workspaceIdx],
         (err, res) => {
           if (err) {
             return reject(err);
           } else {
             if (res.affectedRows === 0) {
               return reject(
-                new CustomError(404, '해당 채널 id를 찾을 수 없습니다.')
+                new CustomError(404, '해당 워크스페이스 id를 찾을 수 없습니다.')
               );
             }
             return resolve({
-              invitation_idx: invitationIdx,
               ...invitationInfo,
             });
           }
