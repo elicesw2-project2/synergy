@@ -7,9 +7,9 @@
   margin: 0 auto;
   padding: 3rem 3rem;
   border-radius: 15px;
-  color: #343a40;
+  color: #dee2e6;
   overflow: auto;
-  background-color: #fff;
+  background-color: #495057;
 }
 
 .category,
@@ -46,9 +46,12 @@
   margin-right: 3rem;
 
   .issue_title {
+    color: white;
     font-size: 2.5rem;
     padding: 0.5rem;
+    margin: 0.3rem 0;
     border: 0;
+    border-radius: 8px;
     background: inherit;
     text-align: left;
   }
@@ -62,6 +65,7 @@
 
   .title_save_button,
   .title_close_button {
+    color: black;
     position: absolute;
     top: 6.5rem;
     font-size: 0.8rem;
@@ -88,7 +92,16 @@
     margin-bottom: 0.5rem;
   }
 
+  .description_textarea {
+    padding: 0.5rem;
+    color: white;
+    background: inherit;
+    border: none;
+    outline: none;
+  }
+
   .add_button {
+    color: #ced4da;
     font-size: 1rem;
     padding: 0.5rem 0.5rem;
     background: inherit;
@@ -99,6 +112,7 @@
     cursor: pointer;
 
     &:hover {
+      color: white;
       background-color: #ced4da;
     }
   }
@@ -130,6 +144,7 @@
 }
 
 .content_close_button {
+  color: white;
   background: inherit;
   border: 0;
   &:hover {
@@ -148,7 +163,7 @@
 }
 
 .detail_background {
-  color: white;
+  color: black;
   padding: 6px 10px;
   border-radius: 8px;
   margin-right: 0.5rem;

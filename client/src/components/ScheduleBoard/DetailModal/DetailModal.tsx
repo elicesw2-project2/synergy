@@ -103,7 +103,11 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
             <span className={styles.description}>설명</span>
             {isOpenContent ? (
               <div>
-                <textarea value={content} onChange={handleChangeContent} />
+                <textarea
+                  value={content}
+                  onChange={handleChangeContent}
+                  className={styles.description_textarea}
+                />
                 <button
                   type="button"
                   onClick={handleUpdateContent}
