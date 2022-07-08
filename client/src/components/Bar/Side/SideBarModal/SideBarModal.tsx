@@ -13,6 +13,8 @@ interface iProps {
 
 function SideBarModal({ onClickToggleModal, categoryIdx }: iProps) {
   const [channelName, setChannelName] = useState<string>('');
+
+  // 일정 관리가 1번, 문서 채널이 2번
   const [channelType, setChannelType] = useState<number>(2);
   const handleChangeChannelName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChannelName(e.target.value);

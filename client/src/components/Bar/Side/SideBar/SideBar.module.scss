@@ -22,18 +22,27 @@
   right: 5%;
   position: absolute;
   color: wheat;
-  background-color: #212529;
+  background-color: #2f3640;
   width: 90%;
   padding: 1rem 0;
   border-radius: 0.4rem;
   z-index: 99;
+
+  li {
+    border-radius: 8px;
+  }
+
+  li button {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .dropdown_button {
     color: white;
     border: 0;
     width: 100%;
     background-color: inherit;
-    padding: 0.4rem;
+    padding: 0.8rem;
     cursor: pointer;
     &:hover {
       background-color: #91a7ff;

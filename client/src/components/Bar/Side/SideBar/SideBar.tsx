@@ -1,6 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDown,
+  faFolderPlus,
+  faUserPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from 'react-query';
 import { getChannelCategory, getWorkspaces } from 'utils/api';
 import { useParams } from 'react-router-dom';
@@ -13,6 +17,7 @@ import styles from './SideBar.module.scss';
 // components
 import ChannelCategory from '../ChannelCategory/ChannelCategory';
 import AddChannelCategory from '../AddChannelCategory/AddChannelCategory';
+import InviteModal from '../InviteModal/InviteModal';
 
 export interface IChannelCategory {
   category_idx: number;
@@ -47,6 +52,11 @@ function SideBar() {
     setIsOpenModal(!isOpenModal);
   }, [isOpenModal]);
 
+  const [isOpenInviteModal, setIsOpenInviteModal] = useState<boolean>(false);
+  const handleToggleInviteModal = useCallback(() => {
+    setIsOpenInviteModal(!isOpenInviteModal);
+  }, [isOpenInviteModal]);
+
   return (
     <div className={styles.container}>
       {/* 워크 스페이스 이름 */}
@@ -58,10 +68,21 @@ function SideBar() {
               <li>
                 <button
                   type="button"
+                  className={styles.dropdown_button}
+                  onClick={handleToggleInviteModal}
+                >
+                  초대하기
+                  <FontAwesomeIcon icon={faUserPlus} />
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
                   onClick={onClickToggleModal}
                   className={styles.dropdown_button}
                 >
                   채널 카테고리 추가
+                  <FontAwesomeIcon icon={faFolderPlus} />
                 </button>
               </li>
             </ul>
@@ -69,6 +90,10 @@ function SideBar() {
         )}
         <FontAwesomeIcon icon={faAngleDown} onClick={onClickToggleDropdown} />
       </div>
+
+      {isOpenInviteModal && (
+        <InviteModal handleToggleInviteModal={handleToggleInviteModal} />
+      )}
 
       {isOpenModal && (
         <AddChannelCategory

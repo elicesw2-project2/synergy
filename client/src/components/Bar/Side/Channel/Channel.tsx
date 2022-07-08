@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faX, faGear, faHashtag } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteChannel, patchChannel } from 'utils/api';
 import { Link } from 'react-router-dom';
@@ -19,8 +19,11 @@ function Channel({ channel }: IProps) {
 
   const channelIcon = channel.type === 1 ? '🗓' : '📝';
 
-  const handleEdit = () => {
+  const handleEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsEdit(!isEdit);
+    console.log(isEdit);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,9 @@ function Channel({ channel }: IProps) {
       queryClient.invalidateQueries('channels');
     },
   });
-  const handleConfirm = () => {
+  const handleConfirm = (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const updatedChannel = channel;
     updatedChannel.name = name;
     updateMutation.mutate(updatedChannel);
@@ -46,7 +51,9 @@ function Channel({ channel }: IProps) {
       queryClient.invalidateQueries('channels');
     },
   });
-  const handleDelete = () => {
+  const handleDelete = (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     deleteMutation.mutate(channel.channel_idx);
   };
 
@@ -74,10 +81,10 @@ function Channel({ channel }: IProps) {
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <li className={styles.channel_name}>
-            # {channelIcon}{' '}
+            <FontAwesomeIcon icon={faHashtag} /> {channelIcon}
             {channel.name.length > 10
-              ? `${channel.name.slice(0, 10)}...`
-              : channel.name}
+              ? ` ${channel.name.slice(0, 10)}...`
+              : ` ${channel.name}`}
           </li>
         </Link>
       )}
@@ -87,7 +94,7 @@ function Channel({ channel }: IProps) {
           {isEdit ? (
             <button
               type="button"
-              className={styles.edit_icon}
+              className={styles.confirm_button}
               onClick={handleConfirm}
             >
               확인

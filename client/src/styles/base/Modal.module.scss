@@ -10,15 +10,16 @@
   background-color: rgba(0, 0, 0, 0.6);
 
   .container {
+    color: white;
     position: relative;
     width: 80%;
     height: 30rem;
     max-width: 30rem;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 2rem;
     border-radius: 15px;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #495057;
   }
 
   .form {
@@ -27,9 +28,9 @@
 
   .close_button {
     position: absolute;
-    top: 1rem;
+    top: 1.5rem;
     right: 1rem;
-    color: black;
+    color: white;
     border: 0;
     border-radius: 4px;
     padding: 4px 8px;
@@ -49,7 +50,10 @@
     border: 0;
     padding: 8px 16px;
     border-radius: 4px;
-    color: white;
-    background: #748ffc;
+    color: black;
+    background: #a9e34b;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
