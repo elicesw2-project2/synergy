@@ -18,7 +18,11 @@ export async function getWorkspaces() {
 }
 
 export async function postWorkspace(workspace: IWorkSpace) {
-  return await axios.post(`${BASE_URL}/workspaces`, workspace);
+  return await axios.post(`${BASE_URL}/workspaces`, workspace, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
 }
 
 export async function postImageUpload(imageFile: File) {
