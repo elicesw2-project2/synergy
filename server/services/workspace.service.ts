@@ -1,10 +1,11 @@
 import * as Workspace from '../model/workspace.model';
+import { addMember } from '../model/workspaceMember.model';
 import { CustomError } from '../middlewares/customError';
 
 interface workpaceData {
   workspace_idx: number;
   name: string;
-  workspace_img: string;
+  profile: string;
 }
 
 // 모든 워크스페이스 목록 조회
@@ -31,12 +32,17 @@ export async function findWorkspaceById(workspaceIdx: number) {
 }
 
 // 워크스페이스 등록
-export async function createWorkspace(workspaceInfo: {
-  name: string;
-  profile: string;
-}) {
+export async function createWorkspace(
+  user_idx: number,
+  workspaceInfo: {
+    name: string;
+    profile: string;
+  }
+) {
   const newWorkspace = await Workspace.create(workspaceInfo);
-  console.log('service', newWorkspace);
+  const workspace_idx = newWorkspace.workspace_idx;
+  const memberInfo = { workspace_idx, user_idx };
+  await addMember(memberInfo);
 
   return newWorkspace;
 }
