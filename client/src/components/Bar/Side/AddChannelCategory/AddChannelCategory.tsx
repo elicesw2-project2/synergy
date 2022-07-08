@@ -37,12 +37,18 @@ function AddChannelCategory({ onClickToggleModal, workspaceIdx }: IProps) {
           <button
             type="button"
             onClick={onClickToggleModal}
-            className={styles.close_button}
+            className={styles.custom_close_button}
           >
             X
           </button>
-          <input type="text" onChange={handleChange} />
-          <input type="submit" value="제출" className={styles.submit_button} />
+          <input
+            type="text"
+            placeholder="새로운 카테고리"
+            onChange={handleChange}
+          />
+          <button type="submit" className={styles.submit_button}>
+            제출
+          </button>
         </form>
       </div>
     </div>
