@@ -46,7 +46,7 @@ function ChatContent(prop: any) {
 
 // 채팅 입력 컴포넌트
 function ChatInput(prop: any) {
-  const { nicknames } = prop;
+  const { nicknames, roomIdx } = prop;
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState<string | undefined>('');
   const [content, setContent] = useState<any[]>([]);
@@ -54,7 +54,7 @@ function ChatInput(prop: any) {
 
   // 채팅내용 불러오기
   useEffect(() => {
-    getChatMessage(1).then((res) => {
+    getChatMessage(roomIdx).then((res) => {
       const chatlist = res.map((el: any) => el);
       setContent(chatlist);
     });
@@ -62,7 +62,7 @@ function ChatInput(prop: any) {
 
   // 채팅방 접속하기
   useEffect(() => {
-    socket.emit('enter_room', 1, nicknames);
+    socket.emit('enter_room', roomIdx, nicknames);
   }, []);
 
   // 소켓IO 입장, 퇴장, 메시지 입력
@@ -81,15 +81,19 @@ function ChatInput(prop: any) {
     event.preventDefault();
     const newChat = contentRef?.current?.value;
     // api 채팅 메시지 저장
-    postChatMessage({ message: newChat, nickname: nicknames, room_idx: 1 });
+    postChatMessage({
+      message: newChat,
+      nickname: nicknames,
+      room_idx: roomIdx,
+    });
     // 소켓io 채팅 메시지 보내기
-    socket.emit('message', newChat, nicknames, 1);
+    socket.emit('message', newChat, nicknames, roomIdx);
     setText('');
   }
 
   // 아무거나 테스트 버튼 / 채팅 메시지
   async function realTest() {
-    getChatMessage(1).then((res) => {
+    getChatMessage(roomIdx).then((res) => {
       const chatlist = res.map((el: any) => el);
       setContent(chatlist);
     });
