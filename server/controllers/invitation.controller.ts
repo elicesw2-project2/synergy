@@ -7,11 +7,11 @@ class InvitationController {
   async getInvitation(req: Request, res: Response, next: NextFunction) {
     try {
       const invitations = await invitationService.findInvitationByLink(
-        Number(req.params.invitation_idx)
+        Number(req.params.workspace_idx)
       );
       res.status(200).send({
         status: 200,
-        message: '초대링크 정보 조회 성공',
+        message: '워크스페이스 초대링크 정보 조회 성공',
         data: invitations,
       });
     } catch (err) {
@@ -25,7 +25,7 @@ class InvitationController {
       const invitation = await invitationService.createInvitation(req.body);
       res.status(201).send({
         status: 201,
-        message: '초대링크 등록 성공',
+        message: '워크스페이스 초대링크 생성 성공',
         data: invitation,
       });
     } catch (err) {
@@ -37,12 +37,12 @@ class InvitationController {
   async setInvitation(req: Request, res: Response, next: NextFunction) {
     try {
       const invitation = await invitationService.updateInvitation(
-        Number(req.params.invitation_idx),
+        Number(req.params.workspace_idx),
         req.body
       );
       res.status(200).send({
         status: 200,
-        message: '초대링크 갱신 성공',
+        message: '워크스페이스 초대링크 갱신 성공',
         data: invitation,
       });
     } catch (err) {
