@@ -3,7 +3,7 @@ import db from './db';
 interface workpaceData {
   workspace_idx: number;
   name: string;
-  workspace_img: string;
+  profile: string;
 }
 // export async function findAllIdx(currentUserIdx: Number) {
 //   return new Promise((resolve, reject) => {
@@ -71,7 +71,10 @@ export async function findAll(workspaceIdx: Number): Promise<workpaceData> {
     );
   });
 }
-export function create(workspaceInfo: { name: string; profile: string }) {
+export function create(workspaceInfo: {
+  name: string;
+  profile: string;
+}): Promise<workpaceData> {
   const { name, profile } = workspaceInfo;
   return new Promise((resolve, reject) => {
     db.query(
