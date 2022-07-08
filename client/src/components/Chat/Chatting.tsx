@@ -10,7 +10,7 @@ export interface IChat {
   nickname: string;
 }
 
-const socket = io('/');
+const socket = io('circuit-synergy.herokuapp.com/');
 
 // 채팅내용 컴포넌트
 function ChatContent(prop: any) {
