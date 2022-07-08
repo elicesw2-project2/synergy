@@ -58,11 +58,11 @@ export async function addWorkspace(
   next: NextFunction
 ) {
   try {
-    const { name, profile } = req.body;
-    const newWorkspace = await workspaceService.createWorkspace({
-      name,
-      profile,
-    });
+    const user_idx = Number(req.currentUserIdx);
+    const newWorkspace = await workspaceService.createWorkspace(
+      user_idx,
+      req.body
+    );
     return res.status(201).json(newWorkspace);
   } catch (err) {
     next(err);
