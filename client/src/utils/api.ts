@@ -132,13 +132,13 @@ export async function getChatMessage(idx: number) {
 }
 
 // 채팅방 조회(아무대도 안쓰는중)
-export async function getChatRoom() {
-  const result = await axios.get(`${BASE_URL}/chatrooms/1`, {
+export async function getChatRoom(idx: number) {
+  const result = await axios.get(`${BASE_URL}/chatrooms/${idx}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
     },
   });
-  return result;
+  return result.data.data;
 }
 
 // user
