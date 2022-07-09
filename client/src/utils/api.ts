@@ -35,12 +35,21 @@ export async function postImageUpload(imageFile: File) {
 export async function patchWorkspace(workspace: IWorkSpace) {
   return await axios.patch(
     `${BASE_URL}/workspaces/${workspace.workspace_idx}`,
-    { name: workspace.name, profile: workspace.workspace_img }
+    { name: workspace.name, profile: workspace.workspace_img },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
   );
 }
 
 export async function deleteWorkspace(idx: number | undefined) {
-  return await axios.delete(`${BASE_URL}/workspaces/${idx}`);
+  return await axios.delete(`${BASE_URL}/workspaces/${idx}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
 }
 
 // channels

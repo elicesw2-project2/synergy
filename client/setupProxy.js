@@ -3,13 +3,10 @@ const createProxyMiddleware = require('http-proxy-middleware');
 
 module.exports = (app) => {
   app.use(
-    createProxyMiddleware(['/api', '/socket.io'], {
+    createProxyMiddleware(['/api'], {
       target: 'https://circuit-synergy.herokuapp.com/',
       changeOrigin: true,
       ws: true,
-      router: {
-        '/socket.io': 'https://circuit-synergy.herokuapp.com/',
-      },
     })
   );
 };
