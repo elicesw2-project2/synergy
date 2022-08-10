@@ -6,12 +6,15 @@ import { deleteChannel, patchChannel } from '../../../utils/api';
 import Link from 'next/link';
 import { IChannel } from './ChannelCategory';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 interface IProps {
   channel: IChannel;
 }
 
 function Channel({ channel }: IProps) {
+  const router = useRouter();
+  const workspaceIdx = router.query.workspaceIdx as string;
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>(channel.name);
@@ -71,7 +74,7 @@ function Channel({ channel }: IProps) {
         </li>
       ) : (
         <Link
-          href={`channels/${channel.category_idx}/channel/${channel.channel_idx}/${channel.type}`}
+          href={`/workspace/${workspaceIdx}/channels/${channel.category_idx}/channel/${channel.channel_idx}/${channel.type}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <ChannelName>

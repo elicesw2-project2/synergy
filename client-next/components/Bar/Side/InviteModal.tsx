@@ -85,17 +85,31 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-  height: 8rem;
   width: 80%;
   max-width: 30rem;
+  background: white;
+  color: white;
+  position: relative;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #495057;
 `;
 
 const EditContainer = styled.div`
-  height: 23srem;
   display: flex;
   flex-direction: column;
   width: 80%;
   max-width: 25rem;
+  background: white;
+  color: white;
+  position: relative;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #495057;
 `;
 
 const CloseButton = styled.button`

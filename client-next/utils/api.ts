@@ -2,8 +2,8 @@ import axios from 'axios';
 import { IChannel } from '../components/Bar/Side/ChannelCategory';
 import { IWorkSpace } from '../components/Bar/Workspace/WorkspaceBar';
 // import { IChat } from 'components/Chat/Chatting';
-// import { IDocument } from 'pages/Document/Document';
-// import { IScheduleCard } from 'pages/ScheduleBoard/ScheduleBoard';
+import { IDocument } from 'components/Document/Document';
+import { IScheduleCard } from 'components/ScheduleBoard/ScheduleBoard';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;
 
@@ -173,14 +173,14 @@ export async function getScheduleCards(channelIdx: string | undefined) {
   return result.data.data;
 }
 
-// export async function postScheduleCard(data: Partial<IScheduleCard>) {
-//   const result = await axios.post(`${BASE_URL}/schedulecards`, data, {
-//     headers: {
-//       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-//     },
-//   });
-//   return result;
-// }
+export async function postScheduleCard(data: Partial<IScheduleCard>) {
+  const result = await axios.post(`${BASE_URL}/schedulecards`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result;
+}
 
 export async function deleteScheduleCard(schedulecardIdx: number) {
   const result = await axios.delete(
@@ -189,21 +189,21 @@ export async function deleteScheduleCard(schedulecardIdx: number) {
   return result;
 }
 
-// export async function patchScheduleCard(data: Partial<IScheduleCard>) {
-//   const result = await axios.patch(
-//     `${BASE_URL}/schedulecards/${data.schedulecard_idx}`,
-//     data,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-//       },
-//     }
-//   );
-//   return result;
-// }
+export async function patchScheduleCard(data: Partial<IScheduleCard>) {
+  const result = await axios.patch(
+    `${BASE_URL}/schedulecards/${data.schedulecard_idx}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
+  return result;
+}
 
 // document
-export async function getDocument(channelIdx: string | undefined) {
+export async function getDocument(channelIdx: string) {
   const result = await axios.get(`${BASE_URL}/documents/${channelIdx}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
@@ -212,11 +212,11 @@ export async function getDocument(channelIdx: string | undefined) {
   return result.data.data[0];
 }
 
-// export async function postDocument(data: Partial<IDocument>) {
-//   const result = await axios.post(`${BASE_URL}/documents`, data, {
-//     headers: {
-//       Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-//     },
-//   });
-//   return result;
-// }
+export async function postDocument(data: Partial<IDocument>) {
+  const result = await axios.post(`${BASE_URL}/documents`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+    },
+  });
+  return result;
+}
