@@ -6,7 +6,7 @@ import {
   faFolderPlus,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { getChannelCategory, getWorkspaces } from '../../../utils/api';
 import ChannelCategory from './ChannelCategory';
 import AddChannelCategory from './AddChannelCategory';
@@ -21,7 +21,8 @@ export interface IChannelCategory {
 
 function SideBar() {
   const router = useRouter();
-  const { workspaceIdx } = router.query;
+  const workspaceIdx = router.query.workspaceIdx as string;
+
   const { isLoading, data: channelCategories } = useQuery(
     ['channelCategory', workspaceIdx],
     () => getChannelCategory(Number(workspaceIdx))
@@ -49,6 +50,8 @@ function SideBar() {
   const handleToggleInviteModal = useCallback(() => {
     setIsOpenInviteModal(!isOpenInviteModal);
   }, [isOpenInviteModal]);
+
+  if (!workspaceIdx) return null;
 
   return (
     <Container>
@@ -97,6 +100,22 @@ function SideBar() {
       )}
     </Container>
   );
+}
+
+export async function getStaticProps(context: any) {
+  const { workspaceIdx } = context.params;
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['workspaces'], getWorkspaces);
+  await queryClient.prefetchQuery(['channelCategory', workspaceIdx], () =>
+    getChannelCategory(Number(workspaceIdx))
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 }
 
 const Container = styled.div`

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ContainerLayout from 'components/ScheduleBoard/ContainerLayout';
 import { useQuery } from '@tanstack/react-query';
 import { getScheduleCards } from 'utils/api';
@@ -24,11 +24,11 @@ export interface IScheduleCardType {
 
 function ScheduleBoard() {
   const router = useRouter();
-  const channelIdx = router.query.channelIdx[2];
+  const channelIdx = router.query.channelIdx as string;
 
   const { data: scheduleCards } = useQuery<IScheduleCardType>(
-    ['scheduleCards', channelIdx],
-    () => getScheduleCards(channelIdx)
+    ['scheduleCards', channelIdx[2]],
+    () => getScheduleCards(channelIdx[2])
   );
 
   if (!channelIdx) return null;

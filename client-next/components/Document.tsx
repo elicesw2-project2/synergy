@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getDocument, postDocument } from '../../utils/api';
+import {
+  dehydrate,
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { getDocument, postDocument } from '../utils/api';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -16,7 +22,8 @@ export interface IDocument {
 
 function Document() {
   const router = useRouter();
-  const channelIdx = router.query.channelIdx[2];
+  const channelIdx = router.query.channelIdx as string;
+
   const [nickname, setNickname] = useState<string>('');
 
   useEffect(() => {
@@ -35,8 +42,8 @@ function Document() {
   }, []);
 
   const { isLoading, data: documents } = useQuery<IDocument>(
-    ['document', channelIdx],
-    () => getDocument(channelIdx)
+    ['document', channelIdx[2]],
+    () => getDocument(channelIdx[2])
   );
 
   const [title, setTitle] = useState<string | undefined>(documents?.title);

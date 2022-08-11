@@ -1,13 +1,17 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalStyles from '../styles/globalStyles';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient();
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
     <>
       <Head>
@@ -16,9 +20,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen />
-          <GlobalStyles />
-          <Component {...pageProps} />
+          <Hydrate state={pageProps.dehydratedState}>
+            <GlobalStyles />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen />
+          </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>
     </>

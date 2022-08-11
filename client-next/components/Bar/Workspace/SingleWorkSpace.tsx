@@ -35,11 +35,13 @@ function SingleWorkSpace({ workspace }: IProps) {
   return (
     <div>
       <Link href={`/workspace/${workspace.workspace_idx}`}>
-        <Box
-          src={workspace.workspace_img}
-          alt="img"
-          onContextMenu={handleContextMenu}
-        />
+        <a>
+          <Box
+            src={workspace.workspace_img}
+            alt="img"
+            onContextMenu={handleContextMenu}
+          />
+        </a>
       </Link>
       {isEdit && (
         <>

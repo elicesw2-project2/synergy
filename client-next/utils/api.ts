@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IChannel } from '../components/Bar/Side/ChannelCategory';
 import { IWorkSpace } from '../components/Bar/Workspace/WorkspaceBar';
 // import { IChat } from 'components/Chat/Chatting';
-import { IDocument } from 'components/Document/Document';
+import { IDocument } from 'components/Document';
 import { IScheduleCard } from 'components/ScheduleBoard/ScheduleBoard';
 
 const BASE_URL = `https://circuit-synergy.herokuapp.com`;

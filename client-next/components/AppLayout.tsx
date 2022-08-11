@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import SideBar from './Bar/Side/SideBar';
@@ -9,10 +10,11 @@ type ComponentProps = {
 };
 
 const AppLayout = ({ children }: ComponentProps) => {
+  const router = useRouter();
   return (
     <MainContainer>
       <WorkSpaceBar />
-      <SideBar />
+      {router.query?.workspaceIdx && <SideBar />}
       <Wrapper>
         <TopBar />
         {children}

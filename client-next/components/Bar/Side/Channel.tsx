@@ -77,12 +77,14 @@ function Channel({ channel }: IProps) {
           href={`/workspace/${workspaceIdx}/channels/${channel.category_idx}/channel/${channel.channel_idx}/${channel.type}`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <ChannelName>
-            <FontAwesomeIcon icon={faHashtag} /> {channelIcon}
-            {channel.name.length > 10
-              ? ` ${channel.name.slice(0, 10)}...`
-              : ` ${channel.name}`}
-          </ChannelName>
+          <a>
+            <ChannelName>
+              <FontAwesomeIcon icon={faHashtag} /> {channelIcon}
+              {channel.name.length > 10
+                ? ` ${channel.name.slice(0, 10)}...`
+                : ` ${channel.name}`}
+            </ChannelName>
+          </a>
         </Link>
       )}
       {isVisible && (

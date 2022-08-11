@@ -6,26 +6,12 @@ import {
   faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faBell } from '@fortawesome/free-regular-svg-icons';
-import { useQuery } from '@tanstack/react-query';
-import { getChannels } from '../../../utils/api';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 function TopBar() {
-  const router = useRouter();
-  const { channelCategoryIdx, channelIdx } = router.query;
-  const { data: channels } = useQuery(
-    ['channels', Number(channelCategoryIdx)],
-    () => getChannels(Number(channelCategoryIdx))
-  );
-
-  const filteredChannel = channels?.find(
-    (channel: any) => channel.channel_idx === Number(channelIdx)
-  );
-
   return (
     <Container>
-      <h1>{filteredChannel ? `# ${filteredChannel?.name}` : ''}</h1>
+      <h1 />
       <div>
         <Icon className="TopBar__icon" icon={faUser} />
         <Icon className="TopBar__icon" icon={faBell} />

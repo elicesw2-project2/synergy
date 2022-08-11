@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Document from '../../../../components/Document/Document';
+import Document from '../../../../components/Document';
 import ScheduleBoard from '../../../../components/ScheduleBoard/ScheduleBoard';
 import AppLayout from 'components/AppLayout';
 
