@@ -65,7 +65,7 @@ function ContainerLayout({ type, data }: IProps) {
         )}
       </div>
       {data?.map((card) => (
-        <Card card={card} key={card.create_date} />
+        <Card card={card} key={card.schedulecard_idx} />
       ))}
       <div>
         {!isBottomOpen ? (
@@ -146,6 +146,7 @@ const CreateIssueButton = styled.button`
 const PlusIcon = styled(FontAwesomeIcon)`
   margin-right: 5px;
 `;
+
 const TextContainer = styled.div`
   position: relative;
   height: 7rem;

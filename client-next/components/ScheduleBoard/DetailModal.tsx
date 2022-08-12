@@ -63,7 +63,6 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
     <Background>
       <Container>
         <Form>
-          {/* 나가기 버튼 */}
           <InputWrapper>
             <Category>{card.category}</Category>
             {isOpenTitle ? (
@@ -73,13 +72,17 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
                   value={title}
                   onChange={handleChangeTitle}
                 />
-                <div>
+                <>
                   <StyledButton icon={faCheck} onClick={handleUpdateContent} />
                   <StyledButton icon={faX} onClick={onClickToggleTitle} />
-                </div>
+                </>
               </>
             ) : (
-              <IssueTitleButton type="button" onClick={onClickToggleTitle}>
+              <IssueTitleButton
+                as="button"
+                type="button"
+                onClick={onClickToggleTitle}
+              >
                 {card.title}
               </IssueTitleButton>
             )}
@@ -104,28 +107,20 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
               </AddButton>
             )}
           </InputWrapper>
-          {/* <div className={styles.detail_container}>
-            <div className={styles.detail_box}>
-              <span className={styles.detail_background}>마감일</span>
+          <DetailCotainer>
+            <DetailWrapper>
+              <DetailBackground>마감일</DetailBackground>
               <span>{card.due_date.slice(0, 10)}</span>
-            </div>
-            <div className={styles.detail_box}>
-              <span className={styles.detail_background}>작성자</span>
+            </DetailWrapper>
+            <DetailWrapper>
+              <DetailBackground>작성자</DetailBackground>
               <span>{card.nickname}</span>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={onClickToggleModal}
-            className={styles.close_button}
-          >
+            </DetailWrapper>
+          </DetailCotainer>
+          <CloseButton type="button" onClick={onClickToggleModal}>
             X
-          </button>
-          <FontAwesomeIcon
-            icon={faTrashCan}
-            className={styles.delete_icon}
-            onClick={handleDeleteCard}
-          /> */}
+          </CloseButton>
+          <DeleteIcon icon={faTrashCan} onClick={handleDeleteCard} />
         </Form>
       </Container>
     </Background>
@@ -244,10 +239,58 @@ const AddButton = styled.button`
   border: 0;
   border-radius: 4px;
   cursor: pointer;
-
   &:hover {
     color: white;
     background-color: #ced4da;
   }
 `;
+
+const DetailCotainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const DetailWrapper = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const DetailBackground = styled.div`
+  color: black;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-right: 0.5rem;
+  background: #b3d9bd;
+`;
+
+const DeleteIcon = styled(FontAwesomeIcon)`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 4px;
+  padding: 8px;
+  color: #e03131;
+  font-size: 2rem;
+  cursor: pointer;
+  &:hover {
+    background: #ced4da;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background: #ced4da;
+  }
+`;
+
 export default DetailModal;
