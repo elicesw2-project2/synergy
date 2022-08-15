@@ -17,16 +17,12 @@ export interface InvitationData {
 }
 
 export class InvitationModel {
-  // invitation_idx로 초대링크 정보 받음
-  async findOneByWorkspace(workspaceIdx: number): Promise<InvitationData> {
+  // link로 초대링크에 대한 정보 반환
+  async findOneByLink(link: String): Promise<InvitationData> {
     return new Promise((resolve, reject) => {
-      sql.query(
-        'SELECT * FROM invitation WHERE workspace_idx = ?',
-        workspaceIdx,
-        (err, res) => {
-          return err ? reject(err) : resolve(res[0]);
-        }
-      );
+      sql.query('SELECT * FROM invitation WHERE link = ?', link, (err, res) => {
+        return err ? reject(err) : resolve(res[0]);
+      });
     });
   }
 

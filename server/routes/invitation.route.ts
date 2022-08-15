@@ -4,12 +4,8 @@ import { loginRequired } from '../middlewares/login.required';
 
 const router = Router();
 
-//  초대링크 정보 요청 GET  /invitation/:workspace_idx
-router.get(
-  '/:workspace_idx',
-  loginRequired,
-  invitationController.getInvitation
-);
+//  초대링크 정보 요청 GET  /invitation/:link
+router.get('/:link', loginRequired, invitationController.getInvitation);
 
 // 초대링크 생성 POST /invitation
 router.post('/', loginRequired, invitationController.addInvitation);
