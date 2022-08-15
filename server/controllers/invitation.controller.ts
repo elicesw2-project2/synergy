@@ -7,7 +7,7 @@ class InvitationController {
   async getInvitation(req: Request, res: Response, next: NextFunction) {
     try {
       const invitations = await invitationService.findInvitationByLink(
-        Number(req.params.workspace_idx)
+        req.params.link
       );
       res.status(200).send({
         status: 200,

@@ -9,12 +9,10 @@ class InvitationService {
   constructor(private invitationModel: InvitationModel) {}
 
   // 워크스페이스 idx별 초대링크 정보를 받음
-  async findInvitationByLink(workspaceIdx: number) {
-    const invitation = await this.invitationModel.findOneByWorkspace(
-      workspaceIdx
-    );
+  async findInvitationByLink(link: String) {
+    const invitation = await this.invitationModel.findOneByLink(link);
 
-    const { workspace_idx, link, expires_date, maximum_cnt } = invitation;
+    const { workspace_idx, expires_date, maximum_cnt } = invitation;
     const current = new Date(); // 현재시간
 
     // 만료날짜가 현재시간보다 과거거나, 횟수가 0인 경우 만료된 링크라고 반환
@@ -29,9 +27,8 @@ class InvitationService {
         expires_date,
         maximum_cnt: count,
       };
-      await this.invitationModel.update(workspaceIdx, invitationInfo);
+      await this.invitationModel.update(workspace_idx, invitationInfo);
       return invitation;
-      // 워크스페이스 멤버에 현재 유저 추가
     }
   }
 
