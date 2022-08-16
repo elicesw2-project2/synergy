@@ -13,6 +13,6 @@ export async function createMember(memberInfo: WorkspaceMemberInfo) {
   return await addMember(memberInfo);
 }
 
-export async function removeMember(memberInfo: WorkspaceMemberInfo) {
-  return await remove(memberInfo);
+export async function removeMember(workspaceIdx: Number, userIdx: Number) {
+  return await remove(workspaceIdx, userIdx);
 }

@@ -25,13 +25,13 @@ export async function addMember(memberInfo: WorkspaceMemberInfo) {
   });
 }
 
-export async function remove(memberInfo: WorkspaceMemberInfo) {
+export async function remove(workspaceIdx: Number, userIdx: Number) {
   return new Promise((resolve, reject) => {
     db.query(
-      'DELETE FROM chatroommember where user_idx = ? and workspace_idx = ?',
-      [memberInfo.user_idx, memberInfo.workspace_idx],
+      'DELETE FROM workspacemember where user_idx = ? and workspace_idx = ?',
+      [userIdx, workspaceIdx],
       (err, result) => {
-        return err ? reject(err) : resolve({ user_idx: memberInfo.user_idx });
+        return err ? reject(err) : resolve({ user_idx: userIdx });
       }
     );
   });

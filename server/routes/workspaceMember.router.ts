@@ -1,5 +1,6 @@
 import express from 'express';
 import * as workspaceMemberController from '../controllers/workspaceMember.controller';
+import { loginRequired } from '../middlewares/login.required';
 
 const router = express.Router();
 
@@ -10,5 +11,5 @@ router.get('/:workspace_idx', workspaceMemberController.getAllUser);
 router.post('/', workspaceMemberController.addMember);
 
 //워크 스페이스 유저 삭제
-router.delete('/', workspaceMemberController.deleteMember);
+router.delete('/', loginRequired, workspaceMemberController.deleteMember);
 export default router;

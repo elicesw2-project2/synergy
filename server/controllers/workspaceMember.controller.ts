@@ -44,7 +44,12 @@ export async function deleteMember(
   next: NextFunction
 ) {
   try {
-    const user = await workspaceMemberService.removeMember(req.body);
+    const workspaceIdx = Number(req.body.workspace_idx);
+    const userIdx = Number(req.currentUserIdx);
+    const user = await workspaceMemberService.removeMember(
+      workspaceIdx,
+      userIdx
+    );
     res.status(200).send({
       status: 200,
       message: '워크스페이스 탈퇴 성공',
