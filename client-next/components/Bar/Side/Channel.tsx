@@ -94,18 +94,10 @@ function Channel({ channel }: IProps) {
               확인
             </ConfirmButton>
           ) : (
-            <>
-              <StyledIcon
-                icon={faGear}
-                className="edit_icon"
-                onClick={handleEdit}
-              />
-              <StyledIcon
-                icon={faX}
-                className="delete_icon"
-                onClick={handleDelete}
-              />
-            </>
+            <ButtonWrapper>
+              <EditIcon icon={faGear} onClick={handleEdit} />
+              <DeleteIcon icon={faX} onClick={handleDelete} />
+            </ButtonWrapper>
           )}
         </>
       )}
@@ -116,7 +108,6 @@ function Channel({ channel }: IProps) {
 const Container = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border-radius: 4px;
   &:hover {
@@ -134,22 +125,21 @@ const ConfirmButton = styled.button`
   outline: none;
 `;
 
-const StyledIcon = styled(FontAwesomeIcon)`
-  .edit_icon,
-  .delete_icon {
-    color: white;
-    cursor: pointer;
-  }
+const ButtonWrapper = styled.div`
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  gap: 10px;
+`;
 
-  .edit_icon {
-    position: absolute;
-    right: 1.7rem;
-  }
+const EditIcon = styled(FontAwesomeIcon)`
+  align-self: center;
+  cursor: pointer;
+`;
 
-  .delete_icon {
-    position: absolute;
-    right: 0.5rem;
-  }
+const DeleteIcon = styled(FontAwesomeIcon)`
+  align-self: center;
+  cursor: pointer;
 `;
 
 const Input = styled.input`

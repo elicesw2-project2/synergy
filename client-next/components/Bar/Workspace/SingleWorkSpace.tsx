@@ -44,14 +44,14 @@ function SingleWorkSpace({ workspace }: IProps) {
         </a>
       </Link>
       {isEdit && (
-        <>
-          <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
+        <ButtonWrapper>
+          <Button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
             수정
-          </button>
-          <button type="button" onClick={handleClick}>
+          </Button>
+          <Button type="button" onClick={handleClick}>
             삭제
-          </button>
-        </>
+          </Button>
+        </ButtonWrapper>
       )}
       {isModalOpen && (
         <EditWorkSpaceModal
@@ -73,6 +73,18 @@ const Box = styled.img`
   border: none;
   border-radius: 50%;
   background-color: whitesmoke;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+`;
+
+const Button = styled.button`
+  background: #94d82d;
+  padding: 6px;
+  border-radius: 4px;
 `;
 
 export default SingleWorkSpace;
