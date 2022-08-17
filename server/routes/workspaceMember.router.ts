@@ -12,4 +12,6 @@ router.post('/', loginRequired, workspaceMemberController.addMember);
 
 //워크 스페이스 유저 삭제
 router.delete('/', loginRequired, workspaceMemberController.deleteMember);
+// 워크 스페이스 유저 권한 확인
+router.get('/', loginRequired, workspaceMemberController.getUserRole);
 export default router;

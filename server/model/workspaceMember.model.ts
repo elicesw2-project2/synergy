@@ -1,4 +1,7 @@
+import { rejects } from 'assert';
+import { Result } from 'express-validator';
 import { userInfo } from 'os';
+import { resolve } from 'path';
 import db from './db';
 
 export interface WorkspaceMemberInfo {
@@ -41,6 +44,18 @@ export async function remove(workspaceIdx: Number, userIdx: Number) {
       [userIdx, workspaceIdx],
       (err, result) => {
         return err ? reject(err) : resolve({ user_idx: userIdx });
+      }
+    );
+  });
+}
+
+export async function getRole(workspaceIdx: Number, userIdx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT role FROM workspacemember WHERE workspace_idx= ? and user_idx= ?',
+      [workspaceIdx, userIdx],
+      (err, result) => {
+        return err ? reject(err) : resolve(result[0].role);
       }
     );
   });

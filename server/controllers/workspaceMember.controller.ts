@@ -67,3 +67,21 @@ export async function deleteMember(
     next(err);
   }
 }
+export async function getUserRole(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const workspaceIdx = Number(req.body.workspace_idx);
+    const userIdx = Number(req.currentUserIdx);
+    const role = await workspaceMemberService.checkRole(workspaceIdx, userIdx);
+    res.status(200).send({
+      status: 200,
+      message: '워크스페이스 유저 권한 확인 성공',
+      data: role,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
