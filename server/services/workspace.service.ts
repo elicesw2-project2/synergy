@@ -41,8 +41,7 @@ export async function createWorkspace(
 ) {
   const newWorkspace = await Workspace.create(workspaceInfo);
   const workspace_idx = newWorkspace.workspace_idx;
-  const memberInfo = { workspace_idx, user_idx };
-  await addMember(memberInfo);
+  await addMember(user_idx, workspace_idx, 'admin');
 
   return newWorkspace;
 }

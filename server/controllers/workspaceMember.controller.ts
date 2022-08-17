@@ -27,7 +27,15 @@ export async function addMember(
   next: NextFunction
 ) {
   try {
-    const newUser = await workspaceMemberService.createMember(req.body);
+    const userIdx = Number(req.currentUserIdx);
+    const role = req.body.role;
+    const workspaceIdx = Number(req.body.workspace_idx);
+    const info = { userIdx, role, workspaceIdx };
+    const newUser = await workspaceMemberService.createMember(
+      userIdx,
+      workspaceIdx,
+      role
+    );
     res.status(201).send({
       status: 201,
       message: '워크스페이스 유저 등록 성공',
@@ -52,7 +60,7 @@ export async function deleteMember(
     );
     res.status(200).send({
       status: 200,
-      message: '워크스페이스 탈퇴 성공',
+      message: '워크스페이스 유저 삭제 성공',
       data: user,
     });
   } catch (err) {

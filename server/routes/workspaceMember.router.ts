@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:workspace_idx', workspaceMemberController.getAllUser);
 
 //워크 스페이스 유저 추가
-router.post('/', workspaceMemberController.addMember);
+router.post('/', loginRequired, workspaceMemberController.addMember);
 
 //워크 스페이스 유저 삭제
 router.delete('/', loginRequired, workspaceMemberController.deleteMember);

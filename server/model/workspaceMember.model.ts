@@ -1,3 +1,4 @@
+import { userInfo } from 'os';
 import db from './db';
 
 export interface WorkspaceMemberInfo {
@@ -17,11 +18,19 @@ export async function findAll(workspaceIdx: Number) {
   });
 }
 
-export async function addMember(memberInfo: WorkspaceMemberInfo) {
+export async function addMember(
+  userIdx: Number,
+  workspaceIdx: Number,
+  role: String
+) {
   return new Promise((resolve, reject) => {
-    db.query('INSERT INTO workspacemember SET ?', memberInfo, (err, result) => {
-      return err ? reject(err) : resolve(result);
-    });
+    db.query(
+      'INSERT INTO workspacemember SET user_idx = ?, workspace_idx=?, role =?',
+      [userIdx, workspaceIdx, role],
+      (err, result) => {
+        return err ? reject(err) : resolve({ user_idx: userIdx });
+      }
+    );
   });
 }
 
