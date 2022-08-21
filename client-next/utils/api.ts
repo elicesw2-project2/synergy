@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IChannel } from '../components/Bar/Side/ChannelCategory';
 import { IWorkSpace } from '../components/Bar/Workspace/WorkspaceBar';
-// import { IChat } from 'components/Chat/Chatting';
+import { IChat } from 'components/Chat/Chatting';
 import { IDocument } from 'components/Document';
 import { IScheduleCard } from 'components/ScheduleBoard/ScheduleBoard';
 
@@ -113,22 +113,22 @@ export async function postChatRoom(idx: number) {
 }
 
 // 메시지 등록
-// export async function postChatMessage(message: IChat) {
-//   const result = await axios.post(
-//     `${BASE_URL}/chatmessage`,
-//     {
-//       message: message.message,
-//       room_idx: message.room_idx,
-//       nickname: message.nickname,
-//     },
-//     {
-//       headers: {
-//         Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
-//       },
-//     }
-//   );
-//   return result.data.data;
-// }
+export async function postChatMessage(message: IChat) {
+  const result = await axios.post(
+    `${BASE_URL}/chatmessage`,
+    {
+      message: message.message,
+      room_idx: message.room_idx,
+      nickname: message.nickname,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}` || 'not found',
+      },
+    }
+  );
+  return result.data.data;
+}
 
 // 메시지 조회
 export async function getChatMessage(idx: number) {
