@@ -65,7 +65,7 @@ const Login: NextPage = () => {
         <SignUp>
           <span>계정이 없으신가요?</span>
           <span>
-            <Link href="/SignUp">가입하기</Link>
+            <Link href="/signup">가입하기</Link>
           </span>
         </SignUp>
       </Container>
@@ -116,6 +116,7 @@ const Form = styled.form`
     box-sizing: border-box;
   }
   button {
+    background-color: #f0f0f0;
     border: 1px solid transparent;
     border-radius: 10px;
     height: 50px;
