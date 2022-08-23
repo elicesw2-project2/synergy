@@ -26,6 +26,18 @@ export class InvitationModel {
     });
   }
 
+  async findOnwByWorkspace(id: number): Promise<InvitationData> {
+    return new Promise((resolve, reject) => {
+      sql.query(
+        'SELECT * FROM invitation WHERE workspace_idx = ?',
+        id,
+        (err, res) => {
+          return err ? reject(err) : resolve(res[0]);
+        }
+      );
+    });
+  }
+
   // 초대링크 db에 등록
   async create(invitationInfo: InvitationInfo): Promise<InvitationData> {
     return new Promise((resolve, reject) => {

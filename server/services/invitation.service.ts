@@ -34,8 +34,17 @@ class InvitationService {
 
   // 초대링크 생성
   async createInvitation(invitationInfo: InvitationInfo) {
-    if (!invitationInfo.expires_date || !invitationInfo.maximum_cnt) {
+    const { workspace_idx, expires_date, maximum_cnt } = invitationInfo;
+    if (!expires_date || !maximum_cnt) {
       throw new CustomError(400, '요청값을 다시 확인해주세요.');
+    }
+    // 이미 초대링크가 있는 워크스페이스라면 update
+    const invitation = await this.invitationModel.findOnwByWorkspace(
+      workspace_idx
+    );
+    if (invitation) {
+      console.log('이미 존재하는 워크스페이스입니다. 초대링크를 갱신합니다.');
+      return await this.updateInvitation(workspace_idx, invitationInfo);
     }
     // 새로운 링크 생성. 현재 밀리초를 36진수로 표현
     const link = new Date().getTime().toString(36);
