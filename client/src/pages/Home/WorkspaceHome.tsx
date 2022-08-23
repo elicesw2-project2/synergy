@@ -1,5 +1,5 @@
-import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import React from 'react';
+import { IWorkSpace } from 'components/Bar/Workspace/WorkspaceBar/WorkspaceBar';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getWorkspaces } from 'utils/api';
