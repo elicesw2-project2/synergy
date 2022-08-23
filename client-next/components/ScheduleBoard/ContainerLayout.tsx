@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IScheduleCard } from './ScheduleBoard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postScheduleCard } from 'utils/api';
+import { postScheduleCard } from 'api/api';
 import Card from './Card';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';

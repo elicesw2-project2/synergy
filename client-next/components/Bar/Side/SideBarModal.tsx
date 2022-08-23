@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import RadioButton from '../../Button/RadioButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postChannel } from '../../../utils/api';
+import { postChannel } from '../../../api/api';
 
 interface iProps {
   onClickToggleModal: () => void;

@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { deleteChannelCategory, getChannels } from '../../../utils/api';
+import { deleteChannelCategory, getChannels } from '../../../api/api';
 import Channel from './Channel';
 import SideBarModal from './SideBarModal';
 import { IChannelCategory } from './SideBar';

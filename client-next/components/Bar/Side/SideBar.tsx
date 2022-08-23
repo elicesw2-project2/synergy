@@ -5,12 +5,13 @@ import {
   faAngleDown,
   faFolderPlus,
   faUserPlus,
+  faGear,
 } from '@fortawesome/free-solid-svg-icons';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { getChannelCategory, getWorkspaces } from '../../../utils/api';
+import { getChannelCategory, getWorkspaces } from '../../../api/api';
 import ChannelCategory from './ChannelCategory';
 import AddChannelCategory from './AddChannelCategory';
-import InviteModal from './InviteModal';
+import InviteModal from './InviteModal/InviteModal';
 import { useRouter } from 'next/router';
 
 export interface IChannelCategory {
@@ -71,6 +72,12 @@ function SideBar() {
                 <DropdownButton type="button" onClick={onClickToggleModal}>
                   채널 카테고리 추가
                   <FontAwesomeIcon icon={faFolderPlus} />
+                </DropdownButton>
+              </li>
+              <li>
+                <DropdownButton type="button" onClick={onClickToggleModal}>
+                  서버 설정
+                  <FontAwesomeIcon icon={faGear} />
                 </DropdownButton>
               </li>
             </ul>

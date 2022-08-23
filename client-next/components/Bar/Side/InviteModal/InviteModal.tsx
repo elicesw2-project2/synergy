@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import useToggle from 'hooks/useToggle';
+import EditModal from './EditModal';
+import { postInvitation } from 'api/Invitation';
+import { useRouter } from 'next/router';
 
 interface IProps {
   handleToggleInviteModal: () => void;
 }
 
+const validity_list = ['없음', '1일', '7일', '30일'];
+const uses_list = ['없음', '1회', '10회', '50회'];
+
 function InviteModal({ handleToggleInviteModal }: IProps) {
+  const router = useRouter();
+
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -18,25 +27,63 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
     }, 1000);
   };
 
+  const [isOpenValidityModal, setIsOpenValidityModal] = useToggle();
+  const [isOpenUsesModal, setIsOpenUsesModal] = useToggle();
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [validity, setValidity] = useState<string>('없음');
+  const [uses, setUses] = useState<string>('없음');
+
+  useEffect(() => {
+    (async () => {
+      const data = {
+        workspace_idx: Number(router.query.workspaceIdx),
+        expires_date: new Date().toISOString().slice(0, 10),
+        maximum_cnt: Number.MAX_SAFE_INTEGER,
+      };
+      const postData = await postInvitation(data);
+    })();
+  }, []);
+
   return (
     <Background>
       {isEdit ? (
-        <EditContainer>
+        <EditContainer ref={wrapperRef}>
           <CloseButton type="button" onClick={() => setIsEdit(false)}>
             X
           </CloseButton>
           <Title>서버 초대 링크 설정</Title>
           <Detail>
             <span>잔여 유효 기간</span>
-            <SelectButton type="button">
-              <span>없음</span>
+            <SelectButton
+              type="button"
+              onClick={() => setIsOpenValidityModal()}
+            >
+              <span>{validity}</span>
               <FontAwesomeIcon icon={faAngleDown} />
             </SelectButton>
+            {isOpenValidityModal && (
+              <EditModal
+                list={validity_list}
+                top="42%"
+                setFn={setValidity}
+                toggleFn={setIsOpenValidityModal}
+              />
+            )}
             <span>최대 사용 횟수</span>
-            <SelectButton type="button">
-              <span>없음</span>
+            <SelectButton type="button" onClick={() => setIsOpenUsesModal()}>
+              <span>{uses}</span>
               <FontAwesomeIcon icon={faAngleDown} />
             </SelectButton>
+            {isOpenUsesModal && (
+              <EditModal
+                list={uses_list}
+                top="67%"
+                setFn={setUses}
+                toggleFn={setIsOpenUsesModal}
+              />
+            )}
           </Detail>
           <EditButtonWrapper>
             <button type="button" onClick={() => setIsEdit(false)}>
@@ -86,14 +133,13 @@ const Background = styled.div`
 
 const Container = styled.div`
   width: 80%;
-  max-width: 30rem;
+  max-width: 500px;
   background: white;
   color: white;
   position: relative;
   margin: 0 auto;
   padding: 2rem;
-  border-radius: 15px;
-  overflow: hidden;
+  border-radius: 8px;
   background-color: #495057;
 `;
 
@@ -108,7 +154,6 @@ const EditContainer = styled.div`
   margin: 0 auto;
   padding: 2rem;
   border-radius: 15px;
-  overflow: hidden;
   background-color: #495057;
 `;
 
@@ -195,8 +240,8 @@ const InviteLink = styled.div`
   position: relative;
   margin-bottom: 0.8rem;
   border-radius: 4px;
-  :first-child {
-    width: 95%;
+  input {
+    width: 100%;
     color: #ced4da;
     background: #212529;
     padding: 1rem 0.8rem;
@@ -209,7 +254,6 @@ const InviteLink = styled.div`
     top: 0.4rem;
     right: 0.2rem;
     padding: 0.6rem;
-    background: #a9e34b;
     border: none;
     border-radius: 4px;
     outline: none;
@@ -221,14 +265,13 @@ const InviteLink = styled.div`
 `;
 
 const Copy = styled.button<{ $isCopy: boolean }>`
-  background: ${(props) => props.$isCopy && '#91a7ff'};
+  background: ${(props) => (props.$isCopy ? '#91a7ff' : '#a9e34b')};
 `;
 
 const InviteEdit = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: 0 0.5rem;
-  :first-child {
-    margin-right: 0.5rem;
-  }
   button {
     color: #91a7ff;
     background: inherit;

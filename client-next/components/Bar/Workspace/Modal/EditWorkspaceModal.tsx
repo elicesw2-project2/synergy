@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchWorkspace, postImageUpload } from '../../../../utils/api';
+import { patchWorkspace, postImageUpload } from '../../../../api/api';
 import { IWorkSpace } from '../WorkspaceBar';
 
 interface iProps {

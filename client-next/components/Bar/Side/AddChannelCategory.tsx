@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postChannelCategory } from '../../../utils/api';
+import { postChannelCategory } from '../../../api/api';
 import styled from 'styled-components';
 
 interface IProps {

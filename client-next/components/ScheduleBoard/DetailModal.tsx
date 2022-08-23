@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { IScheduleCard } from './ScheduleBoard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteScheduleCard, patchScheduleCard } from 'utils/api';
+import { deleteScheduleCard, patchScheduleCard } from 'api/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faX, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';

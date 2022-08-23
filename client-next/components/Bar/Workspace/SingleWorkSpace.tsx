@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { IWorkSpace } from './WorkspaceBar';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteWorkspace } from '../../../utils/api';
+import { deleteWorkspace } from '../../../api/api';
 import EditWorkSpaceModal from './Modal/EditWorkspaceModal';
 import Link from 'next/link';
 

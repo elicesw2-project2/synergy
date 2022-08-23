@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faGear, faHashtag } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteChannel, patchChannel } from '../../../utils/api';
+import { deleteChannel, patchChannel } from '../../../api/api';
 import Link from 'next/link';
 import { IChannel } from './ChannelCategory';
 import styled from 'styled-components';

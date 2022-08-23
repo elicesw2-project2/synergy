@@ -4,12 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  postImageUpload,
-  postWorkspace,
-  postChatRoom,
-} from '../../../../utils/api';
-import defaultImg from '../../../../assets/default-img.jpeg';
+import { postImageUpload, postWorkspace, postChatRoom } from 'api/api';
+import defaultImg from 'assets/default-img.jpeg';
 import { IWorkSpace } from '../WorkspaceBar';
 import { StaticImageData } from 'next/image';
 
@@ -28,7 +24,7 @@ function AddWorkSpaceModal(props: iProps) {
   } = useForm<IWorkSpace>();
 
   // state
-  const [imageFile, setImageFile] = useState<StaticImageData | File>(
+  const [imageFile, setImageFile] = useState<File | StaticImageData>(
     defaultImg
   );
   const [preview, setPreview] = useState<string>('');
@@ -52,7 +48,7 @@ function AddWorkSpaceModal(props: iProps) {
     // 이미지 따로, 이름 따로 api 요청
     let imageSrc = defaultImg;
     if (preview) {
-      // imageSrc = await postImageUpload(imageFile);
+      imageSrc = await postImageUpload(imageFile);
     }
     const newWorkSpace = { name, profile: imageSrc };
     mutation.mutate(newWorkSpace);

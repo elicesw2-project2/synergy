@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  dehydrate,
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
-import { getDocument, postDocument } from '../utils/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getDocument, postDocument } from '../api/api';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -27,7 +21,7 @@ function Document() {
   const [nickname, setNickname] = useState<string>('');
 
   useEffect(() => {
-    const result = axios
+    axios
       .get(
         `https://circuit-synergy.herokuapp.com/users/${localStorage.getItem(
           'id'
@@ -73,10 +67,10 @@ function Document() {
 
   const handleSaveContent = () => {
     saveMutation.mutate({
-      nickname: documents?.nickname,
+      nickname,
       title,
       content,
-      channel_idx: channelIdx,
+      channel_idx: channelIdx[2],
     });
   };
 

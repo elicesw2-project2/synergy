@@ -1,7 +1,7 @@
 import React from 'react';
 import ContainerLayout from 'components/ScheduleBoard/ContainerLayout';
 import { useQuery } from '@tanstack/react-query';
-import { getScheduleCards } from 'utils/api';
+import { getScheduleCards } from 'api/api';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
