@@ -8,7 +8,7 @@ export async function getAllUser(
   next: NextFunction
 ) {
   try {
-    const workspaceIdx = Number(req.params.id);
+    const workspaceIdx = Number(req.params.workspace_idx);
     const users = await workspaceMemberService.findAllUsers(workspaceIdx);
     res.status(200).send({
       status: 200,
