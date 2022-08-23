@@ -12,7 +12,7 @@ export interface WorkspaceMemberInfo {
 export async function findAll(workspaceIdx: Number) {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM workspacemember WHERE workspace_idx=?',
+      'SELECT workspacemember.*,user.nickname FROM workspacemember left join user on workspacemember.user_idx = user.user_idx WHERE workspace_idx=?',
       workspaceIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result);
