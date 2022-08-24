@@ -11,7 +11,16 @@ import GlobalStyles from '../styles/globalStyles';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
   return (
     <>
       <Head>

@@ -7,12 +7,13 @@ import {
   faUserPlus,
   faGear,
 } from '@fortawesome/free-solid-svg-icons';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getChannelCategory, getWorkspaces } from '../../../api/api';
 import ChannelCategory from './ChannelCategory';
 import AddChannelCategory from './AddChannelCategory';
 import InviteModal from './InviteModal/InviteModal';
 import { useRouter } from 'next/router';
+import UserList from './UserList';
 
 export interface IChannelCategory {
   category_idx: number;
@@ -52,6 +53,8 @@ function SideBar() {
     setIsOpenInviteModal(!isOpenInviteModal);
   }, [isOpenInviteModal]);
 
+  // 유저 추방
+
   if (!workspaceIdx) return null;
 
   return (
@@ -85,18 +88,15 @@ function SideBar() {
         )}
         <FontAwesomeIcon icon={faAngleDown} onClick={onClickToggleDropdown} />
       </WorkspaceTitle>
-
       {isOpenInviteModal && (
         <InviteModal handleToggleInviteModal={handleToggleInviteModal} />
       )}
-
       {isOpenModal && (
         <AddChannelCategory
           workspaceIdx={workspaceIdx}
           onClickToggleModal={onClickToggleModal}
         />
       )}
-
       {/* 채널 카테고리 */}
       {isLoading ? (
         <div>Loading...</div>
@@ -105,28 +105,15 @@ function SideBar() {
           <ChannelCategory key={category.category_idx} category={category} />
         ))
       )}
+      <UserList />
     </Container>
   );
 }
 
-export async function getStaticProps(context: any) {
-  const { workspaceIdx } = context.params;
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(['workspaces'], getWorkspaces);
-  await queryClient.prefetchQuery(['channelCategory', workspaceIdx], () =>
-    getChannelCategory(Number(workspaceIdx))
-  );
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
-
 const Container = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   color: #adb5bd;
   background-color: #262a2e;
   width: 20rem;
