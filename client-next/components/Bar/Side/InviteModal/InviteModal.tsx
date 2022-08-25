@@ -11,6 +11,7 @@ interface IProps {
   handleToggleInviteModal: () => void;
 }
 
+const HOST = process.env.NEXT_PUBLIC_ENV_HOST;
 const validity_list = ['없음', '1일', '7일', '30일'];
 const uses_list = ['없음', '1회', '10회', '50회'];
 
@@ -20,7 +21,8 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
   const [isCopy, setIsCopy] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const handleClickCopy = () => {
+  const handleClickCopy = async () => {
+    await navigator.clipboard.writeText(`${HOST}/invite/${inviteLink}`);
     setIsCopy(true);
     setTimeout(() => {
       setIsCopy(false);
@@ -34,15 +36,17 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
 
   const [validity, setValidity] = useState<string>('없음');
   const [uses, setUses] = useState<string>('없음');
+  const [inviteLink, setInviteLink] = useState<string>('');
 
   useEffect(() => {
     (async () => {
       const data = {
         workspace_idx: Number(router.query.workspaceIdx),
-        expires_date: new Date().toISOString().slice(0, 10),
+        expires_date: '2023-12-31',
         maximum_cnt: Number.MAX_SAFE_INTEGER,
       };
-      const postData = await postInvitation(data);
+      const link = await postInvitation(data);
+      setInviteLink(link);
     })();
   }, []);
 
@@ -101,7 +105,7 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
             </CloseButton>
             <FormTitle>친구를 그룹으로 초대하기</FormTitle>
             <InviteLink>
-              <input value="https://synergy.gg/47abN6dr" />
+              <input value={`${HOST}/invite/${inviteLink}`} readOnly />
               <Copy type="button" onClick={handleClickCopy} $isCopy={isCopy}>
                 {isCopy ? '복사됨' : '초대 링크 복사'}
               </Copy>
