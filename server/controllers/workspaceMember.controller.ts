@@ -53,7 +53,7 @@ export async function deleteMember(
 ) {
   try {
     const workspaceIdx = Number(req.body.workspace_idx);
-    const userIdx = Number(req.currentUserIdx);
+    const userIdx = Number(req.params.user_idx);
     const user = await workspaceMemberService.removeMember(
       workspaceIdx,
       userIdx

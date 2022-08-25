@@ -72,8 +72,6 @@ export async function addWorkspace(
 // 워크스페이스 수정하기
 export async function setWorkspace(req: Request, res: Response) {
   const workspaceId = req.params.workspace_idx;
-  const { profile, name } = req.body;
-  console.log({ profile, name });
   try {
     const updated = await workspaceService.updateWorkspace(
       Number(workspaceId),

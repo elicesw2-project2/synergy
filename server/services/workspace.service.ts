@@ -26,9 +26,7 @@ export async function findAllWorkspaces(currentUserIdx: number) {
 
 // id로 워크스페이스 상세 조회
 export async function findWorkspaceById(workspaceIdx: number) {
-  const data = await Workspace.findById(Number(workspaceIdx));
-
-  return data;
+  return await Workspace.findById(Number(workspaceIdx));
 }
 
 // 워크스페이스 등록
@@ -54,12 +52,7 @@ export async function updateWorkspace(
     profile: string;
   }
 ) {
-  console.log('service info', workspaceInfo);
-
-  const updated = await Workspace.update(workspaceIdx, workspaceInfo);
-  console.log('service', updated);
-
-  return updated;
+  return await Workspace.update(workspaceIdx, workspaceInfo);
 }
 
 // 워크스페이스 삭제
