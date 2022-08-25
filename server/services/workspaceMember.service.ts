@@ -1,6 +1,7 @@
 import {
   WorkspaceMemberInfo,
   findAll,
+  findUser,
   addMember,
   remove,
   getRole,
@@ -8,6 +9,9 @@ import {
 
 export async function findAllUsers(workspaceIdX: Number) {
   return await findAll(workspaceIdX);
+}
+export async function findUserById(workspaceIdX: Number, userIdx: Number) {
+  return await findUser(workspaceIdX, userIdx);
 }
 
 export async function createMember(
