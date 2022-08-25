@@ -27,7 +27,7 @@ export async function findUser(workspaceIdx: Number, userIdx: Number) {
       'SELECT * FROM workspacemember WHERE workspace_idx=? and user_idx =?',
       [workspaceIdx, userIdx],
       (err, result) => {
-        return err ? reject(err) : resolve(result);
+        return err ? reject(err) : resolve(result[0]);
       }
     );
   });
