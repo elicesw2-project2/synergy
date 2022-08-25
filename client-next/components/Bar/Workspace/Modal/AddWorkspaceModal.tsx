@@ -37,7 +37,6 @@ function AddWorkSpaceModal(props: iProps) {
   const mutation = useMutation(postWorkspace, {
     onSuccess: (data: any) => {
       queryClient.invalidateQueries(['workspaces']);
-      console.log(data.data);
       postChatRoom(data.data.workspace_idx);
     },
   });

@@ -19,9 +19,18 @@ export const getUserList = async (workspaceIdx: number) => {
   return result.data.data;
 };
 
-export const deleteUser = async () => {
-  const result = await axios.delete(`${BASE_URL}/workspacemember`, {
+export const addUser = async (data: any) => {
+  await axios.post(`${BASE_URL}/workspacemembers`, data, {
     headers: token,
+  });
+};
+
+export const deleteUser = async (workspace_idx: number, userIdx: number) => {
+  const result = await axios.delete(`${BASE_URL}/workspacemembers/${userIdx}`, {
+    headers: token,
+    data: {
+      workspace_idx,
+    },
   });
   return result.data.data;
 };

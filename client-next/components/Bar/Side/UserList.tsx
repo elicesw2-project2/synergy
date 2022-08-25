@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { getUserList } from 'api/WorkspaceMember';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { deleteUser, getUserList } from 'api/WorkspaceMember';
 import useToggle from 'hooks/useToggle';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
@@ -49,8 +49,22 @@ const UserList = () => {
     setSelectedUser(event.currentTarget.innerText);
   };
 
+  const queryClient = useQueryClient();
+  const filtered = userList?.filter(
+    (user: IUser) => user.nickname === selectedUser
+  )[0];
+  const mutation = useMutation(
+    () => deleteUser(+workspaceIdx, filtered?.user_idx),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['userList']);
+      },
+    }
+  );
+
   const handleExpelUser = () => {
     // 유저 추방 api
+    mutation.mutate();
     toggleUserInfo();
   };
 
@@ -58,8 +72,8 @@ const UserList = () => {
     <Container>
       <UserCategoryTitle>유저 목록</UserCategoryTitle>
       <ul style={{ position: 'relative', overflow: 'auto' }}>
-        {userList?.map((user: IUser, index: any) => (
-          <User key={user.user_idx} onClick={handleUserClick} ref={userRef}>
+        {userList?.map((user: IUser, index: number) => (
+          <User key={index} onClick={handleUserClick} ref={userRef}>
             {user.nickname}
           </User>
         ))}

@@ -9,9 +9,17 @@ if (typeof window !== 'undefined') {
   };
 }
 
+export const getInvitationLink = async (link: string) => {
+  const result = await axios.get(`${BASE_URL}/invitation/${link}`, {
+    headers: token,
+  });
+  console.log(result);
+  return result.data.data.workspace_idx;
+};
+
 export const postInvitation = async (data: any) => {
   const result = await axios.post(`${BASE_URL}/invitation`, data, {
     headers: token,
   });
-  return result;
+  return result.data.data.link;
 };
