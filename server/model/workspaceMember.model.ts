@@ -21,6 +21,17 @@ export async function findAll(workspaceIdx: Number) {
   });
 }
 
+export async function findUser(workspaceIdx: Number, userIdx: Number) {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM workspacemember WHERE workspace_idx=? and user_idx =?',
+      [workspaceIdx, userIdx],
+      (err, result) => {
+        return err ? reject(err) : resolve(result);
+      }
+    );
+  });
+}
 export async function addMember(
   userIdx: Number,
   workspaceIdx: Number,

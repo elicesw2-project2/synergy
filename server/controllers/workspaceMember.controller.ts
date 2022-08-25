@@ -30,7 +30,15 @@ export async function addMember(
     const userIdx = Number(req.currentUserIdx);
     const role = req.body.role;
     const workspaceIdx = Number(req.body.workspace_idx);
-    const info = { userIdx, role, workspaceIdx };
+    const userCheck = await workspaceMemberService.findUserById(
+      workspaceIdx,
+      userIdx
+    );
+    if (userCheck) {
+      return res
+        .status(409)
+        .json({ status: 409, message: `${userIdx} already exists` });
+    }
     const newUser = await workspaceMemberService.createMember(
       userIdx,
       workspaceIdx,
@@ -54,6 +62,12 @@ export async function deleteMember(
   try {
     const workspaceIdx = Number(req.body.workspace_idx);
     const userIdx = Number(req.params.user_idx);
+    const currentUserIdx = Number(req.currentUserIdx);
+    if (userIdx === currentUserIdx) {
+      return res
+        .status(400)
+        .json({ status: 400, message: `이 유저는 삭제할 수 없습니다.` });
+    }
     const user = await workspaceMemberService.removeMember(
       workspaceIdx,
       userIdx
