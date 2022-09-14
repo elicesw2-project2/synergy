@@ -67,8 +67,9 @@ const Box = styled.img`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  height: 5rem;
+  width: 50px;
+  height: 50px;
+  margin: 16px 8px;
   margin-bottom: 10px;
   border: none;
   border-radius: 50%;

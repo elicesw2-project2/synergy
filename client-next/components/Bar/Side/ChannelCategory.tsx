@@ -1,11 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import {
-  dehydrate,
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { deleteChannelCategory, getChannels } from '../../../api/api';
@@ -100,8 +94,8 @@ function ChannelCategory({ category }: IProps) {
 
 const Category = styled.div`
   position: relative;
-  background-color: #212529;
   text-align: center;
+  background-color: #e9ecef;
 `;
 
 const CategoryTitle = styled.div`
@@ -109,6 +103,7 @@ const CategoryTitle = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: 1rem;
+  font-weight: 600;
   h1 {
     padding: 0.5rem 0;
     font-size: 1.1rem;
@@ -116,7 +111,6 @@ const CategoryTitle = styled.div`
 `;
 
 const AddButton = styled(FontAwesomeIcon)`
-  color: #94d82d;
   position: absolute;
   right: 1rem;
   opacity: 0.6;
@@ -148,7 +142,6 @@ const DropdownButton = styled.button`
 `;
 
 const Channels = styled.div`
-  background-color: #262a2e;
   padding: 0 0.7rem;
 `;
 

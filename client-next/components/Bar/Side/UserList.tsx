@@ -70,35 +70,54 @@ const UserList = () => {
 
   return (
     <Container>
-      <UserCategoryTitle>유저 목록</UserCategoryTitle>
-      <ul style={{ position: 'relative', overflow: 'auto' }}>
-        {userList?.map((user: IUser, index: number) => (
-          <User key={index} onClick={handleUserClick} ref={userRef}>
-            {user.nickname}
-          </User>
-        ))}
-      </ul>
-      {isOpenUserInfo && (
-        <UserInfoModal x={modalOffset.x} y={modalOffset.y} ref={modalRef}>
-          <Menu onClick={handleExpelUser}>유저 추방하기</Menu>
-          <Menu>역할 변경</Menu>
-        </UserInfoModal>
-      )}
+      <UserCategoryTitle>members</UserCategoryTitle>
+      <UserListWrapper>
+        <ul style={{ position: 'relative', overflow: 'auto' }}>
+          {userList?.map((user: IUser, index: number) => (
+            <User key={index} onClick={handleUserClick} ref={userRef}>
+              {user.nickname}
+            </User>
+          ))}
+        </ul>
+        {isOpenUserInfo && (
+          <UserInfoModal x={modalOffset.x} y={modalOffset.y} ref={modalRef}>
+            <Menu onClick={handleExpelUser}>유저 추방하기</Menu>
+            <Menu>역할 변경</Menu>
+          </UserInfoModal>
+        )}
+      </UserListWrapper>
+      <UserProfile>형욱</UserProfile>
     </Container>
   );
 };
 
 const Container = styled.div`
-  height: 40%;
+  height: 350px;
   margin-top: auto;
-  overflow-x: hidden;
+`;
+
+const UserListWrapper = styled.div`
+  height: 50%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 15px;
+    background-color: #e9ecef;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+  }
 `;
 
 const UserCategoryTitle = styled.h3`
   font-size: 17px;
   font-weight: bold;
-  padding: 10px 16px;
-  margin-bottom: 3px;
+  padding: 20px 16px;
+  border-top: 1px solid #ced4da;
 `;
 
 const User = styled.li`
@@ -127,6 +146,14 @@ const Menu = styled.button`
   &:hover {
     color: #fa5252;
   }
+`;
+
+const UserProfile = styled.div`
+  padding: 20px 16px;
+  margin: 6px 12px;
+  background-color: #dbe1f0;
+  border-radius: 16px;
+  margin-bottom: 30px;
 `;
 
 export default UserList;

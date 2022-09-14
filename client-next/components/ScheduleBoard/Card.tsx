@@ -33,10 +33,8 @@ const Container = styled.div`
   flex-direction: column;
   height: auto;
   padding: 0.8rem;
-  // border: 1px solid white;
-  color: white;
-  background-color: #495057;
   border-radius: 4px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
   transition: background-color 0.5s ease;
   cursor: pointer;
 

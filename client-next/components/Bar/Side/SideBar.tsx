@@ -53,8 +53,6 @@ function SideBar() {
     setIsOpenInviteModal(!isOpenInviteModal);
   }, [isOpenInviteModal]);
 
-  // 유저 추방
-
   if (!workspaceIdx) return null;
 
   return (
@@ -98,13 +96,15 @@ function SideBar() {
         />
       )}
       {/* 채널 카테고리 */}
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        channelCategories?.map((category: any) => (
-          <ChannelCategory key={category.category_idx} category={category} />
-        ))
-      )}
+      <CategoryWrapper>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          channelCategories?.map((category: any) => (
+            <ChannelCategory key={category.category_idx} category={category} />
+          ))
+        )}
+      </CategoryWrapper>
       <UserList />
     </Container>
   );
@@ -114,17 +114,14 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: #adb5bd;
-  background-color: #262a2e;
-  width: 20rem;
+  background-color: #e9ecef;
+  width: 350px;
 `;
 
 const WorkspaceTitle = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1.1rem;
-  background-color: #212529;
-  border-bottom: 1px solid #868e96;
+  padding: 30px 20px;
   cursor: pointer;
   h1 {
     font-size: 1.5rem;
@@ -159,6 +156,23 @@ const DropdownButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #91a7ff;
+  }
+`;
+
+const CategoryWrapper = styled.div`
+  height: 500px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 15px;
+    background-color: #e9ecef;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
   }
 `;
 

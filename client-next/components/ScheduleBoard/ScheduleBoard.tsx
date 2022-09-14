@@ -76,11 +76,6 @@ const Home = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  color: white;
-  background-color: #343a40;
-  overflow-x: hidden;
-  overflow-y: auto;
 `;
 
 const Board = styled.div`

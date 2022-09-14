@@ -9,9 +9,13 @@ export default createGlobalStyle`
       padding: 0;
       font-family: 'Noto Sans KR', sans-serif;
     }
-
-    body {
+    
+    html, body {
+      color: 000742;
+      background-color: #FDFDFD;
       font-family: 'Noto Sans KR', sans-serif;
+      height: 100%;
+      overflow: hidden;
     }
 
     *, :after, :before {

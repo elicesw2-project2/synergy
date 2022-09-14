@@ -1,47 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faMagnifyingGlass,
-  faArrowRightFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
-import { faUser, faBell } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 
 function TopBar() {
   return (
     <Container>
-      <h1 />
-      <div>
-        <Icon className="TopBar__icon" icon={faUser} />
-        <Icon className="TopBar__icon" icon={faBell} />
-        <Icon className="TopBar__icon" icon={faMagnifyingGlass} />
-        <Link href="/login">
-          <FontAwesomeIcon
-            className="TopBar__icon"
-            icon={faArrowRightFromBracket}
-          />
-        </Link>
-      </div>
+      <Link href="/login">
+        <Logout>로그아웃</Logout>
+      </Link>
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 1.2rem;
+  padding: 30px 0;
   color: white;
-  background-color: #343a40;
+  background-color: #f8f9fa;
   h1 {
     font-size: 1.3rem;
   }
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  font-size: 1.3rem;
-  padding: 0 10px;
+const Logout = styled.button`
+  font-size: 14px;
   color: white;
+  margin-left: auto;
+  margin-right: 20px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background-color: #30b9a7;
 `;
 
 export default TopBar;
