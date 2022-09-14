@@ -54,7 +54,6 @@ function WorkSpaceBar() {
 }
 
 const Container = styled.div`
-  background-color: #1d1f21;
   padding: 10px;
 `;
 
@@ -71,8 +70,8 @@ const Box = styled(CreateButton)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  height: 5rem;
+  width: 50px;
+  height: 50px;
   margin-bottom: 10px;
   border: none;
   border-radius: 50%;

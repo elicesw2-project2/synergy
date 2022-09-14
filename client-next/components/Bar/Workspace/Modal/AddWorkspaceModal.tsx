@@ -49,7 +49,7 @@ function AddWorkSpaceModal(props: iProps) {
     if (preview) {
       imageSrc = await postImageUpload(imageFile);
     }
-    const newWorkSpace = { name, profile: imageSrc };
+    const newWorkSpace = { name, profile: imageSrc.src };
     mutation.mutate(newWorkSpace);
 
     // 모달창 닫기

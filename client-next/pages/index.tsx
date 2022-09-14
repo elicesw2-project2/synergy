@@ -13,7 +13,7 @@ const Home: NextPage = () => {
 
 const Container = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   background-color: #343a40;

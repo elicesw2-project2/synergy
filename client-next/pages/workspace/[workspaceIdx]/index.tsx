@@ -32,8 +32,6 @@ const Home = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: aliceblue;
-  background-color: #343a40;
 `;
 
 export default WorkspaceHome;

@@ -79,7 +79,8 @@ function Channel({ channel }: IProps) {
         >
           <a>
             <ChannelName>
-              <FontAwesomeIcon icon={faHashtag} /> {channelIcon}
+              {/* <FontAwesomeIcon icon={faHashtag} /> */}
+              {channelIcon}
               {channel.name.length > 10
                 ? ` ${channel.name.slice(0, 10)}...`
                 : ` ${channel.name}`}
@@ -153,7 +154,6 @@ const Input = styled.input`
 
 const ChannelName = styled.li`
   font-size: 0.9rem;
-  font-weight: 600;
   width: 100%;
   padding: 0.6rem 0.5rem;
   border: gray;

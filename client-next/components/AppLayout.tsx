@@ -31,6 +31,7 @@ const MainContainer = styled.div`
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
+  overflow-y: scroll;
 `;
 
 export default AppLayout;

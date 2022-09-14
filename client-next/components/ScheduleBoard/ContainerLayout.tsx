@@ -114,8 +114,7 @@ const TitleWrapper = styled.div`
 `;
 
 const TitlePlusIcon = styled(FontAwesomeIcon)`
-  opacity: 0.5;
-  color: #74b816;
+  color: #30b9a7;
   cursor: pointer;
   padding: 8px;
   border-radius: 4px;
