@@ -30,7 +30,7 @@ function ContainerLayout({ type, data }: IProps) {
 
   const handleCreateCard = () => {
     createMutation.mutate({
-      channel_idx: Number(channelIdx),
+      channel_idx: Number(channelIdx[2]),
       title: issue,
       category: type,
       content: '',
