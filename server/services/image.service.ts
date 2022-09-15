@@ -21,8 +21,11 @@ const uploadFileToS3 = async (fileData: Express.Multer.File) => {
     Key: fileData.originalname,
     Body: fileContent,
   };
+  // console.log(`file data: ${JSON.stringify(fileData)}`);
+
   const result = await storage.upload(params).promise();
-  const link = `https://d19um727s1pdbh.cloudfront.net/${result.Key}`;
+  //const link = `https://d19um727s1pdbh.cloudfront.net/${result.Key}`;
+  const link = result.Location;
   // const fileName = fileData.originalname;
   return link;
 };
