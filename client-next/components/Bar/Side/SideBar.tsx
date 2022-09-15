@@ -116,6 +116,7 @@ const Container = styled.div`
   flex-direction: column;
   background-color: #e9ecef;
   width: 350px;
+  height: calc(100vh - 0px);
 `;
 
 const WorkspaceTitle = styled.div`
@@ -160,7 +161,6 @@ const DropdownButton = styled.button`
 `;
 
 const CategoryWrapper = styled.div`
-  height: 500px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 15px;
@@ -171,8 +171,6 @@ const CategoryWrapper = styled.div`
     border-radius: 8px;
     background-clip: padding-box;
     border: 4px solid transparent;
-  }
-  &::-webkit-scrollbar-track {
   }
 `;
 

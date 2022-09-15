@@ -4,6 +4,8 @@ import useToggle from 'hooks/useToggle';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 interface IUser {
   user_idx: number;
@@ -69,35 +71,39 @@ const UserList = () => {
   };
 
   return (
-    <Container>
-      <UserCategoryTitle>members</UserCategoryTitle>
-      <UserListWrapper>
-        <ul style={{ position: 'relative', overflow: 'auto' }}>
-          {userList?.map((user: IUser, index: number) => (
-            <User key={index} onClick={handleUserClick} ref={userRef}>
-              {user.nickname}
-            </User>
-          ))}
-        </ul>
-        {isOpenUserInfo && (
-          <UserInfoModal x={modalOffset.x} y={modalOffset.y} ref={modalRef}>
-            <Menu onClick={handleExpelUser}>유저 추방하기</Menu>
-            <Menu>역할 변경</Menu>
-          </UserInfoModal>
-        )}
-      </UserListWrapper>
-      <UserProfile>형욱</UserProfile>
-    </Container>
+    <>
+      <Container>
+        <UserCategoryTitle>members</UserCategoryTitle>
+        <UserListWrapper>
+          <ul style={{ position: 'relative', overflow: 'auto' }}>
+            {userList?.map((user: IUser, index: number) => (
+              <User key={index} onClick={handleUserClick} ref={userRef}>
+                {user.nickname}
+              </User>
+            ))}
+          </ul>
+          {isOpenUserInfo && (
+            <UserInfoModal x={modalOffset.x} y={modalOffset.y} ref={modalRef}>
+              <Menu onClick={handleExpelUser}>유저 추방하기</Menu>
+              <Menu>역할 변경</Menu>
+            </UserInfoModal>
+          )}
+        </UserListWrapper>
+        <UserProfile>
+          <span>형욱</span>
+          <FontAwesomeIcon icon={faEllipsis} />
+        </UserProfile>
+      </Container>
+    </>
   );
 };
 
 const Container = styled.div`
-  height: 350px;
   margin-top: auto;
 `;
 
 const UserListWrapper = styled.div`
-  height: 50%;
+  height: 200px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 15px;
@@ -123,6 +129,7 @@ const UserCategoryTitle = styled.h3`
 const User = styled.li`
   padding: 10px 16px;
   margin-left: 3px;
+  color: #616d8b;
   &:hover {
     background-color: #495057;
   }
@@ -149,11 +156,13 @@ const Menu = styled.button`
 `;
 
 const UserProfile = styled.div`
-  padding: 20px 16px;
-  margin: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 20px;
+  margin: 12px 12px 6px 12px;
+  color: #616d8b;
   background-color: #dbe1f0;
   border-radius: 16px;
-  margin-bottom: 30px;
 `;
 
 export default UserList;

@@ -17,7 +17,7 @@ function Card({ card }: IProps) {
     <>
       <Container onClick={onClickToggleModal}>
         <Title>{card.title}</Title>
-        <Nickname>{card.nickname}</Nickname>
+        <Nickname>{card.content || 'blah blah blah blah blah'}</Nickname>
         <CreatedAt>{card.create_date.slice(0, 10)}</CreatedAt>
       </Container>
       {isOpenModal && (
@@ -31,9 +31,10 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: auto;
-  padding: 0.8rem;
-  border-radius: 4px;
+  min-width: 220px;
+  height: 150px;
+  padding: 20px;
+  border-radius: 16px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
   transition: background-color 0.5s ease;
   cursor: pointer;
@@ -49,8 +50,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 1rem;
 `;
 

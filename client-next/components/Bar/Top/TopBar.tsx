@@ -14,7 +14,7 @@ function TopBar() {
 
 const Container = styled.div`
   display: flex;
-  padding: 30px 0;
+  padding: 17px 0;
   color: white;
   background-color: #f8f9fa;
   h1 {
