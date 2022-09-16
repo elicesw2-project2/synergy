@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import imageUpload from '../middlewares/imageHandler';
 import FileService from '../services/image.service';
 
 const uploadFileToS3 = async (
