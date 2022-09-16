@@ -13,6 +13,7 @@ const uploadFileToS3 = async (
   const fileData: Express.Multer.File = req.file;
   try {
     const imageLink = await FileService(fileData);
+
     res.status(201).send({
       status: 201,
       message: '파일 업로드 성공',

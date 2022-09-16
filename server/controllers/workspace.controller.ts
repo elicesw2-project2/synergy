@@ -59,6 +59,7 @@ export async function addWorkspace(
 ) {
   try {
     const user_idx = Number(req.currentUserIdx);
+    //여기인가?
     const newWorkspace = await workspaceService.createWorkspace(
       user_idx,
       req.body
