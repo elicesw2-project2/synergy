@@ -63,7 +63,8 @@ export async function addWorkspace(
       user_idx,
       req.body
     );
-    return res.status(201).json(newWorkspace);
+
+    return res.status(201).json(req.body);
   } catch (err) {
     next(err);
   }
@@ -86,6 +87,7 @@ export async function setWorkspace(req: Request, res: Response) {
 // 워크스페이스 삭제하기
 export async function deleteWorkspace(req: Request, res: Response) {
   const workspaceId = req.params.workspace_idx;
+
   try {
     const deleteWorkspace = await workspaceService.removeWorkspace(
       Number(workspaceId)

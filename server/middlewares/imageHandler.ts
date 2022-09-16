@@ -54,7 +54,7 @@ const multerConfig = {
   storage: multer.diskStorage({
     destination: 'uploads/',
     filename(req: Request, file: Express.Multer.File, cb: FileNameCallback) {
-      cb(null, file.originalname);
+      cb(null, `images/${Date.now()}_${file.originalname}`);
     },
   }),
 };
