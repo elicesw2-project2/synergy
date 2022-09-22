@@ -184,9 +184,12 @@ export async function patchScheduleCard(data: Partial<IScheduleCard>) {
 
 // document
 export async function getDocument(channelIdx: string) {
-  const result = await axios.get(`${BASE_URL}/documents/${channelIdx}`, {
-    headers: token,
-  });
+  const result = await axios.get(
+    `${BASE_URL}/documents/channel/${channelIdx}`,
+    {
+      headers: token,
+    }
+  );
   return result.data.data[0];
 }
 

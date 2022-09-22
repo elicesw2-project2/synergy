@@ -76,6 +76,14 @@ function Document() {
 
   const testButton = () => {
     console.log('asdf');
+    getDocument(String(24)).then((res) => console.log(res));
+    axios
+      .get(`https://circuit-synergy.herokuapp.com/documents/channel/24`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('TOKEN')}`,
+        },
+      })
+      .then((res) => console.log(res.data.data));
   };
 
   return (
