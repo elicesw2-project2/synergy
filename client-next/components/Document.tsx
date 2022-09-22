@@ -74,6 +74,10 @@ function Document() {
     });
   };
 
+  const testButton = () => {
+    console.log('asdf');
+  };
+
   return (
     <Home>
       {isLoading ? (
@@ -88,6 +92,9 @@ function Document() {
             />
             <SaveButton type="button" onClick={handleSaveContent}>
               저장
+            </SaveButton>
+            <SaveButton type="button" onClick={testButton}>
+              불러오기
             </SaveButton>
           </TitleWrapper>
           <DateSpan>{documents?.date.slice(0, 10)}</DateSpan>
