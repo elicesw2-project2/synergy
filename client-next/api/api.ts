@@ -199,3 +199,10 @@ export async function postDocument(data: Partial<IDocument>) {
   });
   return result;
 }
+
+export async function deleteDocument(Idx: number) {
+  const result = await axios.delete(`${BASE_URL}/documents/${Idx}`, {
+    headers: token,
+  });
+  return result;
+}

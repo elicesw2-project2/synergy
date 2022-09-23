@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getDocument, postDocument } from '../api/api';
+import { getDocument, postDocument, deleteDocument } from '../api/api';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -66,6 +66,9 @@ function Document() {
   });
 
   const handleSaveContent = () => {
+    deleteDocument(Number(documents?.document_idx)).then((res) =>
+      console.log(res)
+    );
     saveMutation.mutate({
       nickname,
       title,
@@ -74,8 +77,12 @@ function Document() {
     });
   };
 
-  const testButton = () => {
+  const delButton = () => {
     console.log('asdf');
+    deleteDocument(26).then((res) => console.log(res));
+  };
+
+  const testButton = () => {
     getDocument(channelIdx[2]).then((res) => console.log(res));
     axios
       .get(
@@ -101,12 +108,6 @@ function Document() {
               value={title}
               onChange={handleChangeTitle}
             />
-            <SaveButton type="button" onClick={handleSaveContent}>
-              저장
-            </SaveButton>
-            <SaveButton type="button" onClick={testButton}>
-              불러오기
-            </SaveButton>
           </TitleWrapper>
           <DateSpan>{documents?.date.slice(0, 10)}</DateSpan>
           {documents?.nickname ? (
@@ -119,6 +120,9 @@ function Document() {
             value={content}
             onChange={handleChangeContent}
           />
+          <SaveButton type="button" onClick={handleSaveContent}>
+            저장
+          </SaveButton>
         </>
       )}
     </Home>
@@ -129,9 +133,11 @@ const Home = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  color: white;
-  background-color: #343a40;
+  height: 90vh;
+  color: black;
+  background-color: #dbe1f0;
+  border-radius: 10px;
+  margin: 10px;
   padding: 5rem 10rem;
 `;
 
@@ -162,27 +168,29 @@ const Title = styled.input`
   font-size: 2rem;
   margin-bottom: 1rem;
   background: inherit;
-  color: white;
+  color: black;
   border: none;
   outline: none;
 `;
 
 const Content = styled.textarea`
   background: inherit;
-  height: 50%;
-  color: white;
+  height: 70%;
+  font-size: 1rem;
+  color: black;
   border: none;
   outline: none;
   resize: none;
 `;
 
 const SaveButton = styled.button`
-  height: 80%;
+  height: 3rem;
+  width: 5rem;
   padding: 0.2rem 1rem;
   border: 0;
-  border-radius: 8px;
-  color: black;
-  background-color: #a9e34b;
+  border-radius: 10px;
+  color: white;
+  background-color: #8270ff;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
