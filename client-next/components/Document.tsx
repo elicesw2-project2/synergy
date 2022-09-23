@@ -77,25 +77,6 @@ function Document() {
     });
   };
 
-  const delButton = () => {
-    console.log('asdf');
-    deleteDocument(26).then((res) => console.log(res));
-  };
-
-  const testButton = () => {
-    getDocument(channelIdx[2]).then((res) => console.log(res));
-    axios
-      .get(
-        `https://circuit-synergy.herokuapp.com/documents/channel/${channelIdx[2]}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('TOKEN')}`,
-          },
-        }
-      )
-      .then((res) => console.log(res.data.data));
-  };
-
   return (
     <Home>
       {isLoading ? (
@@ -192,6 +173,7 @@ const SaveButton = styled.button`
   color: white;
   background-color: #8270ff;
   font-size: 1rem;
+  margin-left: auto;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
