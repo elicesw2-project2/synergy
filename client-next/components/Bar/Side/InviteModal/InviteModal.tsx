@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faX } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
 import EditModal from './EditModal';
@@ -55,7 +55,7 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
       {isEdit ? (
         <EditContainer ref={wrapperRef}>
           <CloseButton type="button" onClick={() => setIsEdit(false)}>
-            X
+            <FontAwesomeIcon icon={faX} />
           </CloseButton>
           <Title>서버 초대 링크 설정</Title>
           <Detail>
@@ -70,7 +70,7 @@ function InviteModal({ handleToggleInviteModal }: IProps) {
             {isOpenValidityModal && (
               <EditModal
                 list={validity_list}
-                top="42%"
+                top="42.3%"
                 setFn={setValidity}
                 toggleFn={setIsOpenValidityModal}
               />
@@ -139,12 +139,11 @@ const Container = styled.div`
   width: 80%;
   max-width: 500px;
   background: white;
-  color: white;
+  color: #000742;
   position: relative;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 8px;
-  background-color: #495057;
 `;
 
 const EditContainer = styled.div`
@@ -153,24 +152,21 @@ const EditContainer = styled.div`
   width: 80%;
   max-width: 25rem;
   background: white;
-  color: white;
   position: relative;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 15px;
-  background-color: #495057;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
   top: 1.7rem;
   right: 1.5rem;
-  color: white;
   border: 0;
   border-radius: 4px;
   padding: 4px 8px;
   background: inherit;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   &:hover {
     background: #ced4da;
@@ -195,9 +191,7 @@ const SelectButton = styled.button`
   justify-content: space-between;
   align-items: center;
   font-size: 1rem;
-  color: #ced4da;
-  background: #212529;
-  border: none;
+  border: 1px solid #a3a6ba;
   border-radius: 4px;
   padding: 0.1rem 1rem;
   margin: 0.3rem 0;
@@ -210,7 +204,8 @@ const EditButtonWrapper = styled.div`
   width: 100%;
   button {
     border-radius: 4px;
-    background: #a9e34b;
+    color: #fff;
+    background: #8270ff;
     border: none;
     padding: 0.7rem;
     &:hover {
@@ -243,11 +238,11 @@ const FormTitle = styled.h1`
 const InviteLink = styled.div`
   position: relative;
   margin-bottom: 0.8rem;
-  border-radius: 4px;
+  border-radius: 16px;
+  border: 1px solid #a3a6ba;
+  overflow: hidden;
   input {
     width: 100%;
-    color: #ced4da;
-    background: #212529;
     padding: 1rem 0.8rem;
     margin-right: 0.5rem;
     border: none;
@@ -269,7 +264,9 @@ const InviteLink = styled.div`
 `;
 
 const Copy = styled.button<{ $isCopy: boolean }>`
-  background: ${(props) => (props.$isCopy ? '#91a7ff' : '#a9e34b')};
+  color: #fff;
+  margin-right: 10px;
+  background: ${(props) => (props.$isCopy ? '#91a7ff' : '#8270FF')};
 `;
 
 const InviteEdit = styled.div`

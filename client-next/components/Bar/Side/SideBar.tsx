@@ -75,12 +75,12 @@ function SideBar() {
                   <FontAwesomeIcon icon={faFolderPlus} />
                 </DropdownButton>
               </li>
-              <li>
+              {/* <li>
                 <DropdownButton type="button" onClick={onClickToggleModal}>
                   서버 설정
                   <FontAwesomeIcon icon={faGear} />
                 </DropdownButton>
-              </li>
+              </li> */}
             </ul>
           </Dropdown>
         )}
@@ -130,11 +130,10 @@ const WorkspaceTitle = styled.div`
 `;
 
 const Dropdown = styled.div`
-  top: 3rem;
+  top: 4rem;
   right: 5%;
   position: absolute;
-  color: wheat;
-  background-color: #2f3640;
+  background-color: #fff;
   width: 90%;
   padding: 1rem 0;
   border-radius: 0.4rem;
@@ -149,7 +148,6 @@ const Dropdown = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  color: white;
   border: 0;
   width: 100%;
   background-color: inherit;

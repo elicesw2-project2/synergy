@@ -110,9 +110,11 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 12px;
+  padding: 4px 0px;
   &:hover {
-    background-color: #495057;
+    box-shadow: 0 0 50px #ccc;
+    background-color: #fff;
   }
 `;
 
