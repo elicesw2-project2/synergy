@@ -78,7 +78,7 @@ const UserList = () => {
           <ul style={{ position: 'relative', overflow: 'auto' }}>
             {userList?.map((user: IUser, index: number) => (
               <User key={index} onClick={handleUserClick} ref={userRef}>
-                {user.nickname}
+                <span key={index}>{user.nickname}</span>
               </User>
             ))}
           </ul>
@@ -128,10 +128,12 @@ const UserCategoryTitle = styled.h3`
 
 const User = styled.li`
   padding: 10px 16px;
-  margin-left: 3px;
+  margin: 0px 8px;
+  border-radius: 12px;
   color: #616d8b;
   &:hover {
-    background-color: #495057;
+    box-shadow: 0 0 50px #ccc;
+    background-color: #fff;
   }
 `;
 
@@ -141,17 +143,17 @@ const UserInfoModal = styled.div<{ x: number; y: number }>`
   display: flex;
   flex-direction: column;
   top: ${(props) => props.y - 65 + 'px'};
-  right: -20px;
+  right: 0;
   padding: 12px;
   border-radius: 4px;
-  background-color: #868e96;
+  background-color: #fff;
   color: #121212;
 `;
 
 const Menu = styled.button`
   padding: 8px;
   &:hover {
-    color: #fa5252;
+    color: #8270ff;
   }
 `;
 

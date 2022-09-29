@@ -72,10 +72,13 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
                   value={title}
                   onChange={handleChangeTitle}
                 />
-                <>
-                  <StyledButton icon={faCheck} onClick={handleUpdateContent} />
-                  <StyledButton icon={faX} onClick={onClickToggleTitle} />
-                </>
+                <div>
+                  <TitleSaveButton
+                    icon={faCheck}
+                    onClick={handleUpdateContent}
+                  />
+                  <TitleCloseButton icon={faX} onClick={onClickToggleTitle} />
+                </div>
               </>
             ) : (
               <IssueTitleButton
@@ -94,12 +97,20 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
                   value={content}
                   onChange={handleChangeContent}
                 />
-                <button type="button" onClick={handleUpdateContent}>
-                  저장
-                </button>
-                <button type="button" onClick={onClickToggleContent}>
-                  닫기
-                </button>
+                <div style={{ float: 'right' }}>
+                  <ContentSaveButton
+                    type="button"
+                    onClick={handleUpdateContent}
+                  >
+                    저장
+                  </ContentSaveButton>
+                  <ContentCloseButton
+                    type="button"
+                    onClick={onClickToggleContent}
+                  >
+                    닫기
+                  </ContentCloseButton>
+                </div>
               </div>
             ) : (
               <AddButton type="button" onClick={onClickToggleContent}>
@@ -118,7 +129,7 @@ function DetailModal({ onClickToggleModal, card }: IProps) {
             </DetailWrapper>
           </DetailCotainer>
           <CloseButton type="button" onClick={onClickToggleModal}>
-            X
+            <FontAwesomeIcon icon={faX} />
           </CloseButton>
           <DeleteIcon icon={faTrashCan} onClick={handleDeleteCard} />
         </Form>
@@ -146,13 +157,13 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 3rem 3rem;
   border-radius: 15px;
-  color: #dee2e6;
+  color: #000742;
+  background-color: #fff;
   overflow: auto;
-  background-color: #495057;
 `;
 
 const Category = styled.span`
-  width: 15%;
+  width: 100px;
   color: #f59f00;
   font-size: 1.2rem;
   font-weight: 600;
@@ -183,7 +194,7 @@ const InputWrapper = styled.div`
 `;
 
 const IssueTitle = styled.input`
-  color: white;
+  color: #000742;
   font-size: 2.5rem;
   padding: 0.5rem;
   margin: 0.3rem 0;
@@ -214,6 +225,14 @@ const StyledButton = styled(FontAwesomeIcon)`
   }
 `;
 
+const TitleSaveButton = styled(StyledButton)`
+  right: 2rem;
+`;
+
+const TitleCloseButton = styled(StyledButton)`
+  right: 0;
+`;
+
 const Description = styled.span`
   font-size: 1.2rem;
   font-weight: 600;
@@ -222,8 +241,10 @@ const Description = styled.span`
 `;
 
 const DescriptionTextarea = styled.textarea`
+  width: 100%;
+  resize: none;
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
-  color: white;
   background: inherit;
   border: none;
   outline: none;
@@ -252,12 +273,14 @@ const DetailCotainer = styled.div`
 `;
 
 const DetailWrapper = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 1.5rem;
 `;
 
 const DetailBackground = styled.div`
   color: black;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   margin-right: 0.5rem;
   background: #b3d9bd;
@@ -281,7 +304,6 @@ const CloseButton = styled.button`
   position: absolute;
   top: 1.5rem;
   right: 1rem;
-  color: white;
   border: 0;
   border-radius: 4px;
   padding: 4px 8px;
@@ -290,6 +312,29 @@ const CloseButton = styled.button`
   cursor: pointer;
   &:hover {
     background: #ced4da;
+  }
+`;
+
+const ContentStyledButton = styled.button`
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+`;
+
+const ContentSaveButton = styled(ContentStyledButton)`
+  background: #a9e34b;
+  &:hover {
+    background: #74b816;
+  }
+  margin-right: 0.2rem;
+`;
+
+const ContentCloseButton = styled(ContentStyledButton)`
+  background: inherit;
+  border: 0;
+  &:hover {
+    background: #dee2e6;
   }
 `;
 

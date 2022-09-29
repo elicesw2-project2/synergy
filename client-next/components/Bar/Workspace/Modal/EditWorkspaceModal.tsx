@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchWorkspace, postImageUpload } from '../../../../api/api';
 import { IWorkSpace } from '../WorkspaceBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 interface iProps {
   onClickToggleModal: () => void;
@@ -68,12 +70,11 @@ function EditWorkSpaceModal({ onClickToggleModal, workspace }: iProps) {
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* 나가기 버튼 */}
           <CloseButton type="button" onClick={onClickToggleModal}>
-            X
+            <FontAwesomeIcon icon={faX} />
           </CloseButton>
 
           <Description>
-            <h1>서버 수정</h1>
-            <h2>서버는 나와 친구들이 함께 어울리는 공간입니다.</h2>
+            <h1>워크스페이스 수정</h1>
           </Description>
 
           {/* title, image 입력 */}
@@ -133,16 +134,16 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-  color: white;
   position: relative;
   width: 80%;
-  height: 30rem;
-  max-width: 30rem;
+  height: 450px;
+  max-width: 450px;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 15px;
   overflow: hidden;
-  background-color: #495057;
+  color: #3b4463;
+  background-color: #fff;
 `;
 
 const Form = styled.form`
@@ -151,9 +152,7 @@ const Form = styled.form`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 1.5rem;
-  right: 1rem;
-  color: white;
+  right: 1.5rem;
   border: 0;
   border-radius: 4px;
   padding: 4px 8px;
@@ -167,8 +166,10 @@ const CloseButton = styled.button`
 
 const Description = styled.div`
   text-align: center;
+  margin-top: 20px;
+  line-height: 1.2;
   h1 {
-    font-size: 2rem;
+    font-size: 25px;
     margin-bottom: 0.7rem;
   }
 
@@ -193,17 +194,18 @@ const Input = styled.div`
     align-items: center;
     padding: 0.8rem 0;
     span {
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
-      margin-right: auto;
+      font-size: 20px;
+      margin: 10px auto 12px 5px;
     }
     input,
     textarea {
-      width: 95%;
+      width: 100%;
       padding: 1rem;
     }
     input {
       margin-bottom: 0.3rem;
+      border: 1px solid #a3a6ba;
+      border-radius: 24px;
     }
     textarea {
       height: 10rem;
@@ -220,21 +222,21 @@ const ErrorMessage = styled.div`
 `;
 
 const Preview = styled.img`
-  width: 10rem;
-  height: 10rem;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
 `;
 
 const SubmitButton = styled.input`
   position: absolute;
-  right: 1.5rem;
+  right: 2.5rem;
   bottom: 2rem;
   cursor: pointer;
   border: 0;
   padding: 8px 16px;
   border-radius: 4px;
-  color: black;
-  background: #a9e34b;
+  color: #fff;
+  background: #8270ff;
   &:hover {
     opacity: 0.7;
   }

@@ -162,13 +162,13 @@ const TextContainer = styled.div`
 const AddButton = styled.button`
   position: absolute;
   bottom: 0.3rem;
+  right: 3.5rem;
   background: inherit;
   border: 0;
   padding: 8px 12px;
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
-  right: 3rem;
   background: #a9e34b;
   &:hover {
     background: #74b816;
@@ -178,17 +178,15 @@ const AddButton = styled.button`
 const CloseButton = styled.button`
   position: absolute;
   bottom: 0.3rem;
+  right: 5px;
   background: inherit;
   border: 0;
   padding: 8px 12px;
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
-  .close_button {
-    right: 0;
-    &:hover {
-      background: #dee2e6;
-    }
+  &:hover {
+    background: #dee2e6;
   }
 `;
 

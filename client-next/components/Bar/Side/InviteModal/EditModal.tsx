@@ -48,11 +48,11 @@ const Container = styled.div<{ top: string }>`
   position: absolute;
   top: ${(props) => props.top};
   width: 21rem;
-  background: #3b3f44;
+  background: #e9ecef;
   li {
     padding: 15px;
     &:hover {
-      background-color: #2e3136;
+      background-color: #8270ff;
     }
   }
 `;

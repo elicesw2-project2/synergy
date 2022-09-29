@@ -112,8 +112,9 @@ const CategoryTitle = styled.div`
 
 const AddButton = styled(FontAwesomeIcon)`
   position: absolute;
-  right: 1rem;
-  opacity: 0.6;
+  font-size: 12px;
+  right: 5px;
+  opacity: 0.8;
   cursor: pointer;
 `;
 
