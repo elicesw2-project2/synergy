@@ -14,10 +14,11 @@ export async function findAllWorkspaces(currentUserIdx: number) {
     throw new CustomError(400, 'user_idx 값이 없습니다');
   }
   const workspaceList = await Workspace.findAllIdx(currentUserIdx);
+  console.log(workspaceList);
 
   const workspaces: workpaceData[] = await Promise.all(
     workspaceList.map((data) => {
-      return Workspace.findAll(data);
+      return Workspace.findById(data);
     })
   );
 

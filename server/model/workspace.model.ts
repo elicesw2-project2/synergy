@@ -25,13 +25,14 @@ interface workpaceData {
 export async function findAllIdx(currentUserIdx: Number): Promise<number[]> {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT workspace_idx FROM workspacemember WHERE user_idx=?',
+      'SELECT workspace_idx FROM workspacemember WHERE user_idx=? ORDER BY workspacemember.order',
       currentUserIdx,
       (err, result) => {
         let dataList: number[] = [];
         for (let i = 0; i < result.length; i++) {
           dataList.push(result[i].workspace_idx);
         }
+
         return err ? reject(err) : resolve(dataList);
       }
     );
@@ -60,10 +61,21 @@ export async function findAllIdx(currentUserIdx: Number): Promise<number[]> {
 //   })
 
 // 이거를 await을 사용해서 받아오고 받아오는 형식으로 할건데 어떻게 받아오는지 잘 모르겟음
-export async function findAll(workspaceIdx: Number): Promise<workpaceData> {
+// export async function findAll(workspaceIdx: Number): Promise<workpaceData> {
+//   return new Promise((resolve, reject) => {
+//     db.query(
+//       'SELECT * FROM workspace WHERE workspace_idx=? ',
+//       workspaceIdx,
+//       (err, result) => {
+//         return err ? reject(err) : resolve(result[0]);
+//       }
+//     );
+//   });
+// }
+export function findById(workspaceIdx: number): Promise<workpaceData> {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM workspace WHERE workspace_idx=?',
+      'SELECT * FROM workspace WHERE workspace_idx = ?',
       workspaceIdx,
       (err, result) => {
         return err ? reject(err) : resolve(result[0]);
@@ -84,18 +96,6 @@ export function create(workspaceInfo: {
         return err
           ? reject(err)
           : resolve({ workspace_idx: result.insertId, ...workspaceInfo });
-      }
-    );
-  });
-}
-
-export function findById(workspaceIdx: number) {
-  return new Promise((resolve, reject) => {
-    db.query(
-      'SELECT * FROM workspace WHERE workspace_idx = ?',
-      workspaceIdx,
-      (err, result) => {
-        return err ? reject(err) : resolve(result);
       }
     );
   });
