@@ -22,17 +22,9 @@ const uploadFileToS3 = async (fileData: Express.Multer.File) => {
     Body: fileContent,
   };
   const result = await storage.upload(params).promise();
-  const link = `https://dk5tzlq8j97g2.cloudfront.net/${result.Key}`;
-  // const fileName = fileData.originalname;
+  const link = `https://d2alx61on5cmtu.cloudfront.net/${result.Key}`;
 
   return link;
 };
-
-// const uploadFileToS3 = async (
-//   fileData: Express.Multer.File
-// ): Promise<FileInfo> => {
-//   try {
-//   } catch {}
-// };
 
 export default uploadFileToS3;
